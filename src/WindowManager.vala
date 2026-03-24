@@ -17,9 +17,22 @@
 //
 
 namespace Gala {
+    private class BspRevealRequest : Object {
+        public Meta.Window window;
+        public Mtk.Rectangle rect;
+        public ulong damage_handler_id = 0;
+        public uint timeout_id = 0;
+
+        public BspRevealRequest (Meta.Window window, Mtk.Rectangle rect) {
+            this.window = window;
+            this.rect = rect;
+        }
+    }
+
     public class WindowManagerGala : Meta.Plugin, WindowManager {
         private const string OPEN_MULTITASKING_VIEW = "dbus-send --session --dest=org.pantheon.gala --print-reply /org/pantheon/gala org.pantheon.gala.PerformAction int32:1";
         private const string OPEN_APPLICATIONS_MENU = "io.elementary.wingpanel --toggle-indicator=app-launcher";
+        private const uint BSP_REVEAL_FALLBACK_MS = 90;
 
         /**
          * {@inheritDoc}
@@ -108,12 +121,17 @@ namespace Gala {
 
         private Gee.LinkedList<ModalProxy> modal_stack = new Gee.LinkedList<ModalProxy> ();
 
+        public BspTree bsp_tree;
+
         private Gee.HashSet<Meta.WindowActor> minimizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> maximizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> unmaximizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> mapping = new Gee.HashSet<Meta.WindowActor> ();
+        private Gee.HashSet<Meta.WindowActor> pending_bsp_map_reveals = new Gee.HashSet<Meta.WindowActor> ();
+        private Gee.HashMap<Meta.WindowActor, BspRevealRequest> bsp_reveal_requests = new Gee.HashMap<Meta.WindowActor, BspRevealRequest> ();
         private Gee.HashSet<Meta.WindowActor> destroying = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
+        private Gee.HashSet<Meta.WindowActor> bypassing_size_change_effects = new Gee.HashSet<Meta.WindowActor> ();
         private Meta.SizeChange? which_change = null;
         private Mtk.Rectangle old_rect_size_change;
         private Clutter.Actor? latest_window_snapshot;
@@ -138,6 +156,8 @@ namespace Gala {
             daemon_manager = new DaemonManager (get_display ());
 
             show_stage ();
+            bsp_tree = new BspTree (get_display ());
+            bsp_tree.window_target_ready.connect (on_bsp_window_target_ready);
 
             init_a11y ();
 
@@ -393,9 +413,23 @@ namespace Gala {
             scroll_action.triggered.connect (handle_super_scroll);
             stage.add_action_full ("wm-super-scroll-action", CAPTURE, scroll_action);
 
-            display.window_created.connect ((window) =>
-                InternalUtils.wait_for_window_actor_visible (window, check_shell_window)
-            );
+            display.window_created.connect ((window) => {
+                InternalUtils.wait_for_window_actor_visible (window, check_shell_window);
+            });
+
+            display.window_created.connect ((window) => {
+                if (!bsp_tree.should_skip_map_animation (window)) {
+                    return;
+                }
+
+                InternalUtils.wait_for_window_actor_before_redraw (window, (window_actor) => {
+                    if (window_actor.is_destroyed ()) {
+                        return;
+                    }
+
+                    window_actor.opacity = 0U;
+                });
+            });
 
             WindowListener.get_default ().window_type_changed.connect ((window) => {
                 unowned var window_actor = (Meta.WindowActor) window.get_compositor_private ();
@@ -1085,13 +1119,54 @@ namespace Gala {
             which_change = which_change_local;
             old_rect_size_change = old_frame_rect;
 
+            if (bsp_tree.should_skip_size_change_animation (actor.get_meta_window ())) {
+                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                    message (
+                        "[BSP] bypass-size-change title=\"%s\" change=%d old-frame=(%d,%d %dx%d)",
+                        actor.get_meta_window ().title ?? "(untitled)",
+                        which_change_local,
+                        old_frame_rect.x,
+                        old_frame_rect.y,
+                        old_frame_rect.width,
+                        old_frame_rect.height
+                    );
+                }
+
+                bypassing_size_change_effects.add (actor);
+                latest_window_snapshot = null;
+                return;
+            }
+
+            bypassing_size_change_effects.remove (actor);
+
             if (Meta.Prefs.get_gnome_animations ()) {
                 latest_window_snapshot = Utils.get_window_actor_snapshot (actor, old_frame_rect);
+            } else {
+                latest_window_snapshot = null;
             }
         }
 
         // size_changed gets called after frame_rect has updated
         public override void size_changed (Meta.WindowActor actor) {
+            if (bypassing_size_change_effects.remove (actor)) {
+                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                    var new_rect = actor.get_meta_window ().get_frame_rect ();
+                    message (
+                        "[BSP] bypass-size-changed title=\"%s\" frame=(%d,%d %dx%d)",
+                        actor.get_meta_window ().title ?? "(untitled)",
+                        new_rect.x,
+                        new_rect.y,
+                        new_rect.width,
+                        new_rect.height
+                    );
+                }
+
+                kill_window_effects (actor);
+                which_change = null;
+                size_change_completed (actor);
+                return;
+            }
+
             if (which_change == null) {
                 return;
             }
@@ -1314,20 +1389,148 @@ namespace Gala {
 
         public override void map (Meta.WindowActor actor) {
             unowned var window = actor.get_meta_window ();
+            var is_bsp_window = bsp_tree.should_skip_map_animation (window);
+            Mtk.Rectangle bsp_target_rect = {};
+            var has_bsp_target_rect = false;
+            var defer_bsp_map_reveal = false;
 
-            WindowStateSaver.on_map (window);
+            if (is_bsp_window) {
+                has_bsp_target_rect = bsp_tree.try_get_initial_frame_rect (window, out bsp_target_rect);
+            }
 
             actor.remove_all_transitions ();
+
+            if (is_bsp_window && Meta.Prefs.get_gnome_animations ()) {
+                actor.opacity = 0U;
+            }
+
             actor.show ();
 
+            if (has_bsp_target_rect) {
+                bsp_tree.prepare_window_actor_for_target_rect (window, bsp_target_rect);
+            }
+
             // Notifications initial animation is handled by the notification stack
-            if (NotificationStack.is_notification (window) || !Meta.Prefs.get_gnome_animations ()) {
+            if (NotificationStack.is_notification (window)
+                || !Meta.Prefs.get_gnome_animations ()) {
+                pending_bsp_map_reveals.remove (actor);
+                bsp_tree.cancel_map_reveal (window);
+
+                if (is_bsp_window) {
+                    actor.opacity = 255U;
+                }
+
                 dim_parent_window (window);
                 map_completed (actor);
                 return;
             }
 
+            if (is_bsp_window) {
+                defer_bsp_map_reveal = true;
+                pending_bsp_map_reveals.add (actor);
+                bsp_tree.queue_map_reveal (window);
+
+                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                    message (
+                        "[BSP] map-defer title=\"%s\" has-target=%s target=(%d,%d %dx%d)",
+                        window.title ?? "(untitled)",
+                        has_bsp_target_rect ? "true" : "false",
+                        bsp_target_rect.x,
+                        bsp_target_rect.y,
+                        bsp_target_rect.width,
+                        bsp_target_rect.height
+                    );
+                }
+            }
+
+            if (defer_bsp_map_reveal) {
+                return;
+            }
+
+            WindowStateSaver.on_map (window);
             animate_map.begin (actor);
+        }
+
+        private void on_bsp_window_target_ready (Meta.Window window, Mtk.Rectangle rect) {
+            unowned var actor = window.get_compositor_private () as Meta.WindowActor;
+            if (actor == null || actor.is_destroyed ()) {
+                return;
+            }
+
+            if (!pending_bsp_map_reveals.remove (actor)) {
+                return;
+            }
+
+            bsp_tree.prepare_window_actor_for_target_rect (window, rect);
+            actor.opacity = 0U;
+            actor.show ();
+
+            queue_bsp_reveal_after_damage (actor, window, rect);
+        }
+
+        private void queue_bsp_reveal_after_damage (Meta.WindowActor actor, Meta.Window window, Mtk.Rectangle rect) {
+            clear_bsp_reveal_request (actor);
+
+            var request = new BspRevealRequest (window, rect);
+            bsp_reveal_requests[actor] = request;
+
+            request.damage_handler_id = actor.damaged.connect (() => {
+                if (bsp_reveal_requests[actor] != request) {
+                    return;
+                }
+
+                reveal_bsp_window (actor, request, "damaged");
+            });
+
+            request.timeout_id = Timeout.add (BSP_REVEAL_FALLBACK_MS, () => {
+                if (bsp_reveal_requests[actor] != request) {
+                    return Source.REMOVE;
+                }
+
+                reveal_bsp_window (actor, request, "timeout");
+                return Source.REMOVE;
+            });
+        }
+
+        private void reveal_bsp_window (Meta.WindowActor actor, BspRevealRequest request, string reason) {
+            clear_bsp_reveal_request (actor);
+
+            if (actor.is_destroyed ()) {
+                return;
+            }
+
+            if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                message (
+                    "[BSP] reveal-map title=\"%s\" target=(%d,%d %dx%d) reason=%s",
+                    request.window.title ?? "(untitled)",
+                    request.rect.x,
+                    request.rect.y,
+                    request.rect.width,
+                    request.rect.height,
+                    reason
+                );
+            }
+
+            animate_map.begin (actor);
+        }
+
+        private void clear_bsp_reveal_request (Meta.WindowActor actor) {
+            var request = bsp_reveal_requests[actor];
+            if (request == null) {
+                return;
+            }
+
+            if (request.damage_handler_id != 0) {
+                actor.disconnect (request.damage_handler_id);
+                request.damage_handler_id = 0;
+            }
+
+            if (request.timeout_id != 0) {
+                Source.remove (request.timeout_id);
+                request.timeout_id = 0;
+            }
+
+            bsp_reveal_requests.unset (actor);
         }
 
         private async void animate_map (Meta.WindowActor actor) {
@@ -1383,6 +1586,9 @@ namespace Gala {
             unowned var window = actor.get_meta_window ();
 
             actor.remove_all_transitions ();
+            pending_bsp_map_reveals.remove (actor);
+            clear_bsp_reveal_request (actor);
+            bsp_tree.cancel_map_reveal (window);
 
             if (NotificationStack.is_notification (window)) {
                 if (Meta.Prefs.get_gnome_animations ()) {

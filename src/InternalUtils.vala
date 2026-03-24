@@ -152,6 +152,27 @@ namespace Gala {
             });
         }
 
+        public static void wait_for_window_actor_before_redraw (Meta.Window window, owned WindowActorReadyCallback callback) {
+            unowned var window_actor = (Meta.WindowActor) window.get_compositor_private ();
+            if (window_actor != null) {
+                callback (window_actor);
+                return;
+            }
+
+            var attempts_left = 8;
+            window.get_display ().get_compositor ().get_laters ().add (Meta.LaterType.BEFORE_REDRAW, () => {
+                window_actor = (Meta.WindowActor) window.get_compositor_private ();
+
+                if (window_actor != null) {
+                    callback (window_actor);
+                    return Source.REMOVE;
+                }
+
+                attempts_left--;
+                return attempts_left > 0 ? Source.CONTINUE : Source.REMOVE;
+            });
+        }
+
         public static void wait_for_window_actor_visible (Meta.Window window, owned WindowActorReadyCallback callback) {
             wait_for_window_actor (window, (window_actor) => {
                 if (window_actor.visible) {

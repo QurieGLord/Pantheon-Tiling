@@ -1,4 +1,7 @@
 gala_bin_sources = files(
+    'BspLayout.vala',
+    'BspTilingConfig.vala',
+    'BspTree.vala',
     'BlurManager.vala',
     'DBus.vala',
     'DBusAccelerator.vala',
