@@ -195,7 +195,7 @@
       <description></description>
     </key>
     <key type="as" name="toggle-multitasking-view">
-      <default><![CDATA[['<Super>Down','<Super>s']]]></default>
+      <default><![CDATA[['<Super>s']]]></default>
       <summary>Toggle multitasking view</summary>
       <description></description>
     </key>
@@ -203,6 +203,124 @@
       <default><![CDATA[['<Super>f']]]></default>
       <summary>The shortcut to enable picture-in-picture window</summary>
       <description>The shortcut to show the selection area to choose a window.</description>
+    </key>
+    <key type="as" name="bsp-focus-left">
+      <default><![CDATA[['<Super>Left']]]></default>
+      <summary>Focus the BSP tile to the left</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-right">
+      <default><![CDATA[['<Super>Right']]]></default>
+      <summary>Focus the BSP tile to the right</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-up">
+      <default><![CDATA[['<Super>Up']]]></default>
+      <summary>Focus the BSP tile above</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-down">
+      <default><![CDATA[['<Super>Down']]]></default>
+      <summary>Focus the BSP tile below</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-left">
+      <default><![CDATA[['<Super><Shift>Left']]]></default>
+      <summary>Move the focused BSP tile to the left</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-right">
+      <default><![CDATA[['<Super><Shift>Right']]]></default>
+      <summary>Move the focused BSP tile to the right</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-up">
+      <default><![CDATA[['<Super><Shift>Up']]]></default>
+      <summary>Move the focused BSP tile up</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-down">
+      <default><![CDATA[['<Super><Shift>Down']]]></default>
+      <summary>Move the focused BSP tile down</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-tiling">
+      <default><![CDATA[['<Super>b']]]></default>
+      <summary>Toggle BSP tiling globally</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-workspace-tiling">
+      <default><![CDATA[['<Super><Shift>b']]]></default>
+      <summary>Toggle BSP tiling for the active workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-floating">
+      <default><![CDATA[['<Super>v']]]></default>
+      <summary>Toggle the focused window between tiled and floating</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-increase-inner-gap">
+      <default><![CDATA[['<Super>i']]]></default>
+      <summary>Increase the inner BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-decrease-inner-gap">
+      <default><![CDATA[['<Super><Shift>i']]]></default>
+      <summary>Decrease the inner BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-increase-outer-gap">
+      <default><![CDATA[['<Super>o']]]></default>
+      <summary>Increase the outer BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-decrease-outer-gap">
+      <default><![CDATA[['<Super><Shift>o']]]></default>
+      <summary>Decrease the outer BSP gap</summary>
+      <description></description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/wm/bsp/" id="io.elementary.desktop.wm.bsp">
+    <key type="b" name="enabled">
+      <default>true</default>
+      <summary>Whether BSP tiling is enabled</summary>
+      <description></description>
+    </key>
+    <key type="s" name="scope">
+      <default>'global'</default>
+      <summary>How BSP tiling enablement is scoped</summary>
+      <description>Supported values are 'global' and 'workspace'.</description>
+    </key>
+    <key type="as" name="workspace-enabled">
+      <default>[]</default>
+      <summary>Workspace indices with BSP tiling enabled</summary>
+      <description>Only used when the scope is set to 'workspace'.</description>
+    </key>
+    <key type="i" name="inner-gap">
+      <default>0</default>
+      <summary>Gap between tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="i" name="outer-gap">
+      <default>0</default>
+      <summary>Gap between tiled windows and the work area edge</summary>
+      <description></description>
+    </key>
+    <key type="i" name="border-width">
+      <default>0</default>
+      <summary>Future border width for tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="s" name="border-color">
+      <default>'#4c8bf5'</default>
+      <summary>Future border color for tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="b" name="live-reorder-on-drag">
+      <default>true</default>
+      <summary>Whether dragging a tiled window live-reorders the BSP tree</summary>
+      <description></description>
     </key>
   </schema>
 

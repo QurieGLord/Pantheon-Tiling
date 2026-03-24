@@ -6,6 +6,8 @@ BUILD_DIR="${BUILD_DIR:-$ROOT_DIR/builddir}"
 GALA_BIN="$BUILD_DIR/src/gala"
 DEMO_SOURCE="$ROOT_DIR/tools/NestedDemoWindows.vala"
 DEMO_BIN="$BUILD_DIR/tools/nested-demo-windows"
+SCHEMA_SOURCE="$ROOT_DIR/data/gala.gschema.xml"
+SCHEMA_OVERRIDE_SOURCE="$ROOT_DIR/data/20_elementary.pantheon.wm.gschema.override"
 WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY_NAME:-gala-demo}"
 STARTUP_DELAY="${STARTUP_DELAY:-3}"
 DEMO_PAUSE="${DEMO_PAUSE:-1.5}"
@@ -27,6 +29,11 @@ if ! command -v valac >/dev/null 2>&1; then
     exit 1
 fi
 
+if ! command -v glib-compile-schemas >/dev/null 2>&1; then
+    echo "glib-compile-schemas is required" >&2
+    exit 1
+fi
+
 TMP_DIR="$(mktemp -d)"
 cleanup() {
     rm -rf "$TMP_DIR"
@@ -36,15 +43,23 @@ trap cleanup EXIT
 mkdir -p "$(dirname "$DEMO_BIN")"
 valac --pkg gtk4 --pkg gio-2.0 --pkg glib-2.0 -o "$DEMO_BIN" "$DEMO_SOURCE"
 
+SCHEMA_DIR="$TMP_DIR/schemas"
+mkdir -p "$SCHEMA_DIR"
+cp "$SCHEMA_SOURCE" "$SCHEMA_DIR/org.pantheon.desktop.gala.gschema.xml"
+cp "$SCHEMA_OVERRIDE_SOURCE" "$SCHEMA_DIR/"
+glib-compile-schemas "$SCHEMA_DIR"
+
 DEMO_PAUSE_MS="$(python3 - <<PY
 print(int(float("$DEMO_PAUSE") * 1000))
 PY
 )"
 
-export GALA_BIN DEMO_BIN WAYLAND_DISPLAY_NAME STARTUP_DELAY DEMO_PAUSE DEMO_PAUSE_MS DEMO_WINDOWS TMP_DIR
+export GALA_BIN DEMO_BIN WAYLAND_DISPLAY_NAME STARTUP_DELAY DEMO_PAUSE DEMO_PAUSE_MS DEMO_WINDOWS TMP_DIR SCHEMA_DIR
 
 dbus-run-session -- bash -lc '
 set -euo pipefail
+
+export GSETTINGS_SCHEMA_DIR="$SCHEMA_DIR"
 
 "$GALA_BIN" --nested --wayland-display="$WAYLAND_DISPLAY_NAME" &
 gala_pid=$!
@@ -76,6 +91,7 @@ fi
 for ((i = 1; i <= DEMO_WINDOWS; i++)); do
     WAYLAND_DISPLAY="$WAYLAND_DISPLAY_NAME" \
     GDK_BACKEND=wayland \
+    GSETTINGS_SCHEMA_DIR="$SCHEMA_DIR" \
     "$DEMO_BIN" 1 0 "$i" &
     demo_pids+=("$!")
 

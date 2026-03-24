@@ -23,10 +23,22 @@ namespace Gala {
         }
     }
 
+    private class BspWindowPlacement : Object {
+        public Meta.Window window;
+        public Mtk.Rectangle rect;
+
+        public BspWindowPlacement (Meta.Window window, Mtk.Rectangle rect) {
+            this.window = window;
+            this.rect = rect;
+        }
+    }
+
     public class BspTree : Object {
         private const uint INITIAL_SYNC_DELAY_MS = 75;
+        private const int GAP_STEP = 4;
 
         private Meta.Display display;
+        private GLib.Settings settings;
         private bool debug_enabled = Environment.get_variable ("GALA_BSP_DEBUG") == "1";
         private Gee.HashMap<string, BspGroup> groups = new Gee.HashMap<string, BspGroup> ();
         private Gee.HashMap<Meta.Window, BspGroup> window_groups = new Gee.HashMap<Meta.Window, BspGroup> ();
@@ -34,12 +46,14 @@ namespace Gala {
         private Gee.HashMap<Meta.Window, uint> initial_sync_timeouts = new Gee.HashMap<Meta.Window, uint> ();
         private Gee.HashMap<Meta.Window, Meta.Window> interactive_swap_targets = new Gee.HashMap<Meta.Window, Meta.Window> ();
         private Gee.HashSet<Meta.Window> monitored_windows = new Gee.HashSet<Meta.Window> ();
+        private Gee.HashSet<Meta.Window> floating_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> pending_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> interactive_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> windows_with_first_frame = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> windows_waiting_for_first_frame = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> windows_waiting_for_initial_settle = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> windows_waiting_for_map_reveal = new Gee.HashSet<Meta.Window> ();
+        private Gee.HashSet<string> workspace_enabled = new Gee.HashSet<string> ();
         private Gee.HashSet<string> dirty_groups = new Gee.HashSet<string> ();
         private Gee.ArrayList<BspReadyPlacement> ready_placements = new Gee.ArrayList<BspReadyPlacement> ();
 
@@ -52,6 +66,9 @@ namespace Gala {
 
         public BspTree (Meta.Display display) {
             this.display = display;
+            settings = new GLib.Settings ("io.elementary.desktop.wm.bsp");
+            load_settings ();
+            settings.changed.connect (on_settings_changed);
 
             display.window_created.connect (monitor_window);
             display.window_entered_monitor.connect (on_window_monitor_changed);
@@ -145,6 +162,7 @@ namespace Gala {
             windows_waiting_for_first_frame.remove (window);
             windows_waiting_for_initial_settle.remove (window);
             windows_waiting_for_map_reveal.remove (window);
+            floating_windows.remove (window);
             remove_ready_placement (window);
 
             var handler_id = first_frame_handlers[window];
@@ -389,6 +407,7 @@ namespace Gala {
             var current_group = window_groups[window];
             if (!is_tile_candidate (window)) {
                 log_window_event (window, "skip-sync/not-candidate");
+                cancel_map_reveal (window);
                 if (current_group != null) {
                     remove_window (window);
                 }
@@ -420,7 +439,7 @@ namespace Gala {
         }
 
         private bool is_tile_candidate (Meta.Window window) {
-            if (!is_potential_tile_candidate (window)) {
+            if (!should_manage_window (window)) {
                 return false;
             }
 
@@ -442,11 +461,11 @@ namespace Gala {
         }
 
         public bool should_skip_map_animation (Meta.Window window) {
-            return is_potential_tile_candidate (window);
+            return should_manage_window (window);
         }
 
         public void queue_map_reveal (Meta.Window window) {
-            if (!is_potential_tile_candidate (window)) {
+            if (!should_manage_window (window)) {
                 return;
             }
 
@@ -455,14 +474,17 @@ namespace Gala {
         }
 
         public void cancel_map_reveal (Meta.Window window) {
-            windows_waiting_for_map_reveal.remove (window);
+            if (windows_waiting_for_map_reveal.remove (window)) {
+                restore_window_actor_visibility (window);
+            }
+
             remove_ready_placement (window);
         }
 
         public bool try_get_initial_frame_rect (Meta.Window window, out Mtk.Rectangle rect) {
             rect = { 0, 0, 0, 0 };
 
-            if (!is_potential_tile_candidate (window)) {
+            if (!should_manage_window (window)) {
                 return false;
             }
 
@@ -518,6 +540,176 @@ namespace Gala {
                 || windows_waiting_for_initial_settle.contains (window);
         }
 
+        public bool is_enabled () {
+            return config.enabled;
+        }
+
+        public string get_scope () {
+            return config.scope;
+        }
+
+        public bool is_enabled_for_active_workspace () {
+            return is_workspace_enabled (display.get_workspace_manager ().get_active_workspace ());
+        }
+
+        public int get_inner_gap () {
+            return config.inner_gap;
+        }
+
+        public int get_outer_gap () {
+            return config.outer_gap;
+        }
+
+        public bool toggle_enabled () {
+            var new_enabled = !config.enabled;
+            settings.set_string ("scope", "global");
+            settings.set_boolean ("enabled", new_enabled);
+            return new_enabled;
+        }
+
+        public bool toggle_active_workspace_enabled () {
+            var workspace = display.get_workspace_manager ().get_active_workspace ();
+            if (workspace == null) {
+                return false;
+            }
+
+            var enabled_keys = get_workspace_enabled_keys ();
+            if (config.scope != "workspace") {
+                enabled_keys.clear ();
+
+                if (config.enabled) {
+                    var workspace_manager = display.get_workspace_manager ();
+                    for (var i = 0; i < workspace_manager.get_n_workspaces (); i++) {
+                        enabled_keys.add (i.to_string ());
+                    }
+                }
+
+                settings.set_string ("scope", "workspace");
+            }
+
+            var key = workspace.index ().to_string ();
+            var now_enabled = !enabled_keys.contains (key);
+            if (now_enabled) {
+                enabled_keys.add (key);
+            } else {
+                enabled_keys.remove (key);
+            }
+
+            settings.set_strv ("workspace-enabled", to_strv (enabled_keys));
+            return now_enabled;
+        }
+
+        public int adjust_inner_gap (int delta) {
+            var new_gap = int.max (0, config.inner_gap + delta);
+            settings.set_int ("inner-gap", new_gap);
+            return new_gap;
+        }
+
+        public int adjust_outer_gap (int delta) {
+            var new_gap = int.max (0, config.outer_gap + delta);
+            settings.set_int ("outer-gap", new_gap);
+            return new_gap;
+        }
+
+        public bool increase_inner_gap () {
+            adjust_inner_gap (GAP_STEP);
+            return true;
+        }
+
+        public bool decrease_inner_gap () {
+            adjust_inner_gap (-GAP_STEP);
+            return true;
+        }
+
+        public bool increase_outer_gap () {
+            adjust_outer_gap (GAP_STEP);
+            return true;
+        }
+
+        public bool decrease_outer_gap () {
+            adjust_outer_gap (-GAP_STEP);
+            return true;
+        }
+
+        public bool is_window_floating (Meta.Window? window = null) {
+            if (window == null) {
+                window = display.focus_window;
+            }
+
+            return window != null && floating_windows.contains (window);
+        }
+
+        public bool toggle_focused_window_floating () {
+            return set_window_floating (display.focus_window, !is_window_floating ());
+        }
+
+        public bool set_window_floating (Meta.Window? window, bool floating) {
+            if (window == null || !can_toggle_floating (window)) {
+                return false;
+            }
+
+            if (floating) {
+                if (!floating_windows.add (window)) {
+                    return true;
+                }
+
+                cancel_map_reveal (window);
+                remove_window (window);
+                queue_sync_window (window);
+                return true;
+            }
+
+            if (!floating_windows.remove (window)) {
+                return false;
+            }
+
+            queue_sync_window (window);
+            return true;
+        }
+
+        public bool focus_in_direction (Meta.MotionDirection direction) {
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var group = window_groups[focus_window];
+            if (group == null) {
+                return false;
+            }
+
+            var target = find_directional_target (group, focus_window, direction);
+            if (target == null) {
+                return false;
+            }
+
+            target.activate (display.get_current_time ());
+            return true;
+        }
+
+        public bool swap_focused_window_in_direction (Meta.MotionDirection direction) {
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var group = window_groups[focus_window];
+            if (group == null) {
+                return false;
+            }
+
+            var target = find_directional_target (group, focus_window, direction);
+            if (target == null || !group.layout.swap (focus_window, target)) {
+                return false;
+            }
+
+            group.active_window = focus_window;
+            mark_group_dirty (group.key, true);
+            schedule_flush ();
+            focus_window.activate (display.get_current_time ());
+            return true;
+        }
+
         private bool is_potential_tile_candidate (Meta.Window window) {
             if (NotificationStack.is_notification (window)) {
                 return false;
@@ -544,6 +736,18 @@ namespace Gala {
             }
 
             return true;
+        }
+
+        private bool should_manage_window (Meta.Window window) {
+            return is_potential_tile_candidate (window)
+                && !floating_windows.contains (window)
+                && is_workspace_enabled (window.get_workspace ());
+        }
+
+        private bool can_toggle_floating (Meta.Window window) {
+            return window.window_type == Meta.WindowType.NORMAL
+                && window.get_transient_for () == null
+                && !NotificationStack.is_notification (window);
         }
 
         private void hook_window_actor (Meta.Window window) {
@@ -591,6 +795,15 @@ namespace Gala {
 
             actor.set_position (target_buffer_x, target_buffer_y);
             actor.set_size (target_buffer_width, target_buffer_height);
+        }
+
+        private void restore_window_actor_visibility (Meta.Window window) {
+            var actor = window.get_compositor_private () as Meta.WindowActor;
+            if (actor == null || actor.is_destroyed ()) {
+                return;
+            }
+
+            actor.opacity = 255U;
         }
 
         private string? get_group_key (Meta.Window window) {
@@ -796,6 +1009,98 @@ namespace Gala {
             return best_target;
         }
 
+        private Meta.Window? find_directional_target (BspGroup group, Meta.Window window, Meta.MotionDirection direction) {
+            var placements = collect_group_placements (group);
+            BspWindowPlacement? current = null;
+
+            foreach (var placement in placements) {
+                if (placement.window == window) {
+                    current = placement;
+                    break;
+                }
+            }
+
+            if (current == null) {
+                return null;
+            }
+
+            BspWindowPlacement? closest = null;
+
+            foreach (var placement in placements) {
+                if (placement.window == window || !rects_intersect_in_direction (current.rect, placement.rect, direction)) {
+                    continue;
+                }
+
+                if (closest == null || is_better_directional_match (current.rect, placement.rect, closest.rect, direction)) {
+                    closest = placement;
+                }
+            }
+
+            return closest != null ? closest.window : null;
+        }
+
+        private Gee.ArrayList<BspWindowPlacement> collect_group_placements (BspGroup group) {
+            var placements = new Gee.ArrayList<BspWindowPlacement> ();
+            var workspace = display.get_workspace_manager ().get_workspace_by_index (group.workspace_index);
+            if (workspace == null) {
+                return placements;
+            }
+
+            var work_area = apply_outer_gap (workspace.get_work_area_for_monitor (group.monitor));
+            if (work_area.width <= 0 || work_area.height <= 0) {
+                return placements;
+            }
+
+            group.layout.foreach_leaf_rect (work_area, (tile, rect) => {
+                var window = tile as Meta.Window;
+                if (window == null || !window_groups.has_key (window)) {
+                    return;
+                }
+
+                placements.add (new BspWindowPlacement (window, apply_inner_gaps (rect, work_area)));
+            });
+
+            return placements;
+        }
+
+        private bool rects_intersect_in_direction (Mtk.Rectangle current, Mtk.Rectangle candidate, Meta.MotionDirection direction) {
+            switch (direction) {
+                case Meta.MotionDirection.LEFT:
+                    return candidate.x <= current.x
+                        && candidate.y + candidate.height > current.y
+                        && candidate.y < current.y + current.height;
+                case Meta.MotionDirection.RIGHT:
+                    return candidate.x >= current.x
+                        && candidate.y + candidate.height > current.y
+                        && candidate.y < current.y + current.height;
+                case Meta.MotionDirection.UP:
+                    return candidate.y <= current.y
+                        && candidate.x + candidate.width > current.x
+                        && candidate.x < current.x + current.width;
+                case Meta.MotionDirection.DOWN:
+                    return candidate.y >= current.y
+                        && candidate.x + candidate.width > current.x
+                        && candidate.x < current.x + current.width;
+                default:
+                    return false;
+            }
+        }
+
+        private bool is_better_directional_match (Mtk.Rectangle current, Mtk.Rectangle candidate, Mtk.Rectangle closest, Meta.MotionDirection direction) {
+            switch (direction) {
+                case Meta.MotionDirection.LEFT:
+                    return candidate.x > closest.x;
+                case Meta.MotionDirection.RIGHT:
+                    return candidate.x < closest.x;
+                case Meta.MotionDirection.UP:
+                    return candidate.y > closest.y;
+                case Meta.MotionDirection.DOWN:
+                    return candidate.y < closest.y;
+                default:
+                    return false;
+            }
+        }
+
         private Mtk.Rectangle apply_outer_gap (Mtk.Rectangle rect) {
             var gap = int.max (0, config.outer_gap);
             if (gap <= 0) {
@@ -888,6 +1193,93 @@ namespace Gala {
                     ready_placements.remove_at (i);
                 }
             }
+        }
+
+        private void load_settings () {
+            config.enabled = settings.get_boolean ("enabled");
+            config.scope = normalize_scope (settings.get_string ("scope"));
+            config.inner_gap = int.max (0, settings.get_int ("inner-gap"));
+            config.outer_gap = int.max (0, settings.get_int ("outer-gap"));
+            config.border_width = int.max (0, settings.get_int ("border-width"));
+            config.border_color = settings.get_string ("border-color");
+            config.live_reorder_on_drag = settings.get_boolean ("live-reorder-on-drag");
+
+            workspace_enabled.clear ();
+            foreach (var key in settings.get_strv ("workspace-enabled")) {
+                if (key != null && key != "") {
+                    workspace_enabled.add (key);
+                }
+            }
+        }
+
+        private void on_settings_changed (string key) {
+            var old_enabled = config.enabled;
+            var old_scope = config.scope;
+            var old_inner_gap = config.inner_gap;
+            var old_outer_gap = config.outer_gap;
+            var old_live_reorder = config.live_reorder_on_drag;
+
+            load_settings ();
+
+            switch (key) {
+                case "enabled":
+                case "scope":
+                case "workspace-enabled":
+                    if (old_enabled != config.enabled || old_scope != config.scope || key == "workspace-enabled") {
+                        queue_full_rebuild ();
+                    }
+                    break;
+                case "inner-gap":
+                case "outer-gap":
+                    if (old_inner_gap != config.inner_gap || old_outer_gap != config.outer_gap) {
+                        queue_relayout_all_groups ();
+                    }
+                    break;
+                case "live-reorder-on-drag":
+                    if (old_live_reorder != config.live_reorder_on_drag) {
+                        queue_relayout_all_groups ();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private string normalize_scope (string scope) {
+            return scope == "workspace" ? scope : "global";
+        }
+
+        private bool is_workspace_enabled (Meta.Workspace? workspace) {
+            if (workspace == null) {
+                return false;
+            }
+
+            if (config.scope == "workspace") {
+                return workspace_enabled.contains (workspace.index ().to_string ());
+            }
+
+            return config.enabled;
+        }
+
+        private Gee.ArrayList<string> get_workspace_enabled_keys () {
+            var keys = new Gee.ArrayList<string> ();
+            foreach (var key in workspace_enabled) {
+                keys.add (key);
+            }
+
+            keys.sort ((a, b) => {
+                return int.parse (a) - int.parse (b);
+            });
+            return keys;
+        }
+
+        private string[] to_strv (Gee.List<string> values) {
+            var strv = new string[values.size];
+            for (int i = 0; i < values.size; i++) {
+                strv[i] = values[i];
+            }
+
+            return strv;
         }
 
         private void log_window_event (Meta.Window window, string event, string extra = "") {

@@ -368,6 +368,82 @@ namespace Gala {
                 }
             });
 
+            display.add_keybinding ("bsp-focus-left", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.focus_in_direction (Meta.MotionDirection.LEFT);
+                }
+            });
+            display.add_keybinding ("bsp-focus-right", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.focus_in_direction (Meta.MotionDirection.RIGHT);
+                }
+            });
+            display.add_keybinding ("bsp-focus-up", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.focus_in_direction (Meta.MotionDirection.UP);
+                }
+            });
+            display.add_keybinding ("bsp-focus-down", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.focus_in_direction (Meta.MotionDirection.DOWN);
+                }
+            });
+            display.add_keybinding ("bsp-move-left", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.LEFT);
+                }
+            });
+            display.add_keybinding ("bsp-move-right", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.RIGHT);
+                }
+            });
+            display.add_keybinding ("bsp-move-up", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.UP);
+                }
+            });
+            display.add_keybinding ("bsp-move-down", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.DOWN);
+                }
+            });
+            display.add_keybinding ("bsp-toggle-tiling", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.toggle_enabled ();
+                }
+            });
+            display.add_keybinding ("bsp-toggle-workspace-tiling", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.toggle_active_workspace_enabled ();
+                }
+            });
+            display.add_keybinding ("bsp-toggle-floating", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.toggle_focused_window_floating ();
+                }
+            });
+            display.add_keybinding ("bsp-increase-inner-gap", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.increase_inner_gap ();
+                }
+            });
+            display.add_keybinding ("bsp-decrease-inner-gap", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.decrease_inner_gap ();
+                }
+            });
+            display.add_keybinding ("bsp-increase-outer-gap", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.increase_outer_gap ();
+                }
+            });
+            display.add_keybinding ("bsp-decrease-outer-gap", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.decrease_outer_gap ();
+                }
+            });
+
             display.overlay_key.connect (() => {
                 // Showing panels in fullscreen is broken in X11
                 if (InternalUtils.get_x11_in_fullscreen (display) &&
@@ -1829,6 +1905,22 @@ namespace Gala {
                     return filter_action (MULTITASKING_VIEW);
                 case "expose-all-windows":
                     return filter_action (WINDOW_OVERVIEW);
+                case "bsp-focus-left":
+                case "bsp-focus-right":
+                case "bsp-focus-up":
+                case "bsp-focus-down":
+                case "bsp-move-left":
+                case "bsp-move-right":
+                case "bsp-move-up":
+                case "bsp-move-down":
+                case "bsp-toggle-tiling":
+                case "bsp-toggle-workspace-tiling":
+                case "bsp-toggle-floating":
+                case "bsp-increase-inner-gap":
+                case "bsp-decrease-inner-gap":
+                case "bsp-increase-outer-gap":
+                case "bsp-decrease-outer-gap":
+                    return filter_action (SWITCH_WINDOWS);
                 case "screenshot":
                 case "screenshot-clip":
                 case "interactive-screenshot":

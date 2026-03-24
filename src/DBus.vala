@@ -94,4 +94,52 @@ public class Gala.DBus {
     public void perform_action (ActionType type) throws DBusError, IOError {
         wm.perform_action (type);
     }
+
+    public bool get_bsp_enabled () throws DBusError, IOError {
+        return wm.bsp_tree.is_enabled ();
+    }
+
+    public string get_bsp_scope () throws DBusError, IOError {
+        return wm.bsp_tree.get_scope ();
+    }
+
+    public bool get_bsp_enabled_for_active_workspace () throws DBusError, IOError {
+        return wm.bsp_tree.is_enabled_for_active_workspace ();
+    }
+
+    public int get_bsp_inner_gap () throws DBusError, IOError {
+        return wm.bsp_tree.get_inner_gap ();
+    }
+
+    public int get_bsp_outer_gap () throws DBusError, IOError {
+        return wm.bsp_tree.get_outer_gap ();
+    }
+
+    public bool toggle_bsp_enabled () throws DBusError, IOError {
+        return wm.bsp_tree.toggle_enabled ();
+    }
+
+    public bool toggle_bsp_active_workspace_enabled () throws DBusError, IOError {
+        return wm.bsp_tree.toggle_active_workspace_enabled ();
+    }
+
+    public bool toggle_bsp_focused_window_floating () throws DBusError, IOError {
+        return wm.bsp_tree.toggle_focused_window_floating ();
+    }
+
+    public int increase_bsp_inner_gap () throws DBusError, IOError {
+        return wm.bsp_tree.adjust_inner_gap (4);
+    }
+
+    public int decrease_bsp_inner_gap () throws DBusError, IOError {
+        return wm.bsp_tree.adjust_inner_gap (-4);
+    }
+
+    public int increase_bsp_outer_gap () throws DBusError, IOError {
+        return wm.bsp_tree.adjust_outer_gap (4);
+    }
+
+    public int decrease_bsp_outer_gap () throws DBusError, IOError {
+        return wm.bsp_tree.adjust_outer_gap (-4);
+    }
 }

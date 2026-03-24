@@ -4,6 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD_DIR="${BUILD_DIR:-$ROOT_DIR/builddir}"
 GALA_BIN="$BUILD_DIR/src/gala"
+SCHEMA_SOURCE="$ROOT_DIR/data/gala.gschema.xml"
+SCHEMA_OVERRIDE_SOURCE="$ROOT_DIR/data/20_elementary.pantheon.wm.gschema.override"
 WAYLAND_DISPLAY_NAME="${WAYLAND_DISPLAY_NAME:-gala-pantheon-$$}"
 STARTUP_DELAY="${STARTUP_DELAY:-4}"
 SHELL_DELAY="${SHELL_DELAY:-2}"
@@ -19,6 +21,11 @@ fi
 
 if ! command -v dbus-run-session >/dev/null 2>&1; then
     echo "dbus-run-session is required" >&2
+    exit 1
+fi
+
+if ! command -v glib-compile-schemas >/dev/null 2>&1; then
+    echo "glib-compile-schemas is required" >&2
     exit 1
 fi
 
@@ -41,7 +48,13 @@ if [[ "$ISOLATE_XDG" == "1" ]]; then
     TMP_DIR="$(mktemp -d)"
 fi
 
-export ROOT_DIR GALA_BIN WAYLAND_DISPLAY_NAME STARTUP_DELAY SHELL_DELAY APP_DELAY SESSION_APPS ISOLATE_XDG TMP_DIR
+SCHEMA_DIR="${TMP_DIR:-$(mktemp -d)}/schemas"
+mkdir -p "$SCHEMA_DIR"
+cp "$SCHEMA_SOURCE" "$SCHEMA_DIR/org.pantheon.desktop.gala.gschema.xml"
+cp "$SCHEMA_OVERRIDE_SOURCE" "$SCHEMA_DIR/"
+glib-compile-schemas "$SCHEMA_DIR"
+
+export ROOT_DIR GALA_BIN WAYLAND_DISPLAY_NAME STARTUP_DELAY SHELL_DELAY APP_DELAY SESSION_APPS ISOLATE_XDG TMP_DIR SCHEMA_DIR
 
 dbus-run-session -- bash -lc '
 set -euo pipefail
@@ -57,6 +70,7 @@ export GDK_BACKEND=wayland
 export QT_QPA_PLATFORM=wayland
 export SDL_VIDEODRIVER=wayland
 export CLUTTER_BACKEND=wayland
+export GSETTINGS_SCHEMA_DIR="$SCHEMA_DIR"
 
 if [[ "$ISOLATE_XDG" == "1" ]]; then
     export XDG_CONFIG_HOME="$TMP_DIR/config"
@@ -100,7 +114,7 @@ if ! kill -0 "$gala_pid" 2>/dev/null; then
 fi
 
 if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-    dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM SDL_VIDEODRIVER CLUTTER_BACKEND XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP DESKTOP_SESSION XDG_SESSION_TYPE XDG_CONFIG_DIRS XDG_CONFIG_HOME XDG_CACHE_HOME XDG_DATA_HOME XDG_STATE_HOME PATH
+    dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM SDL_VIDEODRIVER CLUTTER_BACKEND GSETTINGS_SCHEMA_DIR XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP DESKTOP_SESSION XDG_SESSION_TYPE XDG_CONFIG_DIRS XDG_CONFIG_HOME XDG_CACHE_HOME XDG_DATA_HOME XDG_STATE_HOME PATH
 fi
 
 unset DISPLAY
