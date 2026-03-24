@@ -124,6 +124,25 @@ namespace Gala {
             return true;
         }
 
+        public bool move (Object tile, Object target_tile) {
+            if (tile == target_tile) {
+                return false;
+            }
+
+            var tiles = get_tiles_in_order ();
+            var tile_index = tiles.index_of (tile);
+            var target_index = tiles.index_of (target_tile);
+            if (tile_index < 0 || target_index < 0) {
+                return false;
+            }
+
+            tiles.remove_at (tile_index);
+            target_index = target_index.clamp (0, tiles.size);
+            tiles.insert (target_index, tile);
+            rebuild_from_order (tiles);
+            return true;
+        }
+
         public void foreach_leaf_rect (Mtk.Rectangle area, LeafRectFunc func) {
             if (root == null || area.width <= 0 || area.height <= 0) {
                 return;

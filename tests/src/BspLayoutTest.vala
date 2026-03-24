@@ -15,6 +15,7 @@ public class Gala.BspLayoutTest : TestCase {
     construct {
         add_test ("split geometry", test_split_geometry);
         add_test ("remove rebuilds canonical layout", test_remove_rebuilds_canonical_layout);
+        add_test ("move rebuilds canonical order", test_move_rebuilds_canonical_order);
         add_test ("swap keeps tree structure", test_swap_keeps_tree_structure);
     }
 
@@ -117,6 +118,45 @@ public class Gala.BspLayoutTest : TestCase {
         assert_cmpint (third.rect.y, EQ, 0);
         assert_cmpint (third.rect.width, EQ, 50);
         assert_cmpint (third.rect.height, EQ, 100);
+    }
+
+    private void test_move_rebuilds_canonical_order () {
+        var layout = new BspLayout ();
+        var first = new MockTile ("first");
+        var second = new MockTile ("second");
+        var third = new MockTile ("third");
+
+        layout.insert (first);
+        layout.insert (second, first);
+        layout.insert (third, second);
+
+        assert_true (layout.move (third, first));
+
+        Mtk.Rectangle area = { 0, 0, 100, 100 };
+        layout.foreach_leaf_rect (area, (tile, rect) => {
+            ((MockTile) tile).rect = rect;
+        });
+
+        assert_cmpint (third.rect.x, EQ, 0);
+        assert_cmpint (third.rect.y, EQ, 0);
+        assert_cmpint (third.rect.width, EQ, 50);
+        assert_cmpint (third.rect.height, EQ, 100);
+
+        assert_cmpint (first.rect.x, EQ, 50);
+        assert_cmpint (first.rect.y, EQ, 0);
+        assert_cmpint (first.rect.width, EQ, 50);
+        assert_cmpint (first.rect.height, EQ, 50);
+
+        assert_cmpint (second.rect.x, EQ, 50);
+        assert_cmpint (second.rect.y, EQ, 50);
+        assert_cmpint (second.rect.width, EQ, 50);
+        assert_cmpint (second.rect.height, EQ, 50);
+
+        var ordered_tiles = layout.get_tiles_in_order ();
+        assert_cmpint (ordered_tiles.size, EQ, 3);
+        assert_true (((MockTile) ordered_tiles[0]).name == "third");
+        assert_true (((MockTile) ordered_tiles[1]).name == "first");
+        assert_true (((MockTile) ordered_tiles[2]).name == "second");
     }
 }
 

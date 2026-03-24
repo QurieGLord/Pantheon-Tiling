@@ -639,6 +639,14 @@ namespace Gala {
             return window != null && floating_windows.contains (window);
         }
 
+        public bool is_window_tiled (Meta.Window? window = null) {
+            if (window == null) {
+                window = display.focus_window;
+            }
+
+            return window != null && window_groups.has_key (window);
+        }
+
         public bool toggle_focused_window_floating () {
             return set_window_floating (display.focus_window, !is_window_floating ());
         }
@@ -688,6 +696,10 @@ namespace Gala {
         }
 
         public bool swap_focused_window_in_direction (Meta.MotionDirection direction) {
+            return move_focused_window_in_direction (direction);
+        }
+
+        public bool move_focused_window_in_direction (Meta.MotionDirection direction) {
             var focus_window = display.focus_window;
             if (focus_window == null) {
                 return false;
@@ -699,7 +711,7 @@ namespace Gala {
             }
 
             var target = find_directional_target (group, focus_window, direction);
-            if (target == null || !group.layout.swap (focus_window, target)) {
+            if (target == null || !group.layout.move (focus_window, target)) {
                 return false;
             }
 
@@ -969,44 +981,33 @@ namespace Gala {
                 return;
             }
 
-            if (!group.layout.swap (window, target)) {
+            if (!group.layout.move (window, target)) {
                 return;
             }
 
             interactive_swap_targets[window] = target;
             group.active_window = window;
-            log_window_event (window, "swap", "%s <-> %s".printf (window.title ?? "(untitled)", target.title ?? "(untitled)"));
+            log_window_event (window, "reorder", "%s -> %s".printf (window.title ?? "(untitled)", target.title ?? "(untitled)"));
             mark_group_dirty (group.key, true);
             schedule_flush ();
         }
 
         private Meta.Window? find_swap_target (BspGroup group, Meta.Window window) {
             var frame_rect = window.get_frame_rect ();
-            var best_target = null as Meta.Window;
-            var best_overlap_area = 0;
+            var center_x = frame_rect.x + frame_rect.width / 2;
+            var center_y = frame_rect.y + frame_rect.height / 2;
 
-            foreach (var tile in group.layout.get_tiles_in_order ()) {
-                var other = tile as Meta.Window;
-                if (other == null || other == window) {
+            foreach (var placement in collect_group_placements (group)) {
+                if (placement.window == window) {
                     continue;
                 }
 
-                var other_rect = other.get_frame_rect ();
-                var overlap_left = int.max (frame_rect.x, other_rect.x);
-                var overlap_top = int.max (frame_rect.y, other_rect.y);
-                var overlap_right = int.min (frame_rect.x + frame_rect.width, other_rect.x + other_rect.width);
-                var overlap_bottom = int.min (frame_rect.y + frame_rect.height, other_rect.y + other_rect.height);
-                var overlap_width = overlap_right - overlap_left;
-                var overlap_height = overlap_bottom - overlap_top;
-                var overlap_area = overlap_width > 0 && overlap_height > 0 ? overlap_width * overlap_height : 0;
-
-                if (overlap_area > best_overlap_area) {
-                    best_overlap_area = overlap_area;
-                    best_target = other;
+                if (rect_contains_point (placement.rect, center_x, center_y)) {
+                    return placement.window;
                 }
             }
 
-            return best_target;
+            return null;
         }
 
         private Meta.Window? find_directional_target (BspGroup group, Meta.Window window, Meta.MotionDirection direction) {
@@ -1099,6 +1100,13 @@ namespace Gala {
                 default:
                     return false;
             }
+        }
+
+        private bool rect_contains_point (Mtk.Rectangle rect, int x, int y) {
+            return x >= rect.x
+                && x < rect.x + rect.width
+                && y >= rect.y
+                && y < rect.y + rect.height;
         }
 
         private Mtk.Rectangle apply_outer_gap (Mtk.Rectangle rect) {

@@ -390,22 +390,22 @@ namespace Gala {
             });
             display.add_keybinding ("bsp-move-left", keybinding_settings, IGNORE_AUTOREPEAT, () => {
                 if (!filter_action (SWITCH_WINDOWS)) {
-                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.LEFT);
+                    bsp_tree.move_focused_window_in_direction (Meta.MotionDirection.LEFT);
                 }
             });
             display.add_keybinding ("bsp-move-right", keybinding_settings, IGNORE_AUTOREPEAT, () => {
                 if (!filter_action (SWITCH_WINDOWS)) {
-                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.RIGHT);
+                    bsp_tree.move_focused_window_in_direction (Meta.MotionDirection.RIGHT);
                 }
             });
             display.add_keybinding ("bsp-move-up", keybinding_settings, IGNORE_AUTOREPEAT, () => {
                 if (!filter_action (SWITCH_WINDOWS)) {
-                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.UP);
+                    bsp_tree.move_focused_window_in_direction (Meta.MotionDirection.UP);
                 }
             });
             display.add_keybinding ("bsp-move-down", keybinding_settings, IGNORE_AUTOREPEAT, () => {
                 if (!filter_action (SWITCH_WINDOWS)) {
-                    bsp_tree.swap_focused_window_in_direction (Meta.MotionDirection.DOWN);
+                    bsp_tree.move_focused_window_in_direction (Meta.MotionDirection.DOWN);
                 }
             });
             display.add_keybinding ("bsp-toggle-tiling", keybinding_settings, IGNORE_AUTOREPEAT, () => {
@@ -459,8 +459,8 @@ namespace Gala {
                 launch_action (ActionKeys.TOGGLE_RECORDING_ACTION);
             });
 
-            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-up", () => {});
-            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-down", () => {});
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-up", handle_switch_to_workspace);
+            Meta.KeyBinding.set_custom_handler ("switch-to-workspace-down", handle_switch_to_workspace);
             Meta.KeyBinding.set_custom_handler ("switch-to-workspace-left", handle_switch_to_workspace);
             Meta.KeyBinding.set_custom_handler ("switch-to-workspace-right", handle_switch_to_workspace);
 
@@ -468,6 +468,10 @@ namespace Gala {
             Meta.KeyBinding.set_custom_handler ("move-to-workspace-down", () => {});
             Meta.KeyBinding.set_custom_handler ("move-to-workspace-left", handle_move_to_workspace);
             Meta.KeyBinding.set_custom_handler ("move-to-workspace-right", handle_move_to_workspace);
+            Meta.KeyBinding.set_custom_handler ("move-to-monitor-up", handle_move_to_monitor_or_bsp_swap);
+            Meta.KeyBinding.set_custom_handler ("move-to-monitor-down", handle_move_to_monitor_or_bsp_swap);
+            Meta.KeyBinding.set_custom_handler ("move-to-monitor-left", handle_move_to_monitor_or_bsp_swap);
+            Meta.KeyBinding.set_custom_handler ("move-to-monitor-right", handle_move_to_monitor_or_bsp_swap);
 
             for (int i = 1; i < 13; i++) {
                 Meta.KeyBinding.set_custom_handler ("switch-to-workspace-%d".printf (i), handle_switch_to_workspace);
@@ -653,9 +657,22 @@ namespace Gala {
             var timestamp = event != null ? event.get_time () : Meta.CURRENT_TIME;
             unowned var name = binding.get_name ();
 
-            if (name == "switch-to-workspace-left" || name == "switch-to-workspace-right") {
-                var direction = (name == "switch-to-workspace-left" ? Meta.MotionDirection.LEFT : Meta.MotionDirection.RIGHT);
-                switch_to_next_workspace (direction, timestamp);
+            if (name == "switch-to-workspace-left"
+                || name == "switch-to-workspace-right"
+                || name == "switch-to-workspace-up"
+                || name == "switch-to-workspace-down") {
+                var direction = keybinding_name_to_direction (name);
+                if (direction == null) {
+                    return;
+                }
+
+                if (try_handle_bsp_focus_binding (display, direction)) {
+                    return;
+                }
+
+                if (name == "switch-to-workspace-left" || name == "switch-to-workspace-right") {
+                    switch_to_next_workspace (direction, timestamp);
+                }
             } else {
                 unowned var workspace_manager = get_display ().get_workspace_manager ();
 
@@ -669,6 +686,141 @@ namespace Gala {
 
                 workspace.activate (timestamp);
             }
+        }
+
+        private void handle_move_to_monitor_or_bsp_swap (Meta.Display display, Meta.Window? window,
+            Clutter.KeyEvent? event, Meta.KeyBinding binding) {
+            if (window == null) {
+                return;
+            }
+
+            var direction = keybinding_name_to_direction (binding.get_name ());
+            if (direction == null) {
+                return;
+            }
+
+            if (try_handle_bsp_swap_binding (display, direction)) {
+                return;
+            }
+
+            var target_monitor = get_monitor_in_direction (window.get_monitor (), direction);
+            if (target_monitor < 0 || target_monitor == window.get_monitor ()) {
+                InternalUtils.bell_notify (display);
+                return;
+            }
+
+            window.move_to_monitor (target_monitor);
+        }
+
+        private bool try_handle_bsp_focus_binding (Meta.Display display, Meta.MotionDirection direction) {
+            if (!bsp_tree.is_enabled_for_active_workspace () || !bsp_tree.is_window_tiled ()) {
+                return false;
+            }
+
+            if (!bsp_tree.focus_in_direction (direction)) {
+                InternalUtils.bell_notify (display);
+            }
+
+            return true;
+        }
+
+        private bool try_handle_bsp_swap_binding (Meta.Display display, Meta.MotionDirection direction) {
+            if (!bsp_tree.is_enabled_for_active_workspace () || !bsp_tree.is_window_tiled ()) {
+                return false;
+            }
+
+            if (!bsp_tree.move_focused_window_in_direction (direction)) {
+                InternalUtils.bell_notify (display);
+            }
+
+            return true;
+        }
+
+        private Meta.MotionDirection? keybinding_name_to_direction (string name) {
+            switch (name) {
+                case "switch-to-workspace-left":
+                case "move-to-monitor-left":
+                    return Meta.MotionDirection.LEFT;
+                case "switch-to-workspace-right":
+                case "move-to-monitor-right":
+                    return Meta.MotionDirection.RIGHT;
+                case "switch-to-workspace-up":
+                case "move-to-monitor-up":
+                    return Meta.MotionDirection.UP;
+                case "switch-to-workspace-down":
+                case "move-to-monitor-down":
+                    return Meta.MotionDirection.DOWN;
+                default:
+                    return null;
+            }
+        }
+
+        private int get_monitor_in_direction (int origin_monitor, Meta.MotionDirection direction) {
+            unowned var display = get_display ();
+            var origin = display.get_monitor_geometry (origin_monitor);
+            var origin_center_x = origin.x + origin.width / 2;
+            var origin_center_y = origin.y + origin.height / 2;
+            var best_monitor = -1;
+            var best_primary_distance = int.MAX;
+            var best_secondary_distance = int.MAX;
+
+            for (int i = 0; i < display.get_n_monitors (); i++) {
+                if (i == origin_monitor) {
+                    continue;
+                }
+
+                var candidate = display.get_monitor_geometry (i);
+                var candidate_center_x = candidate.x + candidate.width / 2;
+                var candidate_center_y = candidate.y + candidate.height / 2;
+                var primary_distance = 0;
+                var secondary_distance = 0;
+
+                switch (direction) {
+                    case Meta.MotionDirection.LEFT:
+                        if (candidate_center_x >= origin_center_x) {
+                            continue;
+                        }
+
+                        primary_distance = origin_center_x - candidate_center_x;
+                        secondary_distance = (candidate_center_y - origin_center_y).abs ();
+                        break;
+                    case Meta.MotionDirection.RIGHT:
+                        if (candidate_center_x <= origin_center_x) {
+                            continue;
+                        }
+
+                        primary_distance = candidate_center_x - origin_center_x;
+                        secondary_distance = (candidate_center_y - origin_center_y).abs ();
+                        break;
+                    case Meta.MotionDirection.UP:
+                        if (candidate_center_y >= origin_center_y) {
+                            continue;
+                        }
+
+                        primary_distance = origin_center_y - candidate_center_y;
+                        secondary_distance = (candidate_center_x - origin_center_x).abs ();
+                        break;
+                    case Meta.MotionDirection.DOWN:
+                        if (candidate_center_y <= origin_center_y) {
+                            continue;
+                        }
+
+                        primary_distance = candidate_center_y - origin_center_y;
+                        secondary_distance = (candidate_center_x - origin_center_x).abs ();
+                        break;
+                    default:
+                        continue;
+                }
+
+                if (primary_distance < best_primary_distance
+                    || (primary_distance == best_primary_distance && secondary_distance < best_secondary_distance)) {
+                    best_monitor = i;
+                    best_primary_distance = primary_distance;
+                    best_secondary_distance = secondary_distance;
+                }
+            }
+
+            return best_monitor;
         }
 
         private void handle_switch_to_workspace_end (Meta.Display display, Meta.Window? window,

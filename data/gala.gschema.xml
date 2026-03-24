@@ -205,12 +205,12 @@
       <description>The shortcut to show the selection area to choose a window.</description>
     </key>
     <key type="as" name="bsp-focus-left">
-      <default><![CDATA[['<Super>Left']]]></default>
+      <default>[]</default>
       <summary>Focus the BSP tile to the left</summary>
       <description></description>
     </key>
     <key type="as" name="bsp-focus-right">
-      <default><![CDATA[['<Super>Right']]]></default>
+      <default>[]</default>
       <summary>Focus the BSP tile to the right</summary>
       <description></description>
     </key>
@@ -225,22 +225,22 @@
       <description></description>
     </key>
     <key type="as" name="bsp-move-left">
-      <default><![CDATA[['<Super><Shift>Left']]]></default>
+      <default>[]</default>
       <summary>Move the focused BSP tile to the left</summary>
       <description></description>
     </key>
     <key type="as" name="bsp-move-right">
-      <default><![CDATA[['<Super><Shift>Right']]]></default>
+      <default>[]</default>
       <summary>Move the focused BSP tile to the right</summary>
       <description></description>
     </key>
     <key type="as" name="bsp-move-up">
-      <default><![CDATA[['<Super><Shift>Up']]]></default>
+      <default>[]</default>
       <summary>Move the focused BSP tile up</summary>
       <description></description>
     </key>
     <key type="as" name="bsp-move-down">
-      <default><![CDATA[['<Super><Shift>Down']]]></default>
+      <default>[]</default>
       <summary>Move the focused BSP tile down</summary>
       <description></description>
     </key>
