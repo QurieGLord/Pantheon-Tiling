@@ -12,8 +12,19 @@ namespace Gala {
         }
     }
 
+    private class BspMinSize : Object {
+        public int width;
+        public int height;
+
+        public BspMinSize (int width = 1, int height = 1) {
+            this.width = int.max (1, width);
+            this.height = int.max (1, height);
+        }
+    }
+
     public class BspLayout : Object {
         public delegate void LeafRectFunc (Object tile, Mtk.Rectangle rect);
+        public delegate void LeafMinSizeFunc (Object tile, out int min_width, out int min_height);
 
         private BspNode? root = null;
         private Gee.HashMap<Object, BspNode> leaves = new Gee.HashMap<Object, BspNode> ();
@@ -174,12 +185,12 @@ namespace Gala {
             return true;
         }
 
-        public void foreach_leaf_rect (Mtk.Rectangle area, LeafRectFunc func) {
+        public void foreach_leaf_rect (Mtk.Rectangle area, LeafRectFunc func, LeafMinSizeFunc? min_size_func = null) {
             if (root == null || area.width <= 0 || area.height <= 0) {
                 return;
             }
 
-            apply_layout (root, area, func);
+            apply_layout (root, area, func, min_size_func);
         }
 
         private BspNode? choose_target_leaf (Object? split_target) {
@@ -279,7 +290,42 @@ namespace Gala {
             return split;
         }
 
-        private void apply_layout (BspNode node, Mtk.Rectangle rect, LeafRectFunc func) {
+        private BspMinSize get_subtree_min_size (BspNode? node, LeafMinSizeFunc? min_size_func) {
+            if (node == null) {
+                return new BspMinSize ();
+            }
+
+            if (node.is_leaf ()) {
+                if (node.tile == null) {
+                    return new BspMinSize ();
+                }
+
+                var min_width = 1;
+                var min_height = 1;
+                if (min_size_func != null) {
+                    min_size_func (node.tile, out min_width, out min_height);
+                }
+
+                return new BspMinSize (min_width, min_height);
+            }
+
+            var left_min = get_subtree_min_size (node.left, min_size_func);
+            var right_min = get_subtree_min_size (node.right, min_size_func);
+
+            if (node.split_horizontal) {
+                return new BspMinSize (
+                    left_min.width + right_min.width,
+                    int.max (left_min.height, right_min.height)
+                );
+            }
+
+            return new BspMinSize (
+                int.max (left_min.width, right_min.width),
+                left_min.height + right_min.height
+            );
+        }
+
+        private void apply_layout (BspNode node, Mtk.Rectangle rect, LeafRectFunc func, LeafMinSizeFunc? min_size_func) {
             if (node.is_leaf ()) {
                 if (node.tile != null) {
                     func (node.tile, rect);
@@ -290,25 +336,37 @@ namespace Gala {
 
             Mtk.Rectangle first = { rect.x, rect.y, rect.width, rect.height };
             Mtk.Rectangle second = { rect.x, rect.y, rect.width, rect.height };
+            var left_min = get_subtree_min_size (node.left, min_size_func);
+            var right_min = get_subtree_min_size (node.right, min_size_func);
 
             if (node.split_horizontal) {
                 var first_width = clamp_split_size (rect.width, node.split_ratio);
+                if (left_min.width + right_min.width <= rect.width) {
+                    first_width = int.max (left_min.width, first_width);
+                    first_width = int.min (rect.width - right_min.width, first_width);
+                }
+
                 first.width = first_width;
                 second.x += first_width;
                 second.width -= first_width;
             } else {
                 var first_height = clamp_split_size (rect.height, node.split_ratio);
+                if (left_min.height + right_min.height <= rect.height) {
+                    first_height = int.max (left_min.height, first_height);
+                    first_height = int.min (rect.height - right_min.height, first_height);
+                }
+
                 first.height = first_height;
                 second.y += first_height;
                 second.height -= first_height;
             }
 
             if (node.left != null) {
-                apply_layout (node.left, first, func);
+                apply_layout (node.left, first, func, min_size_func);
             }
 
             if (node.right != null) {
-                apply_layout (node.right, second, func);
+                apply_layout (node.right, second, func, min_size_func);
             }
         }
     }

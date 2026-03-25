@@ -33,9 +33,27 @@ namespace Gala {
         }
     }
 
+    private class BspPendingFrameRequest : Object {
+        public Mtk.Rectangle old_rect;
+        public Mtk.Rectangle rect;
+        public uint timeout_id = 0;
+
+        public BspPendingFrameRequest (Mtk.Rectangle old_rect, Mtk.Rectangle rect) {
+            this.old_rect = old_rect;
+            this.rect = rect;
+        }
+    }
+
+    private class BspWindowMinimumSize : Object {
+        public int width = 1;
+        public int height = 1;
+    }
+
     public class BspTree : Object {
         private const uint INITIAL_SYNC_DELAY_MS = 75;
+        private const uint LAYOUT_REQUEST_TIMEOUT_MS = 160;
         private const int GAP_STEP = 4;
+        private const int LAYOUT_SETTLE_TOLERANCE_PX = 4;
 
         private Meta.Display display;
         private GLib.Settings settings;
@@ -45,6 +63,8 @@ namespace Gala {
         private Gee.HashMap<Meta.Window, ulong> first_frame_handlers = new Gee.HashMap<Meta.Window, ulong> ();
         private Gee.HashMap<Meta.Window, uint> initial_sync_timeouts = new Gee.HashMap<Meta.Window, uint> ();
         private Gee.HashMap<Meta.Window, Meta.Window> interactive_swap_targets = new Gee.HashMap<Meta.Window, Meta.Window> ();
+        private Gee.HashMap<Meta.Window, BspPendingFrameRequest> pending_frame_requests = new Gee.HashMap<Meta.Window, BspPendingFrameRequest> ();
+        private Gee.HashMap<Meta.Window, BspWindowMinimumSize> observed_minimum_sizes = new Gee.HashMap<Meta.Window, BspWindowMinimumSize> ();
         private Gee.HashSet<Meta.Window> monitored_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> floating_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> pending_windows = new Gee.HashSet<Meta.Window> ();
@@ -165,6 +185,8 @@ namespace Gala {
             windows_waiting_for_map_reveal.remove (window);
             floating_windows.remove (window);
             remove_ready_placement (window);
+            clear_pending_frame_request (window);
+            observed_minimum_sizes.unset (window);
 
             var handler_id = first_frame_handlers[window];
             if (handler_id != 0) {
@@ -204,6 +226,17 @@ namespace Gala {
         }
 
         private void on_window_geometry_changed (Meta.Window window) {
+            var pending_request = pending_frame_requests[window];
+            if (pending_request != null) {
+                var frame_rect = window.get_frame_rect ();
+                if (rect_matches_target_without_expansion (frame_rect, pending_request.rect)) {
+                    clear_pending_frame_request (window);
+                    return;
+                }
+
+                return;
+            }
+
             if (interactive_windows.contains (window)) {
                 maybe_reorder_interactive_window (window);
                 return;
@@ -529,7 +562,7 @@ namespace Gala {
 
                 result_rect = apply_inner_gaps (tile_rect, work_area);
                 found = true;
-            });
+            }, get_tile_min_size);
 
             rect = result_rect;
             return found;
@@ -963,14 +996,17 @@ namespace Gala {
                 }
 
                 var frame_rect = window.get_frame_rect ();
-                if (frame_rect.x == rect.x
-                    && frame_rect.y == rect.y
-                    && frame_rect.width == rect.width
-                    && frame_rect.height == rect.height) {
+                if (rect_matches_target_without_expansion (frame_rect, rect)) {
+                    clear_pending_frame_request (window);
                     if (windows_waiting_for_map_reveal.contains (window)) {
                         queue_window_target_ready (window, rect);
                     }
 
+                    return;
+                }
+
+                var pending_request = pending_frame_requests[window];
+                if (pending_request != null && rect_equals_with_tolerance (pending_request.rect, rect, 0)) {
                     return;
                 }
 
@@ -985,12 +1021,13 @@ namespace Gala {
                     )
                 );
                 window_relayout_requested (window, frame_rect, rect);
+                queue_pending_frame_request (window, frame_rect, rect);
                 window.move_resize_frame (false, rect.x, rect.y, rect.width, rect.height);
 
                 if (windows_waiting_for_map_reveal.contains (window)) {
                     queue_window_target_ready (window, rect);
                 }
-            });
+            }, get_tile_min_size);
 
             if (!any_mismatch) {
                 return;
@@ -1095,7 +1132,7 @@ namespace Gala {
                 }
 
                 placements.add (new BspWindowPlacement (window, apply_inner_gaps (rect, work_area)));
-            });
+            }, get_tile_min_size);
 
             return placements;
         }
@@ -1324,6 +1361,124 @@ namespace Gala {
             }
 
             return strv;
+        }
+
+        private void get_tile_min_size (Object tile, out int min_width, out int min_height) {
+            min_width = 1;
+            min_height = 1;
+
+            var window = tile as Meta.Window;
+            if (window == null) {
+                return;
+            }
+
+            var minimum_size = observed_minimum_sizes[window];
+            if (minimum_size == null) {
+                return;
+            }
+
+            var gap_padding = int.max (0, config.inner_gap);
+            min_width = int.max (1, minimum_size.width + gap_padding);
+            min_height = int.max (1, minimum_size.height + gap_padding);
+        }
+
+        private void queue_pending_frame_request (Meta.Window window, Mtk.Rectangle old_rect, Mtk.Rectangle rect) {
+            clear_pending_frame_request (window);
+
+            var request = new BspPendingFrameRequest (old_rect, rect);
+            pending_frame_requests[window] = request;
+            request.timeout_id = Timeout.add (LAYOUT_REQUEST_TIMEOUT_MS, () => {
+                if (pending_frame_requests[window] != request) {
+                    return Source.REMOVE;
+                }
+
+                pending_frame_requests.unset (window);
+                var frame_rect = window.get_frame_rect ();
+                if (rect_matches_target_without_expansion (frame_rect, request.rect)) {
+                    return Source.REMOVE;
+                }
+
+                var group = window_groups[window];
+                if (group != null
+                    && update_observed_minimum_size (window, frame_rect, request.old_rect, request.rect)) {
+                    mark_group_dirty (group.key, true);
+                    schedule_flush ();
+                }
+
+                return Source.REMOVE;
+            });
+        }
+
+        private void clear_pending_frame_request (Meta.Window window) {
+            var request = pending_frame_requests[window];
+            if (request == null) {
+                return;
+            }
+
+            if (request.timeout_id != 0) {
+                Source.remove (request.timeout_id);
+            }
+
+            pending_frame_requests.unset (window);
+        }
+
+        private bool update_observed_minimum_size (
+            Meta.Window window,
+            Mtk.Rectangle actual_rect,
+            Mtk.Rectangle old_rect,
+            Mtk.Rectangle target_rect
+        ) {
+            var required_width = actual_rect.width > target_rect.width
+                && abs_int (actual_rect.width - old_rect.width) > LAYOUT_SETTLE_TOLERANCE_PX
+                ? actual_rect.width
+                : 0;
+            var required_height = actual_rect.height > target_rect.height
+                && abs_int (actual_rect.height - old_rect.height) > LAYOUT_SETTLE_TOLERANCE_PX
+                ? actual_rect.height
+                : 0;
+
+            if (required_width == 0 && required_height == 0) {
+                return false;
+            }
+
+            var minimum_size = observed_minimum_sizes[window];
+            if (minimum_size == null) {
+                minimum_size = new BspWindowMinimumSize ();
+                observed_minimum_sizes[window] = minimum_size;
+            }
+
+            var changed = false;
+            if (required_width > 0 && required_width > minimum_size.width) {
+                minimum_size.width = required_width;
+                changed = true;
+            }
+
+            if (required_height > 0 && required_height > minimum_size.height) {
+                minimum_size.height = required_height;
+                changed = true;
+            }
+
+            return changed;
+        }
+
+        private bool rect_equals_with_tolerance (Mtk.Rectangle first, Mtk.Rectangle second, int tolerance = 0) {
+            return abs_int (first.x - second.x) <= tolerance
+                && abs_int (first.y - second.y) <= tolerance
+                && abs_int (first.width - second.width) <= tolerance
+                && abs_int (first.height - second.height) <= tolerance;
+        }
+
+        private bool rect_matches_target_without_expansion (Mtk.Rectangle actual, Mtk.Rectangle target) {
+            return abs_int (actual.x - target.x) <= LAYOUT_SETTLE_TOLERANCE_PX
+                && abs_int (actual.y - target.y) <= LAYOUT_SETTLE_TOLERANCE_PX
+                && actual.width <= target.width
+                && actual.height <= target.height
+                && abs_int (actual.width - target.width) <= LAYOUT_SETTLE_TOLERANCE_PX
+                && abs_int (actual.height - target.height) <= LAYOUT_SETTLE_TOLERANCE_PX;
+        }
+
+        private int abs_int (int value) {
+            return value < 0 ? -value : value;
         }
 
         private void log_window_event (Meta.Window window, string event, string extra = "") {

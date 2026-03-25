@@ -1834,11 +1834,16 @@ namespace Gala {
             }
 
             unowned var actor = window.get_compositor_private () as Meta.WindowActor;
-            if (actor == null || actor.is_destroyed () || pending_bsp_map_reveals.contains (actor)) {
+            if (actor == null
+                || actor.is_destroyed ()
+                || pending_bsp_map_reveals.contains (actor)
+                || mapping.contains (actor)) {
                 return;
             }
 
-            bsp_flow_animation_requests[actor] = new BspFlowAnimationRequest (old_rect, new_rect);
+            var request = new BspFlowAnimationRequest (old_rect, new_rect);
+            prepare_bsp_reflow_actor (actor, request);
+            bsp_flow_animation_requests[actor] = request;
             schedule_bsp_flow_animations ();
         }
 
@@ -1863,7 +1868,9 @@ namespace Gala {
 
                     bsp_flow_animation_requests.unset (actor);
 
-                    if (actor.is_destroyed () || pending_bsp_map_reveals.contains (actor)) {
+                    if (actor.is_destroyed ()
+                        || pending_bsp_map_reveals.contains (actor)
+                        || mapping.contains (actor)) {
                         continue;
                     }
 
@@ -1874,8 +1881,9 @@ namespace Gala {
             });
         }
 
-        private void animate_bsp_reflow (Meta.WindowActor actor, BspFlowAnimationRequest request) {
+        private void prepare_bsp_reflow_actor (Meta.WindowActor actor, BspFlowAnimationRequest request) {
             actor.remove_all_transitions ();
+            actor.opacity = 255U;
             actor.set_pivot_point (0.0f, 0.0f);
             actor.set_scale (
                 request.new_rect.width > 0 ? (float) request.old_rect.width / request.new_rect.width : 1.0f,
@@ -1886,6 +1894,11 @@ namespace Gala {
                 request.old_rect.y - request.new_rect.y,
                 0.0f
             );
+        }
+
+        private void animate_bsp_reflow (Meta.WindowActor actor, BspFlowAnimationRequest request) {
+            actor.opacity = 255U;
+            actor.set_pivot_point (0.0f, 0.0f);
 
             actor.save_easing_state ();
             actor.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
@@ -1938,6 +1951,7 @@ namespace Gala {
                 );
             }
 
+            mapping.add (actor);
             animate_map.begin (actor);
         }
 
