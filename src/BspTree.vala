@@ -63,6 +63,7 @@ namespace Gala {
 
         public BspTilingConfig config { get; private set; default = new BspTilingConfig (); }
         public signal void window_target_ready (Meta.Window window, Mtk.Rectangle rect);
+        public signal void window_relayout_requested (Meta.Window window, Mtk.Rectangle old_rect, Mtk.Rectangle new_rect);
 
         public BspTree (Meta.Display display) {
             this.display = display;
@@ -839,10 +840,9 @@ namespace Gala {
                 actor.rotation_angle_z = 0.0f;
                 actor.set_pivot_point (0.0f, 0.0f);
                 actor.set_translation (0.0f, 0.0f, 0.0f);
+                actor.set_position (target_buffer_x, target_buffer_y);
+                actor.set_size (target_buffer_width, target_buffer_height);
             }
-
-            actor.set_position (target_buffer_x, target_buffer_y);
-            actor.set_size (target_buffer_width, target_buffer_height);
         }
 
         private void restore_window_actor_visibility (Meta.Window window) {
@@ -984,7 +984,7 @@ namespace Gala {
                         rect.x, rect.y, rect.width, rect.height
                     )
                 );
-                prepare_window_actor_for_target_rect (window, rect);
+                window_relayout_requested (window, frame_rect, rect);
                 window.move_resize_frame (false, rect.x, rect.y, rect.width, rect.height);
 
                 if (windows_waiting_for_map_reveal.contains (window)) {

@@ -29,10 +29,21 @@ namespace Gala {
         }
     }
 
+    private class BspFlowAnimationRequest : Object {
+        public Mtk.Rectangle old_rect;
+        public Mtk.Rectangle new_rect;
+
+        public BspFlowAnimationRequest (Mtk.Rectangle old_rect, Mtk.Rectangle new_rect) {
+            this.old_rect = old_rect;
+            this.new_rect = new_rect;
+        }
+    }
+
     public class WindowManagerGala : Meta.Plugin, WindowManager {
         private const string OPEN_MULTITASKING_VIEW = "dbus-send --session --dest=org.pantheon.gala --print-reply /org/pantheon/gala org.pantheon.gala.PerformAction int32:1";
         private const string OPEN_APPLICATIONS_MENU = "io.elementary.wingpanel --toggle-indicator=app-launcher";
         private const uint BSP_REVEAL_FALLBACK_MS = 90;
+        private const uint BSP_FLOW_ANIMATION_DURATION_MS = AnimationDuration.SNAP;
 
         /**
          * {@inheritDoc}
@@ -129,14 +140,18 @@ namespace Gala {
         private Gee.HashSet<Meta.WindowActor> mapping = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> pending_bsp_map_reveals = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashMap<Meta.WindowActor, BspRevealRequest> bsp_reveal_requests = new Gee.HashMap<Meta.WindowActor, BspRevealRequest> ();
+        private Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> bsp_flow_animation_requests = new Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> ();
         private Gee.HashSet<Meta.WindowActor> destroying = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> bypassing_size_change_effects = new Gee.HashSet<Meta.WindowActor> ();
         private Meta.SizeChange? which_change = null;
         private Mtk.Rectangle old_rect_size_change;
         private Clutter.Actor? latest_window_snapshot;
+        private uint bsp_flow_animation_later_id = 0;
 
         private GLib.Settings behavior_settings;
+        private GLib.Settings wm_preferences_settings;
+        private bool syncing_focus_follows_mouse = false;
 
         construct {
 #if !HAS_MUTTER48
@@ -145,6 +160,10 @@ namespace Gala {
 #endif
 
             behavior_settings = new GLib.Settings ("io.elementary.desktop.wm.behavior");
+            wm_preferences_settings = new GLib.Settings ("org.gnome.desktop.wm.preferences");
+            behavior_settings.changed.connect (on_behavior_settings_changed);
+            wm_preferences_settings.changed.connect (on_wm_preferences_changed);
+            sync_focus_follows_mouse_toggle_from_preferences ();
 
             //Make it start watching the settings daemon bus
             Drawing.StyleManager.get_instance ();
@@ -158,6 +177,7 @@ namespace Gala {
             show_stage ();
             bsp_tree = new BspTree (get_display ());
             bsp_tree.window_target_ready.connect (on_bsp_window_target_ready);
+            bsp_tree.window_relayout_requested.connect (on_bsp_window_relayout_requested);
 
             init_a11y ();
 
@@ -985,14 +1005,109 @@ namespace Gala {
 
         private void on_focus_window_changed () {
             unowned var display = get_display ();
+            var focus_window = display.focus_window;
 
-            if (!is_modal () || modal_stack.peek_head ().grab != null || display.focus_window == null ||
-                ShellClientsManager.get_instance ().is_shell_window (display.focus_window)
+            if (focus_window != null) {
+                maybe_warp_pointer_to_focused_window (focus_window);
+            }
+
+            if (!is_modal () || modal_stack.peek_head ().grab != null || focus_window == null ||
+                ShellClientsManager.get_instance ().is_shell_window (focus_window)
             ) {
                 return;
             }
 
             display.unset_input_focus (display.get_current_time ());
+        }
+
+        private void on_behavior_settings_changed (string key) {
+            if (key == "focus-follows-mouse") {
+                apply_focus_follows_mouse_setting ();
+            }
+        }
+
+        private void on_wm_preferences_changed (string key) {
+            if (key == "focus-mode") {
+                sync_focus_follows_mouse_toggle_from_preferences ();
+            }
+        }
+
+        private void apply_focus_follows_mouse_setting () {
+            if (syncing_focus_follows_mouse) {
+                return;
+            }
+
+            var focus_follows_mouse = behavior_settings.get_boolean ("focus-follows-mouse");
+            var focus_mode = wm_preferences_settings.get_string ("focus-mode");
+
+            if (focus_follows_mouse) {
+                if (focus_mode == "click") {
+                    syncing_focus_follows_mouse = true;
+                    wm_preferences_settings.set_string ("focus-mode", "sloppy");
+                    syncing_focus_follows_mouse = false;
+                }
+
+                return;
+            }
+
+            if (focus_mode != "click") {
+                syncing_focus_follows_mouse = true;
+                wm_preferences_settings.set_string ("focus-mode", "click");
+                syncing_focus_follows_mouse = false;
+            }
+        }
+
+        private void sync_focus_follows_mouse_toggle_from_preferences () {
+            if (syncing_focus_follows_mouse) {
+                return;
+            }
+
+            var focus_mode = wm_preferences_settings.get_string ("focus-mode");
+            var focus_follows_mouse = focus_mode != "click";
+
+            if (behavior_settings.get_boolean ("focus-follows-mouse") == focus_follows_mouse) {
+                return;
+            }
+
+            syncing_focus_follows_mouse = true;
+            behavior_settings.set_boolean ("focus-follows-mouse", focus_follows_mouse);
+            syncing_focus_follows_mouse = false;
+        }
+
+        private void maybe_warp_pointer_to_focused_window (Meta.Window window) {
+            if (!behavior_settings.get_boolean ("mouse-follows-focus")
+                || ShellClientsManager.get_instance ().is_shell_window (window)
+                || window.window_type == Meta.WindowType.DOCK
+                || window.window_type == Meta.WindowType.DESKTOP
+                || window.minimized) {
+                return;
+            }
+
+            var frame_rect = window.get_frame_rect ();
+            if (frame_rect.width <= 0 || frame_rect.height <= 0) {
+                return;
+            }
+
+            Graphene.Point coords = {};
+#if HAS_MUTTER48
+            unowned var tracker = get_display ().get_compositor ().get_backend ().get_cursor_tracker ();
+#else
+            unowned var tracker = get_display ().get_cursor_tracker ();
+#endif
+            tracker.get_pointer (out coords, null);
+
+            if (coords.x >= frame_rect.x
+                && coords.x < frame_rect.x + frame_rect.width
+                && coords.y >= frame_rect.y
+                && coords.y < frame_rect.y + frame_rect.height) {
+                return;
+            }
+
+            InternalUtils.warp_pointer (
+                get_display (),
+                frame_rect.x + frame_rect.width / 2,
+                frame_rect.y + frame_rect.height / 2
+            );
         }
 
         private void dim_parent_window (Meta.Window window) {
@@ -1711,6 +1826,75 @@ namespace Gala {
             queue_bsp_reveal_after_damage (actor, window, rect);
         }
 
+        private void on_bsp_window_relayout_requested (Meta.Window window, Mtk.Rectangle old_rect, Mtk.Rectangle new_rect) {
+            if (!Meta.Prefs.get_gnome_animations ()
+                || old_rect.width <= 0 || old_rect.height <= 0
+                || new_rect.width <= 0 || new_rect.height <= 0) {
+                return;
+            }
+
+            unowned var actor = window.get_compositor_private () as Meta.WindowActor;
+            if (actor == null || actor.is_destroyed () || pending_bsp_map_reveals.contains (actor)) {
+                return;
+            }
+
+            bsp_flow_animation_requests[actor] = new BspFlowAnimationRequest (old_rect, new_rect);
+            schedule_bsp_flow_animations ();
+        }
+
+        private void schedule_bsp_flow_animations () {
+            if (bsp_flow_animation_later_id != 0) {
+                return;
+            }
+
+            bsp_flow_animation_later_id = get_display ().get_compositor ().get_laters ().add (Meta.LaterType.BEFORE_REDRAW, () => {
+                bsp_flow_animation_later_id = 0;
+
+                var actors = new Gee.ArrayList<Meta.WindowActor> ();
+                foreach (var actor in bsp_flow_animation_requests.keys) {
+                    actors.add (actor);
+                }
+
+                foreach (var actor in actors) {
+                    var request = bsp_flow_animation_requests[actor];
+                    if (request == null) {
+                        continue;
+                    }
+
+                    bsp_flow_animation_requests.unset (actor);
+
+                    if (actor.is_destroyed () || pending_bsp_map_reveals.contains (actor)) {
+                        continue;
+                    }
+
+                    animate_bsp_reflow (actor, request);
+                }
+
+                return Source.REMOVE;
+            });
+        }
+
+        private void animate_bsp_reflow (Meta.WindowActor actor, BspFlowAnimationRequest request) {
+            actor.remove_all_transitions ();
+            actor.set_pivot_point (0.0f, 0.0f);
+            actor.set_scale (
+                request.new_rect.width > 0 ? (float) request.old_rect.width / request.new_rect.width : 1.0f,
+                request.new_rect.height > 0 ? (float) request.old_rect.height / request.new_rect.height : 1.0f
+            );
+            actor.set_translation (
+                request.old_rect.x - request.new_rect.x,
+                request.old_rect.y - request.new_rect.y,
+                0.0f
+            );
+
+            actor.save_easing_state ();
+            actor.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
+            actor.set_easing_duration (BSP_FLOW_ANIMATION_DURATION_MS);
+            actor.set_scale (1.0f, 1.0f);
+            actor.set_translation (0.0f, 0.0f, 0.0f);
+            actor.restore_easing_state ();
+        }
+
         private void queue_bsp_reveal_after_damage (Meta.WindowActor actor, Meta.Window window, Mtk.Rectangle rect) {
             clear_bsp_reveal_request (actor);
 
@@ -1831,6 +2015,7 @@ namespace Gala {
             actor.remove_all_transitions ();
             pending_bsp_map_reveals.remove (actor);
             clear_bsp_reveal_request (actor);
+            bsp_flow_animation_requests.unset (actor);
             bsp_tree.cancel_map_reveal (window);
 
             if (NotificationStack.is_notification (window)) {

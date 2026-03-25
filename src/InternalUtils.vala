@@ -208,6 +208,16 @@ namespace Gala {
 #endif
         }
 
+        public static void warp_pointer (Meta.Display display, int x, int y) {
+#if HAS_MUTTER48
+            display.get_compositor ().get_stage ().context.get_backend ().get_default_seat ().warp_pointer (x, y);
+#elif HAS_MUTTER47
+            display.get_stage ().context.get_backend ().get_default_seat ().warp_pointer (x, y);
+#else
+            Clutter.get_default_backend ().get_default_seat ().warp_pointer (x, y);
+#endif
+        }
+
         public static bool get_x11_in_fullscreen (Meta.Display display) {
             var primary_monitor = display.get_primary_monitor ();
             var is_in_fullscreen = display.get_monitor_in_fullscreen (primary_monitor);

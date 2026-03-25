@@ -107,6 +107,16 @@
       <summary>What action should be performed on Super + Scroll</summary>
       <description></description>
     </key>
+    <key type="b" name="focus-follows-mouse">
+      <default>false</default>
+      <summary>Focus windows when the pointer enters them</summary>
+      <description>Maps to the underlying window focus mode and enables sloppy focus behavior.</description>
+    </key>
+    <key type="b" name="mouse-follows-focus">
+      <default>false</default>
+      <summary>Move the mouse pointer to the newly focused window</summary>
+      <description>When enabled, keyboard-driven focus changes warp the pointer into the newly focused window.</description>
+    </key>
   </schema>
 
   <schema path="/io/elementary/desktop/wm/keybindings/" id="io.elementary.desktop.wm.keybindings">
