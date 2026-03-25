@@ -259,6 +259,21 @@
       <summary>Toggle the focused window between tiled and floating</summary>
       <description></description>
     </key>
+    <key type="as" name="bsp-promote">
+      <default><![CDATA[['<Super>Return', '<Super>KP_Enter']]]></default>
+      <summary>Promote the focused window to the BSP master slot</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-rotate-forward">
+      <default><![CDATA[['<Super>r']]]></default>
+      <summary>Rotate the BSP group forward</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-rotate-backward">
+      <default><![CDATA[['<Super><Shift>r']]]></default>
+      <summary>Rotate the BSP group backward</summary>
+      <description></description>
+    </key>
     <key type="as" name="bsp-increase-inner-gap">
       <default><![CDATA[['<Super>i']]]></default>
       <summary>Increase the inner BSP gap</summary>

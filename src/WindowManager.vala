@@ -423,6 +423,21 @@ namespace Gala {
                     bsp_tree.toggle_focused_window_floating ();
                 }
             });
+            display.add_keybinding ("bsp-promote", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.promote_focused_window ();
+                }
+            });
+            display.add_keybinding ("bsp-rotate-forward", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.rotate_focused_group (true);
+                }
+            });
+            display.add_keybinding ("bsp-rotate-backward", keybinding_settings, IGNORE_AUTOREPEAT, () => {
+                if (!filter_action (SWITCH_WINDOWS)) {
+                    bsp_tree.rotate_focused_group (false);
+                }
+            });
             display.add_keybinding ("bsp-increase-inner-gap", keybinding_settings, IGNORE_AUTOREPEAT, () => {
                 if (!filter_action (SWITCH_WINDOWS)) {
                     bsp_tree.increase_inner_gap ();
@@ -2068,6 +2083,9 @@ namespace Gala {
                 case "bsp-toggle-tiling":
                 case "bsp-toggle-workspace-tiling":
                 case "bsp-toggle-floating":
+                case "bsp-promote":
+                case "bsp-rotate-forward":
+                case "bsp-rotate-backward":
                 case "bsp-increase-inner-gap":
                 case "bsp-decrease-inner-gap":
                 case "bsp-increase-outer-gap":

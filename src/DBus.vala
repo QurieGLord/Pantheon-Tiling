@@ -127,6 +127,18 @@ public class Gala.DBus {
         return wm.bsp_tree.toggle_focused_window_floating ();
     }
 
+    public bool promote_bsp_focused_window () throws DBusError, IOError {
+        return wm.bsp_tree.promote_focused_window ();
+    }
+
+    public bool rotate_bsp_group_forward () throws DBusError, IOError {
+        return wm.bsp_tree.rotate_focused_group (true);
+    }
+
+    public bool rotate_bsp_group_backward () throws DBusError, IOError {
+        return wm.bsp_tree.rotate_focused_group (false);
+    }
+
     public int increase_bsp_inner_gap () throws DBusError, IOError {
         return wm.bsp_tree.adjust_inner_gap (4);
     }

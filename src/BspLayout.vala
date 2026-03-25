@@ -143,6 +143,37 @@ namespace Gala {
             return true;
         }
 
+        public bool promote (Object tile) {
+            var tiles = get_tiles_in_order ();
+            var tile_index = tiles.index_of (tile);
+            if (tile_index <= 0) {
+                return false;
+            }
+
+            tiles.remove_at (tile_index);
+            tiles.insert (0, tile);
+            rebuild_from_order (tiles);
+            return true;
+        }
+
+        public bool rotate (bool forward = true) {
+            var tiles = get_tiles_in_order ();
+            if (tiles.size < 2) {
+                return false;
+            }
+
+            if (forward) {
+                var first_tile = tiles.remove_at (0);
+                tiles.add (first_tile);
+            } else {
+                var last_tile = tiles.remove_at (tiles.size - 1);
+                tiles.insert (0, last_tile);
+            }
+
+            rebuild_from_order (tiles);
+            return true;
+        }
+
         public void foreach_leaf_rect (Mtk.Rectangle area, LeafRectFunc func) {
             if (root == null || area.width <= 0 || area.height <= 0) {
                 return;

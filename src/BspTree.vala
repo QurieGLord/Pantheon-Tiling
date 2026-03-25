@@ -722,6 +722,42 @@ namespace Gala {
             return true;
         }
 
+        public bool promote_focused_window () {
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var group = window_groups[focus_window];
+            if (group == null || !group.layout.promote (focus_window)) {
+                return false;
+            }
+
+            group.active_window = focus_window;
+            mark_group_dirty (group.key, true);
+            schedule_flush ();
+            focus_window.activate (display.get_current_time ());
+            return true;
+        }
+
+        public bool rotate_focused_group (bool forward = true) {
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var group = window_groups[focus_window];
+            if (group == null || !group.layout.rotate (forward)) {
+                return false;
+            }
+
+            group.active_window = focus_window;
+            mark_group_dirty (group.key, true);
+            schedule_flush ();
+            focus_window.activate (display.get_current_time ());
+            return true;
+        }
+
         private bool is_potential_tile_candidate (Meta.Window window) {
             if (NotificationStack.is_notification (window)) {
                 return false;
