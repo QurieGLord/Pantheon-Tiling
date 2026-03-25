@@ -19,7 +19,7 @@ gresource = gnome.compile_resources(
 )
 
 wingpanel_dep = dependency('wingpanel-9')
-wingpanel_indicatorsdir = wingpanel_dep.get_variable('indicatorsdir', pkgconfig_define: ['libdir', libdir])
+wingpanel_indicatorsdir = join_paths(prefix, get_option('libdir'), 'wingpanel-9')
 
 shared_module(
     meson.project_name(),
