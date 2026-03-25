@@ -24,6 +24,44 @@ namespace PanelBsp {
 
     public class GalaClient : Object {
         private GalaBspControl? proxy = null;
+        private uint watch_id = 0;
+        private bool name_available = false;
+        private bool availability_known = false;
+
+        public signal void availability_changed (bool available);
+
+        construct {
+            watch_id = Bus.watch_name (
+                BusType.SESSION,
+                "org.pantheon.gala",
+                BusNameWatcherFlags.NONE,
+                (connection, name, owner) => {
+                    proxy = null;
+                    update_availability (true);
+                },
+                (connection, name) => {
+                    proxy = null;
+                    update_availability (false);
+                }
+            );
+        }
+
+        ~GalaClient () {
+            if (watch_id != 0) {
+                Bus.unwatch_name (watch_id);
+                watch_id = 0;
+            }
+        }
+
+        private void update_availability (bool available) {
+            if (availability_known && name_available == available) {
+                return;
+            }
+
+            availability_known = true;
+            name_available = available;
+            availability_changed (available);
+        }
 
         private bool ensure_proxy () {
             if (proxy != null) {
@@ -36,16 +74,25 @@ namespace PanelBsp {
                     "org.pantheon.gala",
                     "/org/pantheon/gala"
                 );
+                update_availability (true);
                 return true;
             } catch (Error e) {
-                warning ("Failed to connect to Gala BSP D-Bus API: %s", e.message);
+                if (name_available) {
+                    warning ("Failed to connect to Gala BSP D-Bus API: %s", e.message);
+                }
+
                 proxy = null;
+                update_availability (false);
                 return false;
             }
         }
 
         private void invalidate_proxy () {
             proxy = null;
+        }
+
+        public bool is_available () {
+            return proxy != null || name_available;
         }
 
         public bool try_get_state (out BspState state) {

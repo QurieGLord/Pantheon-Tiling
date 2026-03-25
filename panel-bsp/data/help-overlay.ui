@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <object class="GtkShortcutsWindow" id="bsp_help_window">
+    <property name="hide-on-close">True</property>
+    <property name="modal">False</property>
+    <property name="title">BSP Tiling Shortcuts</property>
+    <property name="default-width">760</property>
+    <property name="default-height">520</property>
+    <child>
+      <object class="GtkShortcutsSection">
+        <property name="section-name">bsp</property>
+        <property name="title">BSP Tiling</property>
+        <property name="max-height">14</property>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title">Focus</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="focus_left">
+                <property name="title">Focus tile to the left</property>
+                <property name="subtitle">Reuses the workspace-left shortcut while BSP is active</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="focus_right">
+                <property name="title">Focus tile to the right</property>
+                <property name="subtitle">Reuses the workspace-right shortcut while BSP is active</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="focus_up">
+                <property name="title">Focus tile above</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="focus_down">
+                <property name="title">Focus tile below</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title">Swap and Rearrange</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="swap_left">
+                <property name="title">Swap with the tile to the left</property>
+                <property name="subtitle">Reuses the move-to-monitor-left shortcut while BSP is active</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="swap_right">
+                <property name="title">Swap with the tile to the right</property>
+                <property name="subtitle">Reuses the move-to-monitor-right shortcut while BSP is active</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="swap_up">
+                <property name="title">Swap with the tile above</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="swap_down">
+                <property name="title">Swap with the tile below</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="promote">
+                <property name="title">Promote focused window to the master slot</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="rotate_forward">
+                <property name="title">Rotate the BSP tree forward</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="rotate_backward">
+                <property name="title">Rotate the BSP tree backward</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title">Modes</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="toggle_global">
+                <property name="title">Toggle BSP globally</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="toggle_workspace">
+                <property name="title">Toggle BSP for the current workspace</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="toggle_floating">
+                <property name="title">Toggle the focused window between tiled and floating</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title">Spacing</property>
+            <child>
+              <object class="GtkShortcutsShortcut" id="increase_inner">
+                <property name="title">Increase the inner gap</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="decrease_inner">
+                <property name="title">Decrease the inner gap</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="increase_outer">
+                <property name="title">Increase the outer gap</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut" id="decrease_outer">
+                <property name="title">Decrease the outer gap</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -1,6 +1,6 @@
 # panel-bsp
 
-Wingpanel indicator prototype for configuring Gala BSP tiling.
+Wingpanel indicator for configuring Gala BSP tiling.
 
 Current scope:
 - toggle BSP tiling globally
@@ -10,6 +10,7 @@ Current scope:
 - toggle `mouse-follows-focus`
 - toggle live reorder on drag
 - quick actions for floating, promote, and rotate
+- show a centered help window with the current BSP shortcuts
 
 ## Build
 
@@ -22,3 +23,9 @@ sudo meson install -C builddir
 ```
 
 If you are building against a locally built `wingpanel`, make sure its generated pkg-config files are visible through `PKG_CONFIG_PATH`.
+
+## Notes
+
+The help popup reads the actual current accelerators from
+`io.elementary.desktop.wm.keybindings`, so if the user remaps BSP shortcuts the
+indicator will show the updated bindings instead of hard-coded defaults.

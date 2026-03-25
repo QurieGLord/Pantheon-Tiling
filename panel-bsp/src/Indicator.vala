@@ -1,10 +1,13 @@
 public class PanelBsp.Indicator : Wingpanel.Indicator {
     private const string BSP_SCHEMA = "io.elementary.desktop.wm.bsp";
     private const string BEHAVIOR_SCHEMA = "io.elementary.desktop.wm.behavior";
+    private const string KEYBINDINGS_SCHEMA = "io.elementary.desktop.wm.keybindings";
 
     private GalaClient gala_client;
     private GLib.Settings bsp_settings;
     private GLib.Settings behavior_settings;
+    private GLib.Settings keybinding_settings;
+    private HelpOverlay? help_overlay = null;
 
     private Gtk.Image display_icon;
     private Gtk.Box? popover_widget = null;
@@ -20,6 +23,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
     private Gtk.Button? promote_button = null;
     private Gtk.Button? rotate_button = null;
     private Gtk.Button? rotate_back_button = null;
+    private Wingpanel.PopoverMenuItem? help_button = null;
 
     private bool syncing_controls = false;
 
@@ -33,6 +37,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         gala_client = new GalaClient ();
         bsp_settings = new GLib.Settings (BSP_SCHEMA);
         behavior_settings = new GLib.Settings (BEHAVIOR_SCHEMA);
+        keybinding_settings = new GLib.Settings (KEYBINDINGS_SCHEMA);
 
         display_icon = new Gtk.Image.from_icon_name ("view-grid-symbolic") {
             pixel_size = 16
@@ -40,8 +45,18 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
 
         visible = true;
 
-        bsp_settings.changed.connect (refresh_ui);
-        behavior_settings.changed.connect (refresh_ui);
+        gala_client.availability_changed.connect ((available) => {
+            refresh_ui ();
+        });
+        bsp_settings.changed.connect ((key) => {
+            refresh_ui ();
+        });
+        behavior_settings.changed.connect ((key) => {
+            refresh_ui ();
+        });
+        keybinding_settings.changed.connect ((key) => {
+            refresh_ui ();
+        });
         refresh_ui ();
     }
 
@@ -66,7 +81,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
     }
 
     private void build_popover () {
-        popover_widget = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
+        var content = new Gtk.Box (Gtk.Orientation.VERTICAL, 12) {
             margin_top = 12,
             margin_bottom = 12,
             margin_start = 12,
@@ -79,7 +94,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             xalign = 0.0f
         };
         title_label.add_css_class ("title-4");
-        popover_widget.append (title_label);
+        content.append (title_label);
 
         status_label = new Gtk.Label ("") {
             halign = Gtk.Align.START,
@@ -87,11 +102,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             wrap = true
         };
         status_label.add_css_class ("dim-label");
-        popover_widget.append (status_label);
+        content.append (status_label);
 
-        popover_widget.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
 
-        popover_widget.append (create_switch_row (
+        content.append (create_switch_row (
             "Enable BSP",
             "Turn tiling on or off globally",
             out bsp_enabled_switch
@@ -106,9 +121,9 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
 
-        popover_widget.append (create_switch_row (
+        content.append (create_switch_row (
             "This Workspace",
-            "Enable BSP for the current workspace",
+            "Enable BSP for the active workspace and keep per-workspace state",
             out workspace_switch
         ));
         workspace_switch.notify["active"].connect (() => {
@@ -121,7 +136,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
 
-        popover_widget.append (create_spin_row (
+        content.append (create_spin_row (
             "Inner Gap",
             "Gap between tiled windows",
             out inner_gap_spin
@@ -134,7 +149,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_int ("inner-gap", (int) inner_gap_spin.get_value ());
         });
 
-        popover_widget.append (create_spin_row (
+        content.append (create_spin_row (
             "Outer Gap",
             "Gap between the layout and the screen edge",
             out outer_gap_spin
@@ -147,7 +162,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_int ("outer-gap", (int) outer_gap_spin.get_value ());
         });
 
-        popover_widget.append (create_switch_row (
+        content.append (create_switch_row (
             "Live Reorder",
             "Rebuild the BSP tree while dragging tiled windows",
             out live_reorder_switch
@@ -160,9 +175,9 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_boolean ("live-reorder-on-drag", live_reorder_switch.active);
         });
 
-        popover_widget.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
 
-        popover_widget.append (create_switch_row (
+        content.append (create_switch_row (
             "Focus Follows Mouse",
             "Focus windows when the pointer enters them",
             out focus_follows_mouse_switch
@@ -175,7 +190,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             behavior_settings.set_boolean ("focus-follows-mouse", focus_follows_mouse_switch.active);
         });
 
-        popover_widget.append (create_switch_row (
+        content.append (create_switch_row (
             "Mouse Follows Focus",
             "Warp the pointer to the newly focused window",
             out mouse_follows_focus_switch
@@ -188,14 +203,14 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             behavior_settings.set_boolean ("mouse-follows-focus", mouse_follows_focus_switch.active);
         });
 
-        popover_widget.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
 
         var actions_label = new Gtk.Label ("Window Actions") {
             halign = Gtk.Align.START,
             xalign = 0.0f
         };
         actions_label.add_css_class ("heading");
-        popover_widget.append (actions_label);
+        content.append (actions_label);
 
         var actions_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             homogeneous = true
@@ -223,7 +238,31 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
         actions_box.append (rotate_back_button);
-        popover_widget.append (actions_box);
+        content.append (actions_box);
+
+        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+
+        help_button = new Wingpanel.PopoverMenuItem () {
+            text = "Keyboard Shortcuts and Help…"
+        };
+        help_button.clicked.connect (() => {
+            if (help_overlay == null) {
+                help_overlay = new HelpOverlay (keybinding_settings);
+            }
+
+            help_overlay.present ();
+        });
+        content.append (help_button);
+
+        var scrolled = new Gtk.ScrolledWindow () {
+            hscrollbar_policy = Gtk.PolicyType.NEVER,
+            min_content_width = 340,
+            max_content_height = 560,
+            child = content
+        };
+
+        popover_widget = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        popover_widget.append (scrolled);
     }
 
     private Gtk.Widget create_switch_row (string title, string subtitle, out Gtk.Switch switch_widget) {
@@ -385,6 +424,10 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
 
         if (rotate_back_button != null) {
             rotate_back_button.sensitive = has_gala_state;
+        }
+
+        if (help_button != null) {
+            help_button.sensitive = true;
         }
 
         display_icon.opacity = active_workspace_enabled ? 1.0 : 0.55;

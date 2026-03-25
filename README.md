@@ -5,7 +5,7 @@ Experimental BSP tiling environment for Pantheon.
 This monorepo currently contains:
 
 - `gala/`: patched Gala window manager and compositor with BSP tiling, floating windows, promote/rotate controls, pointer focus toggles, and nested demo tooling
-- `panel-bsp/`: Wingpanel indicator prototype for controlling BSP state and related behavior
+- `panel-bsp/`: Wingpanel indicator for controlling BSP state and related behavior
 
 ## Repository Layout
 
@@ -24,7 +24,7 @@ Pantheon-Tiling/
 - live reorder while dragging
 - inner and outer gaps
 - `focus-follows-mouse` and `mouse-follows-focus`
-- Wingpanel indicator scaffold for runtime controls
+- Wingpanel indicator with runtime controls and shortcut help
 
 ## Development Workflow
 
@@ -57,6 +57,12 @@ The script also supports:
 - `PREFIX=/usr` or another install prefix if you are staging files elsewhere
 
 ## Requirements
+
+Install the currently tested dependency set on elementary OS / Ubuntu-based systems with:
+
+```bash
+sudo apt install -y git build-essential meson ninja-build valac pkg-config gettext libgtk-4-dev libgtk-3-dev libgee-0.8-dev libglib2.0-dev libgnome-desktop-4-dev libgnome-bg-4-dev libgranite-7-dev libgranite-dev libhandy-1-dev libsqlite3-dev gsettings-desktop-schemas-dev libgdk-pixbuf-2.0-dev libatk-bridge2.0-dev libxext-dev libmutter-14-dev libwingpanel-dev
+```
 
 For `gala`, install the same build dependencies you have already been using in the VM, including the correct `libmutter-*` development package for your elementary OS version.
 
@@ -96,3 +102,9 @@ For a clean release, the best path is packaging rather than ad-hoc install scrip
 4. Use post-install hooks to recompile schemas and restart or refresh the relevant session components when safe.
 
 The root install script in this repo is the development version of that flow.
+
+## Future Steps
+
+- tighten BSP behavior around real workspace transitions so tiling state, floating windows, and directional focus stay intuitive when moving between workspaces
+- improve multi-monitor behavior so trees, monitor-aware swaps, and workspace-scoped tiling stay consistent across monitor hotplug and monitor-specific work areas
+- finish polishing the Wingpanel indicator and package both components for a smoother release and update path
