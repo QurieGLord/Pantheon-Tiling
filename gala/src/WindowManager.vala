@@ -32,10 +32,12 @@ namespace Gala {
     private class BspFlowAnimationRequest : Object {
         public Mtk.Rectangle old_rect;
         public Mtk.Rectangle new_rect;
+        public Clutter.Actor? snapshot;
 
-        public BspFlowAnimationRequest (Mtk.Rectangle old_rect, Mtk.Rectangle new_rect) {
+        public BspFlowAnimationRequest (Mtk.Rectangle old_rect, Mtk.Rectangle new_rect, Clutter.Actor? snapshot = null) {
             this.old_rect = old_rect;
             this.new_rect = new_rect;
+            this.snapshot = snapshot;
         }
     }
 
@@ -141,6 +143,7 @@ namespace Gala {
         private Gee.HashSet<Meta.WindowActor> pending_bsp_map_reveals = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashMap<Meta.WindowActor, BspRevealRequest> bsp_reveal_requests = new Gee.HashMap<Meta.WindowActor, BspRevealRequest> ();
         private Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> bsp_flow_animation_requests = new Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> ();
+        private Gee.HashMap<Meta.WindowActor, Clutter.Actor> bsp_flow_snapshots = new Gee.HashMap<Meta.WindowActor, Clutter.Actor> ();
         private Gee.HashSet<Meta.WindowActor> destroying = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> bypassing_size_change_effects = new Gee.HashSet<Meta.WindowActor> ();
@@ -1841,8 +1844,23 @@ namespace Gala {
                 return;
             }
 
-            var request = new BspFlowAnimationRequest (old_rect, new_rect);
+            clear_bsp_flow_snapshot (actor, true);
+
+            Clutter.Actor? snapshot = null;
+            if (old_rect.width > 0 && old_rect.height > 0) {
+                snapshot = Utils.get_window_actor_snapshot (actor, old_rect);
+                if (snapshot != null) {
+                    snapshot.set_position (old_rect.x, old_rect.y);
+                    snapshot.opacity = 255U;
+                    snapshot.show ();
+                    ui_group.add_child (snapshot);
+                    bsp_flow_snapshots[actor] = snapshot;
+                }
+            }
+
+            var request = new BspFlowAnimationRequest (old_rect, new_rect, snapshot);
             prepare_bsp_reflow_actor (actor, request);
+
             bsp_flow_animation_requests[actor] = request;
             schedule_bsp_flow_animations ();
         }
@@ -1871,6 +1889,7 @@ namespace Gala {
                     if (actor.is_destroyed ()
                         || pending_bsp_map_reveals.contains (actor)
                         || mapping.contains (actor)) {
+                        clear_bsp_flow_snapshot (actor, true);
                         continue;
                     }
 
@@ -1897,6 +1916,7 @@ namespace Gala {
         }
 
         private void animate_bsp_reflow (Meta.WindowActor actor, BspFlowAnimationRequest request) {
+            var snapshot = request.snapshot;
             actor.opacity = 255U;
             actor.set_pivot_point (0.0f, 0.0f);
 
@@ -1906,6 +1926,27 @@ namespace Gala {
             actor.set_scale (1.0f, 1.0f);
             actor.set_translation (0.0f, 0.0f, 0.0f);
             actor.restore_easing_state ();
+
+            if (snapshot != null) {
+                var scale_x = request.old_rect.width > 0 ? (float) request.new_rect.width / request.old_rect.width : 1.0f;
+                var scale_y = request.old_rect.height > 0 ? (float) request.new_rect.height / request.old_rect.height : 1.0f;
+
+                snapshot.set_pivot_point (0.0f, 0.0f);
+                snapshot.save_easing_state ();
+                snapshot.set_easing_mode (Clutter.AnimationMode.EASE_OUT_QUAD);
+                snapshot.set_easing_duration (BSP_FLOW_ANIMATION_DURATION_MS);
+                snapshot.set_position (request.new_rect.x, request.new_rect.y);
+                snapshot.set_scale (scale_x, scale_y);
+                snapshot.opacity = 0U;
+                snapshot.restore_easing_state ();
+
+                ulong handler_id = 0UL;
+                handler_id = snapshot.transition_stopped.connect ((finished_snapshot, name, is_finished) => {
+                    finished_snapshot.disconnect (handler_id);
+                    clear_bsp_flow_snapshot (actor, true);
+                });
+                return;
+            }
         }
 
         private void queue_bsp_reveal_after_damage (Meta.WindowActor actor, Meta.Window window, Mtk.Rectangle rect) {
@@ -1974,6 +2015,24 @@ namespace Gala {
             bsp_reveal_requests.unset (actor);
         }
 
+        private void clear_bsp_flow_snapshot (Meta.WindowActor actor, bool restore_actor_visibility = true) {
+            var snapshot = bsp_flow_snapshots[actor];
+            if (snapshot != null) {
+                snapshot.remove_all_transitions ();
+
+                unowned var parent = snapshot.get_parent ();
+                if (parent != null) {
+                    parent.remove_child (snapshot);
+                }
+
+                bsp_flow_snapshots.unset (actor);
+            }
+
+            if (restore_actor_visibility && !actor.is_destroyed ()) {
+                actor.opacity = 255U;
+            }
+        }
+
         private async void animate_map (Meta.WindowActor actor) {
             var window = actor.meta_window;
 
@@ -2029,6 +2088,7 @@ namespace Gala {
             actor.remove_all_transitions ();
             pending_bsp_map_reveals.remove (actor);
             clear_bsp_reveal_request (actor);
+            clear_bsp_flow_snapshot (actor, false);
             bsp_flow_animation_requests.unset (actor);
             bsp_tree.cancel_map_reveal (window);
 
@@ -2201,6 +2261,8 @@ namespace Gala {
             end_animation (ref destroying, actor);
             end_animation (ref unmaximizing, actor);
             end_animation (ref maximizing, actor);
+            clear_bsp_flow_snapshot (actor);
+            bsp_flow_animation_requests.unset (actor);
         }
 
         public override void switch_workspace (int from, int to, Meta.MotionDirection direction) {
