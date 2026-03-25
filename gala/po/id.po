@@ -1,0 +1,710 @@
+# Indonesian translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2023-05-20 17:07+0000\n"
+"Last-Translator: Faisal Rachmadin "
+"<frachmadin@users.noreply.l10n.elementary.io>\n"
+"Language-Team: Indonesian <https://l10n.elementary.io/projects/desktop/gala/"
+"id/>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.17\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "Ubah Latar Belakang…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "Pengaturan Tampilan…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "Pengaturan Sistem…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+#, fuzzy
+#| msgid "System Settings…"
+msgid "Failed to open System Settings"
+msgstr "Pengaturan Sistem…"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "Sembunyikan"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Pindahkan"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Ganti ukuran"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Selalu di atas"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Ruang Kerja Selalu Aktif Terlihat"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Pindahkan ke Ruang Kerja Sebelah Kiri"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Pindahkan ke Ruang Kerja Sebelah Kanan"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "Ambil Tangkapan Layar"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Tutup"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "Lepas Rekatan"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Batal Maksimalkan"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Maksimalkan"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking &amp; Window Management"
+msgid "Multitasking & Window Management"
+msgstr "Multi Tugas &amp; Manajemen Jendela"
+
+#: data/gala.metainfo.xml.in:12
+#, fuzzy
+#| msgid "A window &amp; compositing manager for Pantheon"
+msgid "A window & compositing manager for Pantheon"
+msgstr "Manajer jendela &amp; pengomposisian untuk Pantheon"
+
+#: data/gala.metainfo.xml.in:14
+#, fuzzy
+#| msgid ""
+#| "A window &amp; compositing manager based on libmutter and designed by "
+#| "elementary for use with Pantheon."
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"Manajer jendela &amp; pengomposisian berdasarkan libmutter dan dirancang "
+"oleh elementary untuk digunakan dengan Pantheon."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "Peningkatan:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "Terjemahan yang diperbarui"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:94
+#, fuzzy
+#| msgid "Improve multitasking view animation performance"
+msgid "Improved render performance"
+msgstr "Meningkatkan performa animasi tampilan multi tugas"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:96
+#, fuzzy
+#| msgid "Duration of the workspace switch animation"
+msgid "Improved workspace switch dock animation"
+msgstr "Lama waktu animasi pertukaran ruang kerja"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:271
+#, fuzzy
+#| msgid "Improve multitasking view animation performance"
+msgid "Improved shadows performance"
+msgstr "Meningkatkan performa animasi tampilan multi tugas"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:331
+#, fuzzy
+#| msgid "Fix screenshot keyboard shortcuts while in Multitasking View"
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr ""
+"Perbaiki pintasan papan ketik tangkapan layar saat dalam Tampilan Multi Tugas"
+
+#: data/gala.metainfo.xml.in:332
+#, fuzzy
+#| msgid "Update panel color after dimming the wallpaper"
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "Perbarui warna panel setelah meredupkan latar belakang"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr ""
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Tampilan Multi Tugas"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Lihat semua jendela dan ruang kerja yang terbuka"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Lainnya"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr "Sandaran berkas desktop untuk pemberitahuan dari aplikasi kadaluarsa."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "“%s” tidak merespon"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "Aplikasi tidak merespon"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"Anda dapat memilih untuk menunggu beberapa saat agar aplikasi dilanjutkan, "
+"atau memaksanya untuk berhenti sepenuhnya."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "Hentikan Paksa"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "Tunggu"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr ""
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "Tangkapan layar dari %s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr ""
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "Tangkapan Layar diambil"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr ""
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "Tangkapan Layar"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr ""
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Perubahan akan kembali secara otomatis setelah %i detik."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "Pertahankan pengaturan tampilan baru?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "Pertahankan Pengaturan"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "Gunakan Pengaturan Sebelumnya"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "Atur tata letak papan ketik dengan benar saat startup sehingga indikator "
+#~ "cocok dengan tata letak yang dipilih"
+
+#~ msgid ""
+#~ "Correctly set the active workspace highlight when entering Multitasking "
+#~ "View and animate 1:1 with multitouch gestures"
+#~ msgstr ""
+#~ "Atur sorotan ruang kerja aktif dengan benar saat memasuki Tampilan Multi "
+#~ "Tugas dan animasikan 1:1 dengan gerakan multi sentuh"
+
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Menskalakan sudut membulat per tampilan"
+
+#~ msgid "Support fractional scaling"
+#~ msgstr "Mendukung penskalaan fraksional"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Peningkatan performa"
+
+#~ msgid "Remove texture from Multitasking View"
+#~ msgstr "Hapus tekstur dari Tampilan Multi Tugas"
+
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "Hindari memilih jendela secara tidak sengaja di pengalih jendela"
+
+#~ msgid "Reload animated wallpapers when timezone changes"
+#~ msgstr "Muat ulang wallpaper animasi saat zona waktu berubah"
+
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "Memperbaiki gulir dua jari yang aneh dalam tampilan multi tugas"
+
+#~ msgid "Fixes:"
+#~ msgstr "Perbaikan:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "Memperbaiki regresi untuk OS 7"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "Menggunakan portal akses untuk memaksa berhenti"
+
+#, fuzzy
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr ""
+#~ "Kejernihan jendela yang terletak di belakang layar pada alt-tab-switcher."
+
+#, fuzzy
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr ""
+#~ "Kejernihan jendela yang terletak di belakang layar pada alt-tab-switcher."
+
+#, fuzzy
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr ""
+#~ "Menjadikan jendela induk yang menampilkan sebuah dialog yang disematkan "
+#~ "ke modal menjadi redup"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Apakah tampilannya terlihat baik?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Simpan Pengaturan Ini"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Kembalikan Pengaturan Sebelumnya"
+
+#~ msgid "Minimize"
+#~ msgstr "Sembunyikan"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Tindakan untuk pojok kiri atas"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Algoritma untuk tata letak ikhtisar jendela"
+
+#, fuzzy
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Pilih algoritma yang digunakan untuk menampilkan jendela"
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Tindakan untuk pojok kanan atas"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Tindakan untuk pojok kiri bawah"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Tindakan untuk pojok kanan bawah"
+
+#, fuzzy
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "Perintah yang akan dilaksanakan untuk tindakan hotcorner 'perintah-"
+#~ "gubahan' atau beberapa"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Jika Anda hanya memberikan satu perintah, itu akan digunakan untuk setiap "
+#~ "hotcorner yang telah dipilih ke 'perintah-gubahan'. Jika Anda menggunakan "
+#~ "pola 'hotcorner-topleft:perintah;;hotcorner-bottomright:perintah' maka "
+#~ "perintah yang terpilh akan digunakan pada tiap hotcorner. Pengenal yang "
+#~ "mungkin adalah 'hotcorner-[topleft; topright; bottomleft; bottomright]' "
+#~ "diikuti dengan sebuah ':' dan kemudian perintah ';;' digunakan sebagai "
+#~ "pembatas antara keterangan perintah."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr ""
+#~ "Menyalakan edge tiling ketika menjatuhkan jendela pada ujung-ujung layar"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Jika dinyalakan, menjatuhkan jendela pada ujung vertikal layar akan "
+#~ "membesarkan jendela secara vertikal dan mengukur ulang secara horizontal "
+#~ "untuk menutup sebagian wilayah yang tersedia. Menjatuhkan jendela pada "
+#~ "ujung atas layar akan membesarkan semua jendela secara keseluruhan."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Tindakan menu utama panel"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "Menetapkan perintah untuk dijalankan ketika perintah papan ketik panel-"
+#~ "main-menu ditekan"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Menyalakan ruang kerja dinamis daripada yang statis"
+
+#, fuzzy
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Menggunakan angka yang menaikkan atau menurunkan secara dinamis, seperti "
+#~ "yang dibutuhkan, pada ruang kerja daripada angka yang tetap"
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr ""
+#~ "Nama-nama yang dikenali sebagai galangan jendela untuk penukar jendela"
+
+#, fuzzy
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "Ketika meluncurkan window-switcher, gala mengulangi daftar ini dan "
+#~ "berusaha untuk menemukan jendela yang sesuai dengan nama-nama. Jika "
+#~ "menemukannya, akan menyembunyikan jendela ini dan memudarkan kembali, "
+#~ "segera setelah penukar ditutup."
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "Lihat semua jendela dan ruang kerja yang terbuka"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Pintasan untuk berpindah ke ruang kerja pertama"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Pintasan untuk berpindah ke ruang kerja terakhir"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Pintasan untuk memindahkan jendela sekarang ke ruang kerja pertama"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "Pintasan untuk memindahkan jendela sekarang ke ruang kerja terakhir"
+
+#~ msgid "Zoom in"
+#~ msgstr "Perbesar"
+
+#~ msgid "Zoom out"
+#~ msgstr "Perkecil"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Pintasan untuk membuka ikhtisar jendela"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Pintasan untuk membuka ikhtisar jendela untuk semua jendela"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr ""
+#~ "Putar ke ruang kerja selanjutnya ke sebelah kanan atau ke belakang ke "
+#~ "yang pertama"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Putar ke tata letak papan ketik selanjutnya"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "TIDAK BERLAKU: Kunci ini tidak berlaku dan diabaikan."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Putar ke tata letak papan ketik sebelumnya"
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Menyematkan modal dialog"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Ketika benar, daripada memiliki bilah judul mandiri, modal dialog muncul "
+#~ "tersemat ke bilah judul dari jendela induk dan pindah bersamaan dengan "
+#~ "jendela induknya."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Susunan tombol pada bilah judul"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "Susunan tombol pada bilah judul. Nilainya harus berupa kalimat, seperti "
+#~ "\"menu:minimize,maximize,spacer,close\"; tanda titik dua memisahkan pojok "
+#~ "kiri dari jendela dari pojok kanan, dan nama-nama tombol dipisahkan oleh "
+#~ "koma. Tombol ganda tidak diperbolehkan. Nama tombol yang tidak diketahui "
+#~ "akan diabaikan diam-diam sehingga tombol dapat ditambahkan di versi "
+#~ "metacity mendatang tanpa merusak versi yang lama. Sebuah tanda pemisah "
+#~ "khusus dapat digunakan untuk menyelipkan beberapa spasi di antara dua "
+#~ "tombol yang bersebelahan."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Gambar latar belakang yang digunakan pada workspace-switcher"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Menyalakan animasi"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Apakah animasi akan ditampilkan. Catatan: Ini adalah kunci global, ini "
+#~ "merubah kebiasaan dari pengelola jendela, panel, dll."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "Lama waktu animasi menutup"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr ""
+#~ "Lama waktu dari animasi menempel seperti yang digunakan oleh perbesar/"
+#~ "batalkan perbesar"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Lama waktu animasi menutup"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Lama waktu animasi sembunyikan"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Lama waktu animasi pemetaan menu"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Tetapkan bayangan dari jendela normal yang terpusat"
+
+#, fuzzy
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "Nilai pertama adalah radius kekaburan dari bayangan, nilai kedua adalah "
+#~ "kepudaran atas (biasanya hanya -1), yang ketiga dan keempat adalah offset "
+#~ "dari x dan y dan yang terakhir adalah kejernihan. Jadi [blur-radius, top-"
+#~ "fade, x-offset, y-offset, opacity]"
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Tetapkan bayangan dari jendela normal yang tidak terpusat"
+
+#, fuzzy
+#~ msgid "See normal-focused."
+#~ msgstr "Lihat normal-focused"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Tetapkan bayangan dari sebuah menu"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Tetapkan bayangan dari dialog yang terpusat"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Tetapkan bayangan dari dialog yang tidak terpusat"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Matikan semua pemberitahuan"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Nyalakan gelembung"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Nyalakan suara"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Tampilkan pemberitahuan yang terlewat pada pusat pemberitahuan"
+
+#~ msgid "Corner radius"
+#~ msgstr "Radius pojok"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Matikan penutup pojok pada layar penuh"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Jika dinyalakan, ketika sebuah aplikasi sedang dalam layar penuh (mengisi "
+#~ "layar), penutup pojok akan dimatikan pada layar tersebut."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Hanya tampilkan penutup pojok pada layar utama"
+
+#~ msgid "Cancel"
+#~ msgstr "Batal"

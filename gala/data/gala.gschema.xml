@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <enum id="GalaActionType">
+    <value nick="none" value="0" />
+    <value nick="show-workspace-view" value="1" />
+    <value nick="maximize-current" value="2" />
+    <value nick="minimize-current" value="3" />
+    <value nick="open-launcher" value="4" />
+    <value nick="custom-command" value="5" />
+    <value nick="window-overview" value="6" />
+    <value nick="window-overview-all" value="7" />
+    <value nick="switch-to-workspace-previous" value="8" />
+    <value nick="switch-to-workspace-next" value="9" />
+    <value nick="switch-to-workspace-last" value="10" />
+  </enum>
+
+  <enum id="SuperScrollAction">
+    <value nick="none" value="0" />
+    <value nick="switch-workspace" value="1" />
+    <value nick="zoom" value="2" />
+  </enum>
+
+  <schema path="/io/elementary/desktop/screensaver/" id="io.elementary.desktop.screensaver">
+    <key type="b" name="lock-on-suspend">
+      <default>true</default>
+      <summary>Automatically lock the screen when the computer suspends</summary>
+      <description></description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/background/" id="io.elementary.desktop.background">
+    <key type="b" name="dim-wallpaper-in-dark-style">
+      <default>false</default>
+      <summary>Dim wallpapers when dark style is active</summary>
+      <description></description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/wm/behavior/" id="io.elementary.desktop.wm.behavior">
+    <key enum="GalaActionType" name="hotcorner-topleft">
+      <default>"none"</default>
+      <summary>Action for the top left corner</summary>
+      <description></description>
+    </key>
+    <key enum="GalaActionType" name="hotcorner-topright">
+      <default>"none"</default>
+      <summary>Action for the top right corner</summary>
+      <description></description>
+    </key>
+    <key enum="GalaActionType" name="hotcorner-bottomleft">
+      <default>"none"</default>
+      <summary>Action for the bottom left corner</summary>
+      <description></description>
+    </key>
+    <key enum="GalaActionType" name="hotcorner-bottomright">
+      <default>"none"</default>
+      <summary>Action for the bottom right corner</summary>
+      <description></description>
+    </key>
+    <key type="s" name="hotcorner-custom-command">
+      <default>''</default>
+      <summary>The command that will be executed for the hot corner action 'custom-command' or multiple</summary>
+      <description>If you just put a single command, it will be used for every hot corner assigned to
+        'custom-command'. If you instead use the pattern
+        'hotcorner-topleft:command;;hotcorner-bottomright:command' the specific commands will be used
+        per hotcorner. Possible identifiers are 'hotcorner-[topleft; topright; bottomleft; bottomright]'
+        followed by a ':' and then the command. ';;' is used as delimiter between command definitions.
+      </description>
+    </key>
+    <key type="s" name="panel-main-menu-action">
+      <default>'io.elementary.wingpanel --toggle-indicator=app-launcher'</default>
+      <summary>Panel main menu action</summary>
+      <description>Sets the command to run when the panel-main-menu keybinding is pressed.</description>
+    </key>
+    <key type="s" name="toggle-recording-action">
+      <default>''</default>
+      <summary></summary>
+      <description></description>
+    </key>
+    <key type="s" name="overlay-action">
+      <default>'io.elementary.wingpanel --toggle-indicator=app-launcher'</default>
+      <summary></summary>
+      <description></description>
+    </key>
+    <key type="s" name="interactive-screenshot-action">
+      <default>'flatpak run io.elementary.screenshot'</default>
+      <summary>Interactive screenshot action</summary>
+      <description>Sets the command to run when the interactive-screenshot keybinding is pressed.</description>
+    </key>
+    <key type="b" name="move-maximized-workspace">
+      <default>false</default>
+      <summary>Automatically move maximized windows to a new workspace</summary>
+      <description></description>
+    </key>
+    <key type="b" name="move-fullscreened-workspace">
+			<default>true</default>
+			<summary>Automatically move fullscreened windows to a new workspace</summary>
+			<description></description>
+		</key>
+    <key type="b" name="enable-hotcorners-in-fullscreen">
+      <default>false</default>
+      <summary>Whether hotcorners should be enabled when fullscreen window is opened</summary>
+      <description></description>
+    </key>
+    <key enum="SuperScrollAction" name="super-scroll-action">
+      <default>"none"</default>
+      <summary>What action should be performed on Super + Scroll</summary>
+      <description></description>
+    </key>
+    <key type="b" name="focus-follows-mouse">
+      <default>false</default>
+      <summary>Focus windows when the pointer enters them</summary>
+      <description>Maps to the underlying window focus mode and enables sloppy focus behavior.</description>
+    </key>
+    <key type="b" name="mouse-follows-focus">
+      <default>false</default>
+      <summary>Move the mouse pointer to the newly focused window</summary>
+      <description>When enabled, keyboard-driven focus changes warp the pointer into the newly focused window.</description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/wm/keybindings/" id="io.elementary.desktop.wm.keybindings">
+    <key type="as" name="switch-to-workspace-first">
+      <default><![CDATA[['<Super>Home']]]></default>
+      <summary>Shortcut to move to first workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="switch-to-workspace-last">
+      <default><![CDATA[['<Super>End', '<Super>0']]]></default>
+      <summary>Shortcut to move to last workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="move-to-workspace-first">
+      <default><![CDATA[['<Super><Shift>Home']]]></default>
+      <summary>Shortcut to move the current window to first workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="move-to-workspace-last">
+      <default><![CDATA[['<Super><Shift>End', '<Super><Shift>0']]]></default>
+      <summary>Shortcut to move the current window to last workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="zoom-in">
+      <default><![CDATA[['<Super>plus', '<Super>KP_Add']]]></default>
+      <summary>Zoom in</summary>
+      <description></description>
+    </key>
+    <key type="as" name="zoom-out">
+      <default><![CDATA[['<Super>minus', '<Super>KP_Subtract']]]></default>
+      <summary>Zoom out</summary>
+    </key>
+    <key type="as" name="expose-all-windows">
+      <default><![CDATA[['<Super>a']]]></default>
+      <summary>Shortcut to open the window overview for all windows</summary>
+      <description></description>
+    </key>
+    <key type="as" name="cycle-workspaces-next">
+      <default><![CDATA[['<Super>Tab']]]></default>
+      <summary>Cycle to the next workspace to the right or to back to the first</summary>
+    </key>
+    <key type="as" name="cycle-workspaces-previous">
+      <default><![CDATA[['<Super><Shift>Tab']]]></default>
+      <summary>Cycle to the next workspace to the right or to back to the first</summary>
+    </key>
+    <key type="as" name="panel-main-menu">
+      <default><![CDATA[['<Alt>F2']]]></default>
+      <summary>Open the applications menu</summary>
+    </key>
+    <key name="screenshot" type="as">
+      <default><![CDATA[['Print']]]></default>
+      <summary>Take a screenshot</summary>
+    </key>
+    <key name="interactive-screenshot" type="as">
+      <default><![CDATA[['<Super>Print']]]></default>
+      <summary>Launch the interactive screenshot tool</summary>
+    </key>
+    <key name="window-screenshot" type="as">
+      <default><![CDATA[['<Alt>Print']]]></default>
+      <summary>Take a screenshot of a window</summary>
+    </key>
+    <key name="area-screenshot" type="as">
+      <default><![CDATA[['<Shift>Print']]]></default>
+      <summary>Take a screenshot of an area</summary>
+    </key>
+    <key name="screenshot-clip" type="as">
+      <default><![CDATA[['<Control>Print']]]></default>
+      <summary>Copy a screenshot to clipboard</summary>
+    </key>
+    <key name="window-screenshot-clip" type="as">
+      <default><![CDATA[['<Control><Alt>Print']]]></default>
+      <summary>Copy a screenshot of a window to clipboard</summary>
+    </key>
+    <key name="area-screenshot-clip" type="as">
+      <default><![CDATA[['<Control><Shift>Print']]]></default>
+      <summary>Copy a screenshot of an area to clipboard</summary>
+    </key>
+    <key type="as" name="switch-input-source">
+      <default><![CDATA[['<Super>Space']]]></default>
+      <summary>Cycle to next keyboard layout</summary>
+      <description></description>
+    </key>
+    <key type="as" name="switch-input-source-backward">
+      <default><![CDATA[['<Super><Shift>Space']]]></default>
+      <summary>Cycle to previous keyboard layout</summary>
+      <description></description>
+    </key>
+    <key type="as" name="toggle-multitasking-view">
+      <default><![CDATA[['<Super>s']]]></default>
+      <summary>Toggle multitasking view</summary>
+      <description></description>
+    </key>
+    <key type="as" name="pip">
+      <default><![CDATA[['<Super>f']]]></default>
+      <summary>The shortcut to enable picture-in-picture window</summary>
+      <description>The shortcut to show the selection area to choose a window.</description>
+    </key>
+    <key type="as" name="bsp-focus-left">
+      <default>[]</default>
+      <summary>Focus the BSP tile to the left</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-right">
+      <default>[]</default>
+      <summary>Focus the BSP tile to the right</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-up">
+      <default><![CDATA[['<Super>Up']]]></default>
+      <summary>Focus the BSP tile above</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-focus-down">
+      <default><![CDATA[['<Super>Down']]]></default>
+      <summary>Focus the BSP tile below</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-left">
+      <default>[]</default>
+      <summary>Move the focused BSP tile to the left</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-right">
+      <default>[]</default>
+      <summary>Move the focused BSP tile to the right</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-up">
+      <default>[]</default>
+      <summary>Move the focused BSP tile up</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-move-down">
+      <default>[]</default>
+      <summary>Move the focused BSP tile down</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-tiling">
+      <default><![CDATA[['<Super>b']]]></default>
+      <summary>Toggle BSP tiling globally</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-workspace-tiling">
+      <default><![CDATA[['<Super><Shift>b']]]></default>
+      <summary>Toggle BSP tiling for the active workspace</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-toggle-floating">
+      <default><![CDATA[['<Super>v']]]></default>
+      <summary>Toggle the focused window between tiled and floating</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-promote">
+      <default><![CDATA[['<Super>Return', '<Super>KP_Enter']]]></default>
+      <summary>Promote the focused window to the BSP master slot</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-rotate-forward">
+      <default><![CDATA[['<Super>r']]]></default>
+      <summary>Rotate the BSP group forward</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-rotate-backward">
+      <default><![CDATA[['<Super><Shift>r']]]></default>
+      <summary>Rotate the BSP group backward</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-increase-inner-gap">
+      <default><![CDATA[['<Super>i']]]></default>
+      <summary>Increase the inner BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-decrease-inner-gap">
+      <default><![CDATA[['<Super><Shift>i']]]></default>
+      <summary>Decrease the inner BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-increase-outer-gap">
+      <default><![CDATA[['<Super>o']]]></default>
+      <summary>Increase the outer BSP gap</summary>
+      <description></description>
+    </key>
+    <key type="as" name="bsp-decrease-outer-gap">
+      <default><![CDATA[['<Super><Shift>o']]]></default>
+      <summary>Decrease the outer BSP gap</summary>
+      <description></description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/wm/bsp/" id="io.elementary.desktop.wm.bsp">
+    <key type="b" name="enabled">
+      <default>true</default>
+      <summary>Whether BSP tiling is enabled</summary>
+      <description></description>
+    </key>
+    <key type="s" name="scope">
+      <default>'global'</default>
+      <summary>How BSP tiling enablement is scoped</summary>
+      <description>Supported values are 'global' and 'workspace'.</description>
+    </key>
+    <key type="as" name="workspace-enabled">
+      <default>[]</default>
+      <summary>Workspace indices with BSP tiling enabled</summary>
+      <description>Only used when the scope is set to 'workspace'.</description>
+    </key>
+    <key type="i" name="inner-gap">
+      <default>0</default>
+      <summary>Gap between tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="i" name="outer-gap">
+      <default>0</default>
+      <summary>Gap between tiled windows and the work area edge</summary>
+      <description></description>
+    </key>
+    <key type="i" name="border-width">
+      <default>0</default>
+      <summary>Future border width for tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="s" name="border-color">
+      <default>'#4c8bf5'</default>
+      <summary>Future border color for tiled windows</summary>
+      <description></description>
+    </key>
+    <key type="b" name="live-reorder-on-drag">
+      <default>true</default>
+      <summary>Whether dragging a tiled window live-reorders the BSP tree</summary>
+      <description></description>
+    </key>
+  </schema>
+
+  <schema path="/io/elementary/desktop/wm/animations/" id="io.elementary.desktop.wm.animations">
+    <key type="b" name="enable-animations">
+      <default>true</default>
+      <summary>Enable Animations</summary>
+      <description>DEPRECATED: This key is deprecated and ignored.</description>
+    </key>
+  </schema>
+
+  <enum id="GesturePinch">
+    <value nick="none" value="0" />
+    <value nick="zoom" value="1" />
+  </enum>
+  <enum id="GestureSwipeHorizontal">
+    <value nick="none" value="0" />
+    <value nick="switch-to-workspace" value="1" />
+    <value nick="move-to-workspace" value="2" />
+    <value nick="switch-windows" value="3" />
+  </enum>
+  <enum id="GestureSwipeUp">
+    <value nick="none" value="0" />
+    <value nick="multitasking-view" value="1" />
+    <value nick="toggle-maximized" value="2" />
+  </enum>
+
+  <schema path="/io/elementary/desktop/wm/gestures/" id="io.elementary.desktop.wm.gestures">
+    <key name="three-finger-pinch" enum="GesturePinch">
+      <default>"none"</default>
+      <summary>Three-finger pinch gesture</summary>
+      <description>The action that corresponds to performing a pinch gesture with three fingers</description>
+    </key>
+    <key name="four-finger-pinch" enum="GesturePinch">
+      <default>"none"</default>
+      <summary>Four-finger pinch gesture</summary>
+      <description>The action that corresponds to performing a pinch gesture with four fingers</description>
+    </key>
+    <key name="three-finger-swipe-up" enum="GestureSwipeUp">
+      <default>"multitasking-view"</default>
+      <summary>Three-finger up-swipe gesture</summary>
+      <description>The action that corresponds to swiping up with three fingers</description>
+    </key>
+    <key name="four-finger-swipe-up" enum="GestureSwipeUp">
+      <default>"none"</default>
+      <summary>Four-finger up-swipe gesture</summary>
+      <description>The action that corresponds to swiping up with four fingers</description>
+    </key>
+    <key name="three-finger-swipe-horizontal" enum="GestureSwipeHorizontal">
+      <default>"switch-to-workspace"</default>
+      <summary>Three-finger horizontal swipe gesture</summary>
+      <description>The action that corresponds to performing a horizontal swipe gesture with three fingers</description>
+    </key>
+    <key name="four-finger-swipe-horizontal" enum="GestureSwipeHorizontal">
+      <default>"none"</default>
+      <summary>Four-finger horizontal swipe gesture</summary>
+      <description>The action that corresponds to performing a horizontal swipe gesture with four fingers</description>
+    </key>
+  </schema>
+
+  <enum id="GalaColorblindnessFilterType">
+    <value nick="none" value="0"/>
+    <value nick="protanopia" value="1"/>
+    <value nick="protanopia-high-contrast" value="2"/>
+    <value nick="deuteranopia" value="3"/>
+    <value nick="deuteranopia-high-contrast" value="4"/>
+    <value nick="tritanopia" value="5"/>
+  </enum>
+
+  <schema path="/io/elementary/desktop/wm/accessibility/" id="io.elementary.desktop.wm.accessibility">
+    <key enum="GalaColorblindnessFilterType" name="colorblindness-correction-filter">
+      <default>"none"</default>
+      <summary>Colorblind correction filter.</summary>
+      <description></description>
+    </key>
+    <key type="d" name="colorblindness-correction-filter-strength">
+      <range min="0.0" max="1.0"/>
+      <default>1.0</default>
+      <summary>The strength of colorblindness correction filter.</summary>
+      <description></description>
+    </key>
+    <key type="b" name="enable-monochrome-filter">
+      <default>false</default>
+      <summary>Enable monochrome filter.</summary>
+      <description></description>
+    </key>
+    <key type="d" name="monochrome-filter-strength">
+      <range min="0.0" max="1.0"/>
+      <default>1.0</default>
+      <summary>The strength of monochrome filter.</summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>

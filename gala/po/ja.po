@@ -1,0 +1,820 @@
+# Japanese translation for noise
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the noise package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: noise\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2026-03-09 08:55+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
+"Language-Team: Japanese <https://l10n.elementaryos.org/projects/desktop/gala/"
+"ja/>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
+"X-Launchpad-Export-Date: 2017-03-02 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "壁紙を変更…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "ディスプレイ設定…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "システム設定…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "システム設定を開けませんでした"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr ""
+"“settings://” URI スキーム用のハンドラーをインストールする必要があります。"
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "非表示"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "移動"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "サイズを変更"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "最前面に維持"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "すべてのワークスペースに表示"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "左のワークスペースへ移動"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "右のワークスペースへ移動"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "スクリーンショットを撮る"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "閉じる"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "タイル表示を解除"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "元に戻す"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "最大化"
+
+#: data/gala.metainfo.xml.in:11
+msgid "Multitasking & Window Management"
+msgstr "マルチタスクとウィンドウ管理"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr "Pantheon 向けのコンポジット型ウィンドウマネージャー"
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"libmutter ベースのコンポジット型ウィンドウマネージャーです。elementary が "
+"Pantheon 向けにデザインしました。"
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "改善点:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "翻訳の更新"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr "HiDPI への対応を改善"
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr "“視覚効果を減らす”設定時の挙動を改善"
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr "描画のパフォーマンスを改善"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr "起動時にドックとパネルを同時に表示するように修正"
+
+#: data/gala.metainfo.xml.in:96
+msgid "Improved workspace switch dock animation"
+msgstr "ドックのワークスペース切り替えアニメーションを改善"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr "ピクチャーインピクチャーウィンドウに角丸を追加"
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr "スリープ・シャットダウン時にウィンドウの状態を保持するように修正"
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr "メニューのスケーリング効果を削除"
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr "マルチタスク画面で上にスワイプするとウィンドウを閉じるように修正"
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr "ドックウィンドウが強制終了されると、まれにクラッシュする不具合を修正"
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr "対話式スクリーンショットのショートカットを追加"
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "ウィンドウを並べるショートカット使用時のクラッシュを修正"
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr "影のパフォーマンスを改善"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr "ワークスペース間でウィンドウを移動した際に起こりうるクラッシュを修正"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr "マルチタスク画面に遷移した際の通知のアニメーションを修正"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "“マルチタスク画面”でのキーボード操作を改善"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "壁紙の遷移と同時にパネルの色を変更するように修正"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+"壁紙変更やスリープが\"視覚効果を減らす\"オプションの設定値に従うように修正"
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+"ウィンドウ移動時、ドラッグ & ドロップの形をした適切なポインターを使用するよう"
+"に修正"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr "マルチタスク画面でジェスチャーが動作しなくなる可能性がある不具合を修正"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr "マルチモニター環境におけるダイナミックワークスペースの挙動を改善"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "“move-to-workspace”ショートカットの処理を改善"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "マルチタスク画面"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "すべての開いているウィンドウとワークスペースを参照します"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "その他"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+"従来のアプリケーションからの通知用のフォールバックデスクトップファイルです。"
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "不明なプログラム"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "“%s”の応答がありません"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "アプリケーションの応答がありません"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"もうしばらくアプリケーションの再開を待つか、完全に強制終了させるかを選択でき"
+"ます。"
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "強制終了"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "再開を待つ"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "“%s”がシステムショートカットを横取りしようとしています"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "アプリケーションがシステムショートカットを横取りしようとしています"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "すべてのシステムショートカットはこのアプリケーションに送られます。"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "許可"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "拒否"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "ウィンドウはすでにアクティブです"
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "Screenshot from %s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr "“%s”で表示"
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "スクリーンショットを取得しました"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr "スクリーンショットをクリップボードに保存しました"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr "スクリーンショットを “Screenshots” フォルダーに保存しました"
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "スクリーンショット"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "ウィンドウスイッチャー"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "変更は %i 秒後に自動的に元に戻ります。"
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "新しいディスプレイの設定を維持しますか?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "設定を維持"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "以前の設定を使う"
+
+#, c-format
+#~ msgid "Open in %s"
+#~ msgstr "“%s”で開く"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "起動時にキーボードレイアウトを適切に設定することで、インジケーターの表示が"
+#~ "実際に有効なレイアウトと一致するように修正"
+
+#~ msgid ""
+#~ "Correctly set the active workspace highlight when entering Multitasking "
+#~ "View and animate 1:1 with multitouch gestures"
+#~ msgstr ""
+#~ "“マルチタスク画面”に切り替える際、現在のワークスペースを適切にハイライト"
+#~ "し、手の動きに合わせてアニメーション表示されるように修正"
+
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "画面四隅を丸く表示する比率を画面ごとに計算するように修正"
+
+#~ msgid "Support fractional scaling"
+#~ msgstr "分数スケーリングに対応"
+
+#~ msgid "Performance improvements"
+#~ msgstr "パフォーマンスの改善"
+
+#~ msgid "Remove texture from Multitasking View"
+#~ msgstr "マルチタスク画面からテクスチャを削除"
+
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr ""
+#~ "ウィンドウスイッチャーで誤ってウィンドウを選択することがないように修正"
+
+#~ msgid "Reload animated wallpapers when timezone changes"
+#~ msgstr "タイムゾーン変更時に動く壁紙を再読み込みするように修正"
+
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "マルチタスク画面での2本指スクロールの挙動が滑らかになるように修正"
+
+#~ msgid "Improve multitasking view animation performance"
+#~ msgstr "マルチタスク画面のアニメーションパフォーマンスを改善"
+
+#~ msgid "Fixes:"
+#~ msgstr "修正点:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "elementary OS 7 でみられていたリグレッションを修正"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "強制終了ダイアログにアクセスポータルを使うように修正"
+
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr ""
+#~ "ウィンドウタイトルがウィンドウスイッチャーの幅より大きくならないように修正"
+
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr ""
+#~ "ウィンドウスイッチャーにおけるアプリアイコンを適切なサイズに設定するよう修"
+#~ "正"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "クラッシュする可能性がある不具合を修正"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr ""
+#~ "ディスプレイに変更があった場合、ワークスペースをサイズ変更するように修正"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "タイトルのないウィンドウを処理できるように修正"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr "ディスプレイの設定確認ダイアログにアクセスポータルを使うように修正"
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "スーパーキー押下で“マルチタスク画面”を閉じられるように修正"
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr ""
+#~ "サーバサイドデコレーションを使用するウィンドウの影が途切れていた不具合を修"
+#~ "正"
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr "高精度のスクロールイベントへの対応"
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr "Alt + Tab スイッチャーのデザインを変更"
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "モーダルダイアログの親ウィンドウを薄暗くするように修正"
+
+#~ msgid "Dialogs fall down on parents instead of shooting out"
+#~ msgstr "ダイアログを親ウィンドウ上にフェードして表示するように修正"
+
+#~ msgid "preferences-desktop-workspaces"
+#~ msgstr "preferences-desktop-workspaces"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "新機能:"
+
+#~ msgid "Stash the picture-in-picture window by pushing it off screen"
+#~ msgstr "ピクチャーインピクチャーのウィンドウを画面端に隠せる機能を追加"
+
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr "壁紙の変更時に起こりうるクラッシュを修正"
+
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "サーバサイドデコレーションを使用するウィンドウのスクリーンショットにデコ"
+#~ "レーション部分も取得されるように修正"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "マルチタッチジェスチャーを追加"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr ""
+#~ "Alt + Tab でのウィンドウの切り替え時に Alt キーを離さずに Esc キーを押す"
+#~ "と、ウィンドウの切り替えを終了できるように変更"
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr ""
+#~ "拡大レベルの上限を大きくし、拡大できない場合はユーザーに知らせるように変更"
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr "壁紙の副クリック時にコンテキストメニューを表示するように変更"
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr ""
+#~ "ホバークリック時とポインターの位置を強調する際に、アニメーション表示するよ"
+#~ "うに変更"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr "ウィンドウのコンテキストメニューに“スクリーンショットを撮る”を追加"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "スクリーンショットを取得する際、常にシャッター音が鳴るように変更"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "軽微な視覚上の改善"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "HiDPI に関する修正"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "ワークスペースの切り替え時に、“すべてのワークスペースに表示” を有効にした"
+#~ "ウィンドウが消滅する不具合を修正"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr ""
+#~ "ワークスペースの切り替え時に、外部モニターに表示中のウィンドウが消滅する不"
+#~ "具合を修正"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr ""
+#~ "一時的なウィンドウが開いている際にワークスペースを切り替えるとクラッシュす"
+#~ "る不具合を修正"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr ""
+#~ "ドックに Gala Background Services というアイコンが表示される不具合を修正"
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "メディアキーの処理に関する修正"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr ""
+#~ "ヘッダーバーのメニューにキーボードショートカットを表示するように修正"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr ""
+#~ "タイル表示にしたウィンドウを移動したり最大化したりする際のアニメーションを"
+#~ "修正"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "ディスプレイの設定に問題はありませんか？"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "この設定を保つ"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "前の設定へ戻す"
+
+#~ msgid "Minimize"
+#~ msgstr "最小化"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "左上端の動作"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "ウィンドウオーバービューレイアウトのアルゴリズム"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "ウィンドウの表示に使うアルゴリズムを選択してください。"
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "右上端の動作"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "左下端の動作"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "右下端の動作"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "1 つまたは複数の 'カスタムコマンド' ホットコーナーアクションに対して実行さ"
+#~ "れるコマンド"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "ひとつのコマンドのみを入力した場合、'カスタムコマンド' に割り当てられたす"
+#~ "べてのホットコーナーで使用されます。代わりに \"hotcorner-topleft: コマンド"
+#~ "名;;hotcorner-bottomright: コマンド名\" というパターンを使用すると、ホット"
+#~ "コーナーごとに指定されたコマンドが使用されます。使用可能な識別子は "
+#~ "\"hotcorner- [topleft/topright/bottomleft/bottomright]\"、続けて \":\" を"
+#~ "付けてコマンドを記述します。\";;\" は、コマンドの記述の間の区切り文字とし"
+#~ "て使用されます。"
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "ウィンドウを画面の端にドロップしたときの整列を有効にする"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "この機能を有効にした場合、画面の横端にウィンドウをドロップした時にウィンド"
+#~ "ウを垂直方向に最大化し、利用可能な場所の半分を埋めるように水平方向にサイズ"
+#~ "を変更します。ウィンドウを画面の上端にドロップしたときにウィンドウを最大化"
+#~ "します。"
+
+#~ msgid "Panel main menu action"
+#~ msgstr "パネルにあるメインメニューの動作"
+
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "パネルメインメニューの割り当てキーが押されたときに実行するコマンドを設定し"
+#~ "ます。"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "静的なワークスペースの代わりに動的なワークスペースを利用可能にする"
+
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "静的で固定された数ではなく、必要に応じて動的に増減する数のワークスペースを"
+#~ "使用します。"
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr "ウィンドウスイッチャーのドックウィンドウとして認識される名前"
+
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "window-switcher の起動時に、Gala はこのリストを反復し名前と一致するウィン"
+#~ "ドウを探します。見つかった場合、スイッチャーが閉じられた際に、このウィンド"
+#~ "ウは最小化されます。"
+
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "最大化したウィンドウを新しいワークスペースに自動的に移動させます"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "最初のワークスペースに移動するショートカット"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "最後のワークスペースに移動するショートカット"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "現在のウィンドウを最初のワークスペースに移動するショートカット"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "現在のウィンドウを最後のワークスペースに移動するショートカット"
+
+#~ msgid "Zoom in"
+#~ msgstr "ズームイン"
+
+#~ msgid "Zoom out"
+#~ msgstr "ズームアウト"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "ウィンドウのオーバービューを開くショートカット"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "すべてのウィンドウのオーバービューを開くショートカット"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "右隣のワークスペースや最初のワークスペースに切り替え"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "次のキーボードレイアウトに変更"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "非推奨: このキーは廃止予定であり、無視されます。"
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "前のキーボードレイアウトに変更"
+
+#~ msgid "The shortcut to enable picture-in-picture window"
+#~ msgstr "ピクチャーインピクチャーウィンドウを有効にするためのショートカット"
+
+#~ msgid "The shortcut to show the selection area to choose a window."
+#~ msgstr "ウィンドウを選択するための選択領域を表示するショートカットです。"
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "モーダル表示のダイアログを親ウィンドウにくっつける"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "この機能が有効の時、独立したタイトルバーの代わりに、親ウィンドウのタイトル"
+#~ "バーにくっついたモーダル表示のダイアログが表示され、親ウィンドウと一緒に移"
+#~ "動させられます。"
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "タイトルバー内ボタンの配置"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "タイトルバーのボタンの位置を指定します。ここで指定する値は "
+#~ "\"menu:minimize,maximize,spacer,close\" のような文字列にしてください; コロ"
+#~ "ンでウィンドウの右上隅と左上隅を分割し、ボタン名はコンマで区切ります。ボタ"
+#~ "ンを重複させることはできません。不明なボタン名は単に無視されるだけなので、"
+#~ "metacity の将来のバージョンでも利用できます。spacer というタグはボタンとボ"
+#~ "タンの間に挿入する空白を意味します。"
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "ワークスペース スイッチャーで使用される背景"
+
+#~ msgid "Enable Animations"
+#~ msgstr "アニメーションを有効にする"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "アニメーションを有効にするかどうかを設定します。注意: これはグローバルな設"
+#~ "定なので、ウィンドウマネージャーやパネルなどの挙動に影響します。"
+
+#~ msgid "Duration of the open animation"
+#~ msgstr "開く時のアニメーションの長さ"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "最大化・最大化からの復元時に使われるスナップアニメーションの長さ"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "閉じる時のアニメーションの長さ"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "最小化時のアニメーションの長さ"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "メニュー マッピングのアニメーションの長さ"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "通常のフォーカスされたウィンドウの影の定義"
+
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "1 番目の値は影のぼかし効果の半径で、2 番目が上部のフェードの値 (ほとんどの"
+#~ "場合 -1 です)、3 番目と 4 番目の値は x オフセットと y オフセット、5 番目は"
+#~ "透明度です。つまり、[影の半径, 上部のフェード, x オフセット, y オフセッ"
+#~ "ト, 透明度] です。"
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "通常のフォーカスされていないダイアログの影の定義"
+
+#~ msgid "See normal-focused."
+#~ msgstr "normal-focused を参照してください。"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "メニューの影の定義"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "フォーカスされたダイアログの影の定義"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "フォーカスされていないダイアログの影の定義"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "すべての通知を無効にする"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "バブルを有効にする"
+
+#~ msgid "Enable sounds"
+#~ msgstr "サウンドを有効にする"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "見逃した通知を通知センターに表示"
+
+#~ msgid "Corner radius"
+#~ msgstr "四隅の丸み付け"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "全画面表示時にコーナーマスクを無効にする"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "有効にすると、アプリケーションが全画面表示のとき (モニターいっぱいのと"
+#~ "き)、コーナーマスクがそのモニターで無効になります。"
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "現在のモニターのみでコーナーマスクを表示"
+
+#~ msgid "Cancel"
+#~ msgstr "キャンセル"
+
+#~ msgid "This will close any open app and turn off your device."
+#~ msgstr ""
+#~ "すべての開いているアプリケーションを閉じてお使いのデバイスの電源を切りま"
+#~ "す。"
+
+#~ msgid "Restart"
+#~ msgstr "再起動"
+
+#~ msgid "Are you sure you want to Shut Down?"
+#~ msgstr "シャットダウンしてよろしいですか？"
+
+#~ msgid "Shut Down"
+#~ msgstr "シャットダウン"
+
+#~ msgid "Are you sure you want to Log Out?"
+#~ msgstr "ログアウトしてよろしいですか？"
+
+#~ msgid "Log Out"
+#~ msgstr "ログアウト"

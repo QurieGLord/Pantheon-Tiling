@@ -1,0 +1,635 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2026-03-02 01:51+0000\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://"
+"l10n.elementaryos.org/projects/desktop/gala/zh_TW/>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:48+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "變更桌布…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "顯示器設定…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "系統設定值…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "無法開啟《系統設定值》"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr "必須安裝 \"settings://\" URI 協定的處理程式。"
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "隱藏"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "移動"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "調整大小"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "永遠在最上層"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "永遠在顯示的工作區"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "向左移動工作區"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "向右移動工作區"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "拍攝畫面快照"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "關閉"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "解除鋪排"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "取消最大化"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "最大化"
+
+#: data/gala.metainfo.xml.in:11
+msgid "Multitasking & Window Management"
+msgstr "多工作業和視窗管理"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr "Pantheon 的視窗與合成管理器"
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"設計給 elementary 與 Pantheon 一同使用的視窗與合成管理器，基於 libmutter。"
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "改善項目："
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "更新翻譯"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr "改善 HiDPI 支援"
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr "改善使用「減少動態效果」設定時的行為"
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr "改善算繪效能"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr "啟動時讓 dock 與面板同步出現"
+
+#: data/gala.metainfo.xml.in:96
+msgid "Improved workspace switch dock animation"
+msgstr "改善 dock 的工作區切換動畫"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr "讓子母畫面視窗使用圓角"
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr "視窗狀態現在在關機與睡眠時會儲存"
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr "移除選單的縮放效果"
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr "在多工作業檢視往上滑動來關閉視窗"
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr "修正 dock 視窗被終止時偶爾會發生的崩潰"
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr "新增以互動式介面擷取畫面快照的快捷鍵"
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "修正使用鋪排快捷鍵時會崩潰的問題"
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr "改善陰影效能"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr "修正在工作區之間移動視窗時可能發生的崩潰"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr "修正進入多工作業檢視時的通知動畫"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "改善多工作業檢視中的鍵盤瀏覽"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "桌布切換的同時一起變更面板顏色"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr "變更桌布以及睡眠時遵循「減少動態效果」選項"
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr "移動視窗時使用合適的拖放游標"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr "修正多工作業檢視中手勢可能會停止運作的問題"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr "改善多螢幕時的動態工作區行為"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "改善「移動到工作區」快捷鍵的處理"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "多工作業檢視"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "檢視所有開啟的視窗與工作區"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "其他"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr "過期應用程式通知的後備桌面檔。"
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "未知"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "「%s」沒有回應"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "應用程式沒有回應"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr "您可以選擇稍候片刻等應用程式繼續進行，或是強制它完全終止。"
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "強制終止"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "等待"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "「%s」希望阻擋系統快捷鍵"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "有應用程式希望阻擋系統快捷鍵"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "所有系統快捷鍵都會改送給該應用程式。"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "允許"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "拒絕"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "視窗已有焦點"
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "%s 的畫面快照"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr "在《%s》中顯示"
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "已拍攝畫面快照"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr "畫面快照已儲存到剪貼簿中"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr "畫面快照已儲存到畫面快照資料夾"
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "畫面快照"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "視窗切換器"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "變更將會在 %i 秒後自動復原。"
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "要保留新的顯示器設定嗎？"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "保留設定"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "使用先前的設定"
+
+#, fuzzy
+#~| msgid "Enable rounded corner mask"
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "啟用圓轉角遮罩"
+
+#, fuzzy
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "位於 alt-tab 切換器背景中的視窗不透明度。"
+
+#, fuzzy
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr "位於 alt-tab 切換器背景中的視窗不透明度。"
+
+#, fuzzy
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "位於 alt-tab 切換器背景中的視窗不透明度。"
+
+#, fuzzy
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "讓生出典範附連對話盒的親代視窗變暗"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "顯示器畫面是否正常？"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "保留此設定"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "恢復先前設定"
+
+#~ msgid "Minimize"
+#~ msgstr "最小化"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "左上角的動作"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "視窗概覽配置的演算法"
+
+#, fuzzy
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "選擇視窗開展的演算法"
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "右上角的動作"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "左下角的動作"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "右下角的動作"
+
+#, fuzzy
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr "熱角的「自訂指令」動作，或多重動作所要執行的指令"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "若您只放單一指令，它會被指派為「custom-command」讓每個熱角使用。若你改用"
+#~ "「hotcorner-topleft:command;;hotcorner-bottomright:command」樣式，則各熱角"
+#~ "只會使用特定指令。可用的辨識元為「hotcorner-[topleft; topright; "
+#~ "bottomleft; bottomright]」，接著是「:」與指令。「;;」作為指令定義之間的分"
+#~ "隔符號。"
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "當視窗放在螢幕邊緣時啟用邊緣傾斜"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "如果啟用，視窗放到垂直螢幕邊緣時可將視窗垂直向最大化，並重新調整視窗水平方"
+#~ "向使其蓋住可見區域的一半。視窗放到頂瘨邊緣使之完全最大化。"
+
+#~ msgid "Panel main menu action"
+#~ msgstr "面板主選單動作"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr "設定按下 panel-main-menu 的綁定按鍵時要執行的指令"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "啟用動態工作區而非靜態工作區"
+
+#, fuzzy
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr "根據需要而動態增減工作區，而非靜態、固定的工作區數目"
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr "讓視窗切換器視為 dock 視窗的名稱"
+
+#, fuzzy
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "當啟動視窗啟動器之時，gala 會迭代此清單並試圖尋找符合名稱的視窗。如果找"
+#~ "到，一旦啟動器關閉，它便會隱藏此視窗並讓它在背後消失。"
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "檢視所有開啟的視窗與工作區"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "移動到第一個工作區的快捷鍵"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "移動到最後一個工作區的快捷鍵"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "將目前視窗移動到第一個工作區的快捷鍵"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "將目前視窗移動到最後一個工作區的快捷鍵"
+
+#~ msgid "Zoom in"
+#~ msgstr "拉近"
+
+#~ msgid "Zoom out"
+#~ msgstr "拉遠"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "開啟視窗概覽的快捷鍵"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "開啟所有視窗概覽的快捷鍵"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "向右循環切換到下個工作區，或是返回到第一個工作區"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "循環切換至下個鍵盤配置"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "棄用：此金鑰已棄用並忽略。"
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "循環切換至上個鍵盤配置"
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "附連典範對話盒"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "若為真，不管是否有獨立標題列，典範對話盒出現並附連到親代視窗的標題列，並與"
+#~ "親代視窗一同移動。"
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "標題列上的按鈕排列"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "按鈕在標題列上排序方式。值應該為字串，例如"
+#~ "「menu:minimize,maximize,spacer,close」；半形分號用來分隔視窗左側角與右側"
+#~ "角，按鈕名稱則以半形逗號隔開。按鈕不可重複。未知的按鈕名稱會默默忽略，以便"
+#~ "在未來的 metacity 版本中加入這些按鈕，而不會影響到舊版本。特殊的空間標籤可"
+#~ "以用來在兩相鄰按鈕間插入一些空間。"
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "用於工作區切換器的背景影像"
+
+#~ msgid "Enable Animations"
+#~ msgstr "啟用動畫"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr "是否該顯示動畫。註：這是全域鍵，會更改視窗管理員、面板等的行為。"
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "關閉的動畫時間"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "貼附的動畫時間與最大化/取消最大化的動畫時間相同"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "關閉的動畫時間"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "最小化的動畫時間"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "選單對應的動畫時間"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "定義一般聚焦視窗的陰影。"
+
+#, fuzzy
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "第一個值是陰影模糊的半徑，第二個值是頂端淡化 (通常為 -1)，第三個與第四個值"
+#~ "為 x 與 y 偏移，最後一個為不透明度。所以是 [blur-radius, top-fade, x-"
+#~ "offset, y-offset, opacity]"
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "定義一般未聚焦的視窗陰影"
+
+#, fuzzy
+#~ msgid "See normal-focused."
+#~ msgstr "查看一般聚焦"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "定義選單的陰影"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "定義聚焦對話盒的陰影"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "定義未聚焦對話盒的陰影"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "停用所有通知"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "啟用氣泡"
+
+#~ msgid "Enable sounds"
+#~ msgstr "啟用音效"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "在通知中心內顯示錯過的通知"
+
+#~ msgid "Corner radius"
+#~ msgstr "轉角半徑"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "全螢幕時停用轉角遮罩"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "若啟用，則應用程式在全螢幕時（畫面填滿螢幕），該螢幕的角落遮罩將停用。"
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "僅在主螢幕上顯示轉角遮罩"
+
+#~ msgid "Cancel"
+#~ msgstr "取消"
+
+#~ msgid "Restart"
+#~ msgstr "重新啟動"
+
+#~ msgid "Are you sure you want to Shut Down?"
+#~ msgstr "您確定要關機？"
+
+#~ msgid "Shut Down"
+#~ msgstr "關機"
+
+#~ msgid "Are you sure you want to Log Out?"
+#~ msgstr "您確定要登出？"
+
+#~ msgid "Log Out"
+#~ msgstr "登出"

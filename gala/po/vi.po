@@ -1,0 +1,568 @@
+# Vietnamese translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2017-12-30 00:08+0000\n"
+"Last-Translator: Hải Hồ <hochihai1997@gmail.com>\n"
+"Language-Team: Vietnamese <https://weblate.elementary.io/projects/desktop/"
+"gala/vi/>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.18\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr ""
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr ""
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr ""
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr ""
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Di chuyển"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Đổi kích thước"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Luôn hiển thị phía trên"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Luôn luôn hiển thị trên Workspace"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Di chuyển sang Workspace bên trái"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Di chuyển sang Workspace bên phải"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Đóng"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Mở rộng"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking View"
+msgid "Multitasking & Window Management"
+msgstr "Chế độ xem đa nhiệm"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr ""
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:96
+#, fuzzy
+#| msgid "Duration of the workspace switch animation"
+msgid "Improved workspace switch dock animation"
+msgstr "Thời lượng của hoạt hình chuyển đổi workspace"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:331
+#, fuzzy
+#| msgid "Multitasking View"
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Chế độ xem đa nhiệm"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr ""
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Chế độ xem đa nhiệm"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Xem tất cả các cửa sổ mở và không gian làm việc"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Khác"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr ""
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr ""
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr ""
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr ""
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr ""
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr ""
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr ""
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Enable rounded corner mask"
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Bật mặt nạ góc tròn"
+
+#, fuzzy
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr ""
+#~ "Độ mờ của các cửa sổ nằm ở phía sau trong trình chuyển đổi alt-tab-switch."
+
+#, fuzzy
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr ""
+#~ "Độ mờ của các cửa sổ nằm ở phía sau trong trình chuyển đổi alt-tab-switch."
+
+#, fuzzy
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr ""
+#~ "Độ mờ của các cửa sổ nằm ở phía sau trong trình chuyển đổi alt-tab-switch."
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Màn hình có đẹp không?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Giữ thiết lập này"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Phục hồi về thiết lập trước đó"
+
+#~ msgid "Minimize"
+#~ msgstr "Thu nhỏ"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Tác vụ cho góc trên cùng bên trái"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Thuật toán để bố trí cửa sổ tổng quan"
+
+#, fuzzy
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Chọn thuật toán dùng để phơi bày các cửa sổ"
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Hành động cho góc trên cùng bên phải"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Hành động cho góc trên cùng bên trái"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Hành động cho góc dưới cùng bên phải"
+
+#, fuzzy
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "Lệnh sẽ được thực hiện cho hành động góc nóng 'custom-command' hoặc nhiều"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Nếu bạn chỉ cần đặt một lệnh duy nhất, nó sẽ được sử dụng cho mỗi góc "
+#~ "nóng được gán cho 'custom-command'. Nếu bạn thay vì sử dụng mẫu "
+#~ "'hotcorner-topleft:lệnh;, hotcorner-bottomright:lệnh' các lệnh cụ thể sẽ "
+#~ "được sử dụng cho mỗi góc nóng. Các định danh có thể là \"hotcorner- "
+#~ "[topleft; trên cùng bên phải; bottomleft; bottomright] 'theo sau là một "
+#~ "':' và sau đó là lệnh. ';;' được sử dụng như dấu phân cách giữa các định "
+#~ "nghĩa lệnh."
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Nếu được kích hoạt, việc giảm cửa sổ trên các cạnh màn hình theo chiều "
+#~ "dọc tối đa hóa chúng theo chiều dọc và thay đổi kích thước chúng theo "
+#~ "chiều ngang để bao phủ một nửa diện tích có sẵn. Đóng cửa sổ trên cạnh "
+#~ "màn hình tối đa hóa chúng hoàn toàn."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Thao tác trên menu chính của bảng điều khiển"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "Thiết lập lệnh để chạy khi nhấn phím chốt trên bảng điều khiển chính"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Bật không gian làm việc động thay vì các trang tĩnh"
+
+#, fuzzy
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Sử dụng một số tự động tăng hoặc giảm, nếu cần thiết, các không gian làm "
+#~ "việc thay vì một số tĩnh, cố định"
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "Xem tất cả các cửa sổ mở và không gian làm việc"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Phím tắt để di chuyển đến không gian làm việc đầu tiên"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Phím tắt để di chuyển đến không gian làm việc cuối cùng"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr ""
+#~ "Phím tắt để di chuyển cửa sổ hiện tại đến không gian làm việc đầu tiên"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr ""
+#~ "Phím tắt để di chuyển cửa sổ hiện tại đến không gian làm việc cuối cùng"
+
+#~ msgid "Zoom in"
+#~ msgstr "Phóng to"
+
+#~ msgid "Zoom out"
+#~ msgstr "Thu nhỏ"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Phím tắt để mở tổng quan về cửa sổ"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Phím tắt để mở cho tất cả các cửa sổ"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Chu kỳ để bố trí bàn phím tiếp theo"
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Chu kỳ để bố trí bàn phím trước"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Khi đúng, thay vì có các thanh tiêu đề độc lập, hộp thoại phương thức "
+#~ "xuất hiện gắn với thanh tiêu đề của cửa sổ chính và được di chuyển cùng "
+#~ "với cửa sổ chính."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Sắp xếp các nút trên thanh tiêu đề"
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr ""
+#~ "Bối cảnh hình ảnh được sử dụng trong bộ chuyển đổi không gian làm việc"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Kích hoạt Hoạt ảnh"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Cho dù hình ảnh động được hiển thị hay không. Chú ý: đây là chìa khoá "
+#~ "toàn cầu, nó thay đổi hành vi của người quản lý cửa sổ, bảng điều khiển "
+#~ "v.v..."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "Thời lượng của hoạt hình đóng"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "Thời gian hoạt ảnh được sử dụng bằng cách phóng to/thu nhỏ"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Thời lượng của hoạt hình đóng"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Thời lượng của hoạt hình thu nhỏ"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Xác định bóng của một menu"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Tắt tất cả thông báo"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Kích hoạt bong bóng"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Bật âm thanh"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Hiển thị các thông báo đã bỏ lỡ trong trung tâm thông báo"
+
+#~ msgid "Corner radius"
+#~ msgstr "Bán kính góc"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Vô hiệu hoá mặt nạ góc trên toàn màn hình"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Nếu được kích hoạt, khi một ứng dụng có chế độ toàn màn hình (điền vào "
+#~ "màn hình), mặt nạ góc sẽ bị tắt trên màn hình đó."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Chỉ hiển thị mặt nạ góc trên màn hình chính"

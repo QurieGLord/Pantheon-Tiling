@@ -1,0 +1,798 @@
+# Turkish translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2024-09-21 10:16+0000\n"
+"Last-Translator: Sinan Decron <sinanveyasinan@gmail.com>\n"
+"Language-Team: Turkish <https://l10n.elementary.io/projects/desktop/gala/tr/"
+">\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "Duvar Kağıdını Değiştir…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "Görüntü Ayarları…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "Sistem Ayarları…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "Sistem Ayarları açılamadı"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr "“settings://” URI şeması için bir işleyici yüklenmelidir."
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "Gizle"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Taşı"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Yeniden Boyutlandır"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Her Zaman Üstte"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Her Zaman Görünür Çalışma Alanında"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Soldaki Çalışma Alanına Taşı"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Sağdaki Çalışma Alanına Taşı"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "Ekran Görüntüsü Al"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Kapat"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "Döşemeden Çık"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Tam Ekrandan Çık"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Ekranı Kapla"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking &amp; Window Management"
+msgid "Multitasking & Window Management"
+msgstr "Çoklu Görev ve Pencere Yönetimi"
+
+#: data/gala.metainfo.xml.in:12
+#, fuzzy
+#| msgid "A window &amp; compositing manager for Pantheon"
+msgid "A window & compositing manager for Pantheon"
+msgstr "Pantheon için bir pencere yöneticisi"
+
+#: data/gala.metainfo.xml.in:14
+#, fuzzy
+#| msgid ""
+#| "A window &amp; compositing manager based on libmutter and designed by "
+#| "elementary for use with Pantheon."
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"Pantheon ile kullanılmak üzere libmutter temel alınan ve elementary "
+"tarafından tasarlanmış bir pencere yöneticisi."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "İyileştirmeler:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "Çeviriler güncellendi"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:94
+#, fuzzy
+#| msgid "Improve window shadows for legacy apps"
+msgid "Improved render performance"
+msgstr "Eski uygulamalar için pencere gölgeleri iyileştirildi"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:96
+#, fuzzy
+#| msgid "Duration of the workspace switch animation"
+msgid "Improved workspace switch dock animation"
+msgstr "Çalışma alanı değiştirme animasyonu süresi"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:242
+#, fuzzy
+#| msgid "Fix potential crash when taking screenshots"
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "Ekran görüntüsü alırken olası çökmeler düzeltildi"
+
+#: data/gala.metainfo.xml.in:271
+#, fuzzy
+#| msgid "Improve window shadows for legacy apps"
+msgid "Improved shadows performance"
+msgstr "Eski uygulamalar için pencere gölgeleri iyileştirildi"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr ""
+"Çalışma alanları arasında pencereleri taşırken oluşabilecek bir çökme hatası "
+"düzeltildi"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr "Çoklu görev görünümüne girildiğinde bildirim animasyonunu düzeltildi"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Çoklu Görev Görünümünde klavye gezintisini iyileştirildi"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "Duvar kağıdı geçişiyle aynı anda panel rengini değiştir"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+"Duvar kağıdını değiştirmek veya uyku moduna geçmek \"Hareketi Azalt\" "
+"seçeneğini dikkate alır"
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr "Pencereleri taşırken uygun sürükle ve bırak işaretçilerini kullan"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+"Çoklu görev görünümünde hareketlerin çalışmayı durdurabileceği sorun "
+"düzeltildi"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr "Birden fazla monitörle dinamik çalışma alanı davranışını iyileştirildi"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "Çalışma alanına taşıma kısayolunun kullanımını iyileştirildi"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Çoklu Görev Görünümü"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Tüm açık pencereleri ve çalışma alanlarını göster"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Diğer"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+"Güncel olmayan uygulamalardan gelen bildirimler için yedek masaüstü dosyası."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "“%s” yanıt vermiyor"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "Uygulama yanıt vermiyor"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"Uygulamanın devam etmesi için kısa bir süre beklemeyi veya tamamen kapanmaya "
+"zorlamayı seçebilirsiniz."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "Zorla Çık"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "Bekle"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "“%s” sistem kısayollarını engellemek istiyor"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "Bir uygulama sistem kısayollarını engellemek istiyor"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "Tüm sistem kısayolları uygulamaya yönlendirilecektir."
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "İzin ver"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "Reddet"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "Pencere zaten odaklanmış durumda"
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "%s ekran görüntüsü"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr ""
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "Ekran görüntüsüsü alındı"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr ""
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "Ekran Görüntüleri"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "Pencere değiştirici"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Değişiklikler %i saniye sonra otomatik olarak geri alınır."
+msgstr[1] "Değişiklikler %i saniye sonra otomatik olarak geri alınır."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "Yeni görüntü ayarları korunsun mu?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "Ayarları Koru"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "Önceki Ayarları Kullan"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "Göstergenin seçilen düzen ile eşleşmesi için klavye düzenini başlangıçta "
+#~ "doğru şekilde ayarlayın"
+
+#, fuzzy
+#~| msgid "Enable rounded corner mask"
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Yuvarlatılmış köşe maskesini etkinleştir"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Performans iyileştirmeleri"
+
+#, fuzzy
+#~| msgid "Fix selecting windows underneath the window switcher"
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr ""
+#~ "Pencere değiştiricinin altındaki pencereleri seçme eylemi düzeltildi"
+
+#, fuzzy
+#~| msgid "Show window titles in multitasking view"
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "Çoklu görev görünümünde pencere başlıklarını göster"
+
+#~ msgid "Fixes:"
+#~ msgstr "Düzeltmeler:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "OS 7 gerilemeleri düzeltildi"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "Zorla çıkma için erişim portalını kullan"
+
+#, fuzzy
+#~| msgid "Fix selecting windows underneath the window switcher"
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr ""
+#~ "Pencere değiştiricinin altındaki pencereleri seçme eylemi düzeltildi"
+
+#, fuzzy
+#~| msgid "Properly update accent color in the window switcher"
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "Pencere değiştiricide vurgu rengini uygun şekilde güncelle"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "Olası çökmeler engellendi"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr "Görüntüler değiştiğinde çalışma alanlarını yeniden boyutlandır"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "Başlıksız pencereleri işle"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr "Ekran ayarları onayı için erişim portalını kullan"
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "Super tuşu ile çoklu görev görünümünü kapatmaya izin ver"
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr " "
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr " "
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr " "
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr " "
+
+#~ msgid "Dialogs fall down on parents instead of shooting out"
+#~ msgstr " "
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "Yeni özellikler:"
+
+#~ msgid "Stash the picture-in-picture window by pushing it off screen"
+#~ msgstr " "
+
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr " "
+
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "Sunucu tarafında dekore edilmiş pencereler için ekran görüntülerine "
+#~ "pencere süslemeleri ekleyin"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "Çok noktalı dokunma hareketleri eklendi"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr ""
+#~ "Alt tuşunu bırakmadan Esc tuşuna basarak Alt + Tab değiştiriciyi kapatın"
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr ""
+#~ "Maksimum yakınlaştırma seviyesini artırın ve yakınlaştırma "
+#~ "yapılamadığında geri bildirim sağlayın"
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr "Arka plana sağ tıklarken bağlam menüsünü göster"
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr "Yeni Otomatik Tıklama ve İşaretçi Bul animasyonları eklendi"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr "Pencere içerik menüsüne Ekran Görüntüsü Al eklendi"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "Ekran görüntüsü alırken her zaman deklanşör sesi çal"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "Küçük görsel iyileştirmeler"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "HiDPI düzeltmeleri"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "Çalışma alanlarını değiştirirken \"Her Zaman Görünür Çalışma Alanında\" "
+#~ "pencerelerinin kaybolması düzeltildi"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr ""
+#~ "Çalışma alanlarını değiştirirken kaybolan birincil olmayan ekranlardaki "
+#~ "pencereler düzeltildi"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr ""
+#~ "Geçici bir pencere açılırken çalışma alanlarını değiştirirken kilitlenme "
+#~ "düzeltildi"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr "Gala Arka Plan Hizmetlerini dock'ta gösterme"
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "Medya tuşu kullanımı düzeltildi"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr "Üst Bilgi Çubuğu menülerinde klavye kısayollarını göster"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr "Döşenmiş pencerelerin taşıma ve büyütme animasyonları düzeltildi"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Ekran iyi görünüyor mu?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Bu Yapılandırmayı Koru"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Önceki Yapılandırmayı Geri Yükle"
+
+#~ msgid "Minimize"
+#~ msgstr "Simge Durumuna Küçült"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Sol üst köşe eylemi"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Pencere görünüm düzeni algoritması"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Pencerelerin gösterimi için kullanılan algoritmayı seçin."
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Sağ üst köşe eylemi"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Sol alt köşe eylemi"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Sağ alt köşe eylemi"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "'özel-komut' ya da çoklu etkin-köşe eylemi için çalıştırılacak komut"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Sadece bir komut girerseniz, bu 'custom-command'a atanmış tüm etkin-"
+#~ "köşeler için kullanılır. Bunun yerine 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' kalıbını kullanırsanız, "
+#~ "her bir etkin-köşe için belirlediğiniz komutlar kullanılacaktır. Olası "
+#~ "tanımlayıcılar 'hotcorner-[topleft; topright; bottomleft; bottomright]' "
+#~ "ardından ':' koyulur ve sonrasında komut gelir. ';;' komut tanımları "
+#~ "arasında ayraç işlevi görür."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "Ekran kenarlarına pencere bırakırken kenar döşemesini etkinleştir"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Etkinleştirildiğinde, dikey ekran kenarlarına pencereleri bırakmak onları "
+#~ "dikey olarak büyütür ve kullanılabilir alanın yarısını kapsayacak şekilde "
+#~ "de yatay olarak yeniden boyutlandırır. Pencereleri üst ekran kenarına "
+#~ "bırakmak tamamen büyütür."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Panel ana menüsü eylemi"
+
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "panel-main-menu tuş kombinasyonu basıldığında çalışacak komutu ayarlar."
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Dinamik çalışma alanını etkinleştir"
+
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Durağan ve sabit sayıda çalışma alanı yerine ihtiyaca göre dinamik olarak "
+#~ "artan ya da azalan sayıda çalışma alanı kullanın."
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr ""
+#~ "Pencere değiştiricisi tarafından görev çubuğu penceresi olarak tanınan "
+#~ "isimler"
+
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "Pencere değiştiricisi çalıştığında, Gala listeyi tarar ve isimler "
+#~ "arasından eşleşen bir pencere bulmaya çalışır. Eğer bulursa, pencereyi "
+#~ "saklar ve değiştirici kapatıldığında geriye gönderir."
+
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr ""
+#~ "Ekranı kaplamak için büyütülmüş pencereleri otomatik olarak yeni bir "
+#~ "çalışma alanına taşı"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "İlk çalışma alanına geçiş için kısayol"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Son çalışma alanına geçiş için kısayol"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Mevcut pencereyi ilk çalışma alanına taşımak için kısayol"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "Mevcut pencereyi son çalışma alanına taşımak için kısayol"
+
+#~ msgid "Zoom in"
+#~ msgstr "Yakınlaştır"
+
+#~ msgid "Zoom out"
+#~ msgstr "Uzaklaştır"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Pencere genel görünümüne geçiş için kısayol"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Tüm pencerelerin genel görünümüne geçiş için kısayol"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "Sonraki ilk çalışma alanına geçiş yap ya da ilk çalışma alanına dön"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Sonraki klavye düzenine geçiş yap"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "ONAYLANMADI: Bu anahtar onaylanmamış ve göz ardı edildi."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Önceki klavye düzenine dönüş"
+
+#~ msgid "The shortcut to enable picture-in-picture window"
+#~ msgstr "Resim içinde resim penceresini etkinleştirme kısayolu"
+
+#~ msgid "The shortcut to show the selection area to choose a window."
+#~ msgstr "Pencere seçmek için seçim alanını gösteren kısayol."
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Model Diyalogları ekle"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Doğru iken, kalıcı diyaloglar bağımsız başlık çubuklarına sahip olmak "
+#~ "yerine ana pencerenin başlık çubuğuna yapışırlar ve birlikte hareket "
+#~ "ettirilirler."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Başlık çubuğundaki düğmelerin düzeni"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "Başlık çubuğundaki düğmelerin düzeni. Dizgi türünde bir değer alır, "
+#~ "örneğin \"menu:minimize,maximize,spacer,close\"; pencerenin sol "
+#~ "köşesindekilerle sağ köşesindekileri iki noktayla, düğme adlarını "
+#~ "virgülle ayırın. Bir düğme birden çok kez kullanılamaz. Gelecek metacity "
+#~ "sürümlerinde eski sürümlerde soruna yol açmadan yeni düğmeler "
+#~ "eklenebilmesi için bilinmeyen düğme adları hata vermeden göz ardı "
+#~ "edilecektir. Ard arda iki düğme arasında biraz boşluk eklemek için özel "
+#~ "spacer etiketi kullanılabilir."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Arka plan resmi çalışma alanı değiştiricisinde kullanıldı"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Canlandırmaları Etkinleştir"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Canlandırmaların gösterilip gösterilmemesi. Not: Bu genel bir anahtardır "
+#~ "ve pencere yöneticisi, panel vb. işleyişlerini değiştirir."
+
+#~ msgid "Duration of the open animation"
+#~ msgstr "Açılış animasyonu süresi"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr ""
+#~ "Büyült/Eski haline döndür'de kullanıldığı gibi tutturma animasyonunun "
+#~ "süresi"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Kapanış animasyonu süresi"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Simge durumuna küçültme animasyonu süresi"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Menü haritalama animasyonu süresi"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Odaklanılmış penceredeki gölge miktarını tanımlar"
+
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "Birinci değer gölge bulanıklığının yarıçapı, ikinci değer üst solgunluk "
+#~ "(genelde sadece -1), ve üçüncü ve dördüncü x- ve y-kaydırması ve sonuncu "
+#~ "da opaklık. Yani [bulanıklık-yarıçapı, üst solgunluk, x-kaydırma, y-"
+#~ "kaydırma, opaklık]."
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Odaklanılmamış penceredeki gölge miktarını tanımlar"
+
+#~ msgid "See normal-focused."
+#~ msgstr "Normal odaklı görün."
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Bir menünün gölgelerini tanımlar"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Odaklanmış bir diyaloğun gölgelerini tanımlar"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Odaklanılmamış bir diyaloğun gölgelerini tanımlar"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Tüm bildirimleri kapat"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Balonları etkinleştir"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Sesleri etkinleştir"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Kaçırılan bildirimleri bildirim merkezinde göster"
+
+#~ msgid "Corner radius"
+#~ msgstr "Köşe yarıçapı"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Tam ekranda köşe maskesi devredışı"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Etkinleştirildiğinde, bir uygulama tam ekran iken(monitörü dolduruyorsa), "
+#~ "o monitörde köşe maskeleri devre dışı bırakılacak."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Köşe maskelerini sadece ana ekranda göster"
+
+#~ msgid "Cancel"
+#~ msgstr "Vazgeç"

@@ -1,0 +1,68 @@
+/*
+ * Copyright 2021 elementary, Inc (https://elementary.io)
+ *           2021 José Expósito <jose.exposito89@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace Gala {
+    /**
+     * Physical direction of the gesture. This direction doesn't follow natural scroll preferences.
+     */
+    private enum GestureDirection {
+        UNKNOWN = 0,
+
+        // GestureType.SWIPE and GestureType.SCROLL
+        UP = 1,
+        DOWN = 2,
+        LEFT = 3,
+        RIGHT = 4,
+
+        // GestureType.PINCH
+        IN = 5,
+        OUT = 6,
+    }
+
+    public enum GestureAction {
+        NONE,
+        SWITCH_WORKSPACE,
+        SWITCH_WINDOWS,
+        MULTITASKING_VIEW,
+        ZOOM,
+        CUSTOM,
+        N_ACTIONS;
+
+        public ModalActions to_modal_action () {
+            switch (this) {
+                case SWITCH_WORKSPACE:
+                    return ModalActions.SWITCH_WORKSPACE;
+                case SWITCH_WINDOWS:
+                    return ModalActions.SWITCH_WINDOWS;
+                case MULTITASKING_VIEW:
+                    return ModalActions.MULTITASKING_VIEW;
+                case ZOOM:
+                    return ModalActions.ZOOM;
+                default:
+                    return ModalActions.NONE;
+            }
+        }
+    }
+
+    private class Gesture {
+        public Clutter.EventType type;
+        public GestureDirection direction;
+        public int fingers;
+        public Clutter.InputDeviceType performed_on_device_type;
+    }
+}

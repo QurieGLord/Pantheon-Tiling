@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2019-2023 elementary, Inc. <contact@elementary.io> -->
+<component>
+  <id>io.elementary.gala</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <compulsory_for_desktop>Pantheon</compulsory_for_desktop>
+  <translation type="gettext">gala</translation>
+
+  <icon type="stock">preferences-desktop-workspaces</icon>
+  <name>Multitasking &amp; Window Management</name>
+  <summary>A window &amp; compositing manager for Pantheon</summary>
+  <description>
+    <p>A window &amp; compositing manager based on libmutter and designed by elementary for use with Pantheon.</p>
+  </description>
+
+  <url type="homepage">https://elementary.io/</url>
+  <url type="bugtracker">https://github.com/elementary/gala/issues</url>
+  <url type="donation">https://elementary.io/get-involved#funding</url>
+  <url type="help">https://github.com/elementary/gala/discussions/categories/q-a</url>
+  <url type="translate">https://l10n.elementary.io/engage/desktop/</url>
+
+  <developer id="org.elementaryos">
+    <name>elementary, Inc.</name>
+  </developer>
+  <project_group>elementary</project_group>
+  <update_contact>contact_at_elementary.io</update_contact>
+
+  <releases>
+    <release version="8.4.2" date="2026-02-16" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2717">Flicker when focusing window from overview with Reduce Motion enabled</issue>
+        <issue url="https://github.com/elementary/gala/issues/2767">Pinch gestures are switching between workspaces instead of zooming</issue>
+        <issue url="https://github.com/elementary/gala/issues/2768">Can't fullscreen video's from Firefox</issue>
+      </issues>
+    </release>
+
+    <release version="8.4.1" date="2026-02-10" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+          <li>Improved HiDPI support</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2746">6th and 13th key press of Alt+Tab have a bug</issue>
+        <issue url="https://github.com/elementary/gala/issues/2742">Screenshot inaccurately represents Dock background appearance</issue>
+        <issue url="https://github.com/elementary/gala/issues/2657">Window icons missing in the Show All Windows overview</issue>
+        <issue url="https://github.com/elementary/gala/issues/2675">Blur behind modal shell protocol</issue>
+        <issue url="https://github.com/elementary/gala/issues/2676">Window selection from dock overview doesn't focus the chosen window</issue>
+        <issue url="https://github.com/elementary/gala/issues/2685">Move to new workspace on fullscreen not working</issue>
+        <issue url="https://github.com/elementary/gala/issues/2696">There is a transparent overlay window/object that prevents interaction with whatever is underneath it</issue>
+        <issue url="https://github.com/elementary/dock/issues/537">Dock invisible</issue>
+      </issues>
+    </release>
+
+    <release version="8.4.0" date="2025-12-04" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+          <li>Improved HiDPI support</li>
+          <li>Improve Reduced Motion behavior</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/450">Dim the background when the authentication dialogue is open</issue>
+        <issue url="https://github.com/elementary/gala/issues/2412">Multitasking View is oversized with fractional scaling</issue>
+        <issue url="https://github.com/elementary/gala/issues/2526">Windows positoined outside the viewport</issue>
+        <issue url="https://github.com/elementary/gala/issues/2552">Windows placed in undisplayed area</issue>
+        <issue url="https://github.com/elementary/gala/issues/2620">Reduce Motion breaks multitouch gestures: no live feedback, “teleporting” transitions</issue>
+        <issue url="https://github.com/elementary/gala/issues/2624">Chrome window moves at the start of entering the multitasking view with non-standard text size</issue>
+        <issue url="https://github.com/elementary/gala/issues/2627">Dialogs get restored at unreasonable sizes</issue>
+        <issue url="https://github.com/elementary/gala/issues/2630">The Dock does not hide when any app window is maximized</issue>
+        <issue url="https://github.com/elementary/gala/issues/2632">Windows switcher gesture overshoot</issue>
+        <issue url="https://github.com/elementary/gala/issues/2633">Three finger swipes in different directions sometimes collide</issue>
+        <issue url="https://github.com/elementary/gala/issues/2638">Additional "Reduce Motion" Side Effect</issue>
+      </issues>
+    </release>
+
+    <release version="8.3.0" date="2025-11-05" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+          <li>Improved HiDPI support</li>
+          <li>Improved render performance</li>
+          <li>Reveal dock and panel in sync when starting</li>
+          <li>Improved workspace switch dock animation</li>
+          <li>Picture-in-Picture windows now have rounded corners</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/335">Close button isn't always on top</issue>
+        <issue url="https://github.com/elementary/gala/issues/501">Tiled and maximized widows show different behaviour on wingpanel when in front of fullscreen windows</issue>
+        <issue url="https://github.com/elementary/gala/issues/1385">Urgent notifications can get offset</issue>
+        <issue url="https://github.com/elementary/gala/issues/1998">Blur Behind</issue>
+        <issue url="https://github.com/elementary/gala/issues/2057">Trying to change desktop bg to a color don´t work</issue>
+        <issue url="https://github.com/elementary/gala/issues/2071">Dock overlapping right-click menu on elementary OS 8</issue>
+        <issue url="https://github.com/elementary/gala/issues/2079">Gala app icon shows up in Dock briefly</issue>
+        <issue url="https://github.com/elementary/gala/issues/2333">Wingpanel crashes than reappears in the middle of the screen</issue>
+        <issue url="https://github.com/elementary/gala/issues/2399">Horizontal swipe to switch workspace no longer follows natural scrolling setting</issue>
+        <issue url="https://github.com/elementary/gala/issues/2444">Multitasking view - wrong animation with multiple monitors</issue>
+        <issue url="https://github.com/elementary/gala/issues/2445">Multitasking view - window preview sometimes disappears</issue>
+        <issue url="https://github.com/elementary/gala/issues/2451">Windows get burned onto the screen when "Reduce Motion" is on in Secure Session</issue>
+        <issue url="https://github.com/elementary/gala/issues/2454">Right-click menu in wrong location with 2x DPI setting</issue>
+        <issue url="https://github.com/elementary/gala/issues/2489">Flatpaks don't open upon switching from Secure to Classic: DISPLAY not set</issue>
+        <issue url="https://github.com/elementary/gala/issues/2507">Logs filled with assertion fails / failure messages</issue>
+        <issue url="https://github.com/elementary/gala/issues/2515">Main window is being resized to dialog/child window size after reopen</issue>
+        <issue url="https://github.com/elementary/gala/issues/2530">Freezing minimized windows</issue>
+        <issue url="https://github.com/elementary/dock/issues/479">Dock is shown over fullscreen apps</issue>
+        <issue url="https://github.com/elementary/wingpanel/issues/639">Wingpanel starts at middle of the screen</issue>
+      </issues>
+    </release>
+
+    <release version="8.2.5" date="2025-07-09" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2458">Gala still segfaults while closing LibreOffice windows</issue>
+      </issues>
+    </release>
+
+    <release version="8.2.4" date="2025-06-30" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1264">Applications menu opened but hidden in full screen mode</issue>
+        <issue url="https://github.com/elementary/gala/issues/2438">Gala randomly segfaults while closing Libreoffice windows</issue>
+        <issue url="https://github.com/elementary/gala/issues/2450">Apps not being brought to front</issue>
+        <issue url="https://github.com/elementary/dock/issues/310">Some apps are not showing up in the dock</issue>
+      </issues>
+    </release>
+
+    <release version="8.2.3" date="2025-05-20" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/dock/issues/68">Cannot move window to display below dock.</issue>
+        <issue url="https://github.com/elementary/dock/issues/425">Improper dock behaviour when it hides on vertically stacked monitors</issue>
+        <issue url="https://github.com/elementary/gala/issues/76">PIP: Grabbing an area too close to a Gtk3 window only grabs it's shadow</issue>
+        <issue url="https://github.com/elementary/gala/issues/132">Closing last window in the window overview doesn't close it</issue>
+        <issue url="https://github.com/elementary/gala/issues/340">"Move to left workspace" is a no-op on left-most workspace</issue>
+        <issue url="https://github.com/elementary/gala/issues/2060">Gala.ShadowEffect has performance issues</issue>
+        <issue url="https://github.com/elementary/gala/issues/2424">Mouse pointer often stuck between displays when external display is the primary display and is arranged above built-in display</issue>
+        <issue url="https://github.com/elementary/gala/issues/2230">Multitasking view background clipped when using multiple monitors above each other</issue>
+        <issue url="https://github.com/elementary/gala/issues/2263">Prevent windows from breaking workflow</issue>
+        <issue url="https://github.com/elementary/gala/issues/2400">Switching workspaces makes the windows move down with multiple monitors</issue>
+        <issue url="https://github.com/elementary/gala/issues/2401">Context menus appear at the top left corner of the secondary monitor</issue>
+        <issue url="https://github.com/elementary/gala/issues/2409">Windows sometimes get stuck in an un-interactive state after using gestures to switch workspaces</issue>
+        <issue url="https://github.com/elementary/gala/issues/2410">Window position not restored correctly when going back from fullscreen</issue>
+        <issue url="https://github.com/elementary/gala/issues/2414">During workspace switch, windows on secondary display aren't shown</issue>
+        <issue url="https://github.com/elementary/gala/issues/2415">Wrong animation origin for windows on display 2 on workspace overview</issue>
+      </issues>
+    </release>
+  
+    <release version="8.2.2" date="2025-05-17" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2387">Update broke secondary display workspace</issue>
+      </issues>
+    </release>
+
+    <release version="8.2.1" date="2025-05-15" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2322">Workspace Switch</issue>
+        <issue url="https://github.com/elementary/gala/issues/2357">Very rough shadows around the workspace switcher in HiDPI mode.</issue>
+        <issue url="https://github.com/elementary/gala/issues/2380">ShadowEffect: corner radius doesn't use monitor scale</issue>
+      </issues>
+    </release>
+
+    <release version="8.2.0" date="2025-05-13" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+          <ul>
+          <li>Updated translations</li>
+          <li>Window state is now saved on sleep and shutdown</li>
+          <li>Remove scaling effect from menus</li>
+          <li>Swipe up to close windows in Multitasking View</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/137">Send a persistent notification after taking a screenshot</issue>
+        <issue url="https://github.com/elementary/gala/issues/321">Use org.gnome.desktop.interface enable-animations</issue>
+        <issue url="https://github.com/elementary/gala/issues/544">Multitasking View. Wingpanel shows for brief moment if a fullscreen wokspace is selected after coming from a wokspace that shows the wingpanel.</issue>
+        <issue url="https://github.com/elementary/gala/issues/823">Check for redacted font</issue>
+        <issue url="https://github.com/elementary/gala/issues/898">Super+Number. When workspace doesn't exist, switch to last workspace instead.</issue>
+        <issue url="https://github.com/elementary/gala/issues/1121">Postman app is captured partially (and without a shadow)</issue>
+        <issue url="https://github.com/elementary/gala/issues/1202">Touchpad desktop switching gesture is sometimes unresponsive</issue>
+        <issue url="https://github.com/elementary/gala/issues/1235">Overview window title should follow keyboard focus</issue>
+        <issue url="https://github.com/elementary/gala/issues/1661">Better post-screenshot animation</issue>
+        <issue url="https://github.com/elementary/gala/issues/2114">Wrong context menu placement</issue>
+        <issue url="https://github.com/elementary/gala/issues/2172">Override redirect Popup menu type window under Xwayland can not be displayed on the second XMapWindow</issue>
+        <issue url="https://github.com/elementary/gala/issues/2199">Swiping in the multitasking view can close applications</issue>
+        <issue url="https://github.com/elementary/gala/issues/2260">Ghost of window on another workspace appears when cancelling workspace swipe</issue>
+        <issue url="https://github.com/elementary/gala/issues/2267">Dock crash may crash Gala</issue>
+        <issue url="https://github.com/elementary/gala/issues/2279">Can't reveal dock when animations are disabled</issue>
+        <issue url="https://github.com/elementary/gala/issues/2294">Unlocking firewall settings leads to crash</issue>
+        <issue url="https://github.com/elementary/gala/issues/2341">Lutris Flatpak crashes gala with GE setup</issue>
+        <issue url="https://github.com/elementary/gala/issues/2366">Menus only show once</issue>
+        <issue url="https://github.com/elementary/portals/issues/97">False detection of "background activity" for some Flatpak apps</issue>
+      </issues>
+    </release>
+
+    <release version="8.1.0" date="2025-01-11" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+          <li>Fixed rare crash when a dock window was killed</li>
+          <li>Added interactive screenshot shortcut</li>
+          <li>Fixed crash when using tiling shortcuts</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/397">Prevent PIP overlapping wingpanel?</issue>
+        <issue url="https://github.com/elementary/gala/issues/551">Return to original workspace if a fullscreen window is closed and there is no more windows open</issue>
+        <issue url="https://github.com/elementary/gala/issues/815">Zoom with Super + Scroll</issue>
+        <issue url="https://github.com/elementary/gala/issues/857">Toggling the active window's maximization state during multitasking view messes up the window preview size</issue>
+        <issue url="https://github.com/elementary/gala/issues/1178">Workspace Switching with Keyboard (meta) + Mouse scroll</issue>
+        <issue url="https://github.com/elementary/gala/issues/1967">Some apps ignore HiDPI mode</issue>
+        <issue url="https://github.com/elementary/gala/issues/1986">Does not return to the first virtual desktop after exiting fullscreen mode.</issue>
+        <issue url="https://github.com/elementary/gala/issues/2088">Invisible window clones</issue>
+        <issue url="https://github.com/elementary/gala/issues/2102">Notifications sometimes result in segfault</issue>
+        <issue url="https://github.com/elementary/gala/issues/2113">gnome-session-x11-services-ready.target isn't started on Wayland session</issue>
+        <issue url="https://github.com/elementary/gala/issues/2131">Unthemed cursor style and glitchy menus on some applications</issue>
+        <issue url="https://github.com/elementary/gala/issues/2154">Windows do not display correctly after moving between workspaces</issue>
+        <issue url="https://github.com/elementary/gala/issues/2159">Crash when moving windows between workspaces and using gestures to switch</issue>
+        <issue url="https://github.com/elementary/gala/issues/2169">Text UI based Scaling: Tiny Titlebars in XWayland Apps</issue>
+        <issue url="https://github.com/elementary/gala/issues/2170">Don’t show app icons in app window spread</issue>
+        <issue url="https://github.com/elementary/gala/issues/2171">PiP dragging doesn't start until after mouse is released</issue>
+        <issue url="https://github.com/elementary/gala/issues/2175">Gala crashes when receiving a notification while switching workspaces</issue>
+      </issues>
+    </release>
+
+    <release version="8.0.4" date="2024-12-02" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+          <li>Improved shadows performance</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/2101">Dock interacts with the mouse even with the window overlapping</issue>
+      </issues>
+    </release>
+
+    <release version="8.0.3" date="2024-11-20" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/dock/issues/300">Slight timeout before hiding dock again</issue>
+        <issue url="https://github.com/elementary/dock/issues/309">Dock doesn't disappear with two tiled maximised windows</issue>
+        <issue url="https://github.com/elementary/gala/issues/1960">Multitasking view doesn't respond to touchscreen events</issue>
+        <issue url="https://github.com/elementary/gala/issues/2064">Multitasking view on wayland gets stuck grabbing window</issue>
+      </issues>
+    </release>
+
+    <release version="8.0.2" date="2024-10-24" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1737">Cursor only visible in window screenshots</issue>
+        <issue url="https://github.com/elementary/gala/issues/1898">wayland: opening windows when overview is opened breaks a lot</issue>
+        <issue url="https://github.com/elementary/gala/issues/2053">Window renders black</issue>
+        <issue url="https://github.com/elementary/gala/issues/2067">Terminal and System Settings have generic icon in multitasking view on Wayland</issue>
+        <issue url="https://github.com/elementary/gala/issues/2083">Autohide is too sensitive</issue>
+        <issue url="https://github.com/elementary/dock/issues/78">Touch support - getting the dock to display when hidden</issue>
+      </issues>
+    </release>
+
+    <release version="8.0.1" date="2024-09-17" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Fix a potential crash when moving windows between workspaces</li>
+          <li>Fix notification animation when entering multitasking view</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/wingpanel/issues/540">Struts aren't updated on DPI change</issue>
+        <issue url="https://github.com/elementary/gala/issues/1052">Workspace doesn't switch automatically when invoke app from different workspace</issue>
+        <issue url="https://github.com/elementary/gala/issues/1301">Make Window Switcher accessible</issue>
+      </issues>
+    </release>
+
+    <release version="8.0.0" date="2024-08-19" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Improve keyboard navigation in Multitasking View</li>
+          <li>Change panel color at the same time as wallpaper transition</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/6">Can't navigate open windows with keyboard when doing Super+A</issue>
+        <issue url="https://github.com/elementary/gala/issues/271">RDNN GSettings</issue>
+        <issue url="https://github.com/elementary/gala/issues/297">Add an API to remember window position</issue>
+        <issue url="https://github.com/elementary/gala/issues/348">UX: It's too easy to trigger the action "Close All Windows in Workspace" when switching between workspaces with mouse</issue>
+        <issue url="https://github.com/elementary/gala/issues/765">The notifications appear on the right side, they should be in Arabic on the left</issue>
+        <issue url="https://github.com/elementary/gala/issues/927">Workspace bump animation on non-primary display</issue>
+        <issue url="https://github.com/elementary/gala/issues/979">Add gesture to switch between windows on a touchpad</issue>
+        <issue url="https://github.com/elementary/gala/issues/1287">Visual artifacts when swiping workspaces with touchpad</issue>
+        <issue url="https://github.com/elementary/gala/issues/1317">Add a Gesture option to scroll and switch between open windows, similar to Alt Tab</issue>
+        <issue url="https://github.com/elementary/gala/issues/1377">API for launching or switching a particular app ID</issue>
+        <issue url="https://github.com/elementary/gala/issues/1545">Draw rounded corners on workspaces in multitasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/1648">Option to Disable/Enable Hot Corners</issue>
+        <issue url="https://github.com/elementary/gala/issues/1657">Window switcher mouse interaction issue</issue>
+        <issue url="https://github.com/elementary/gala/issues/1727">opening multitasking view can crash gala</issue>
+        <issue url="https://github.com/elementary/gala/issues/1796">Blur wallpaper behind multitasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/1799">Last gap in the rightmost workspace has it size doubled when revealed using gestures</issue>
+        <issue url="https://github.com/elementary/gala/issues/1813">Primary monitor grey background</issue>
+        <issue url="https://github.com/elementary/gala/issues/1815">Grey lines on primary monitor top and bottom</issue>
+        <issue url="https://github.com/elementary/gala/issues/1823">API for display labels</issue>
+        <issue url="https://github.com/elementary/gala/issues/1824">add support for libmutter-14</issue>
+        <issue url="https://github.com/elementary/gala/issues/1826">Missing gala-daemon systemd service</issue>
+        <issue url="https://github.com/elementary/gala/issues/1834">WindowSwitcher doesn't use accent color anymore</issue>
+        <issue url="https://github.com/elementary/gala/issues/1841">Changing wallpaper makes the background go grey</issue>
+        <issue url="https://github.com/elementary/gala/issues/1961">Crash</issue>
+        <issue url="https://github.com/elementary/gala/issues/1965">Launch Dock on X11</issue>
+        <issue url="https://github.com/elementary/gala/issues/1978">Bounce window when focusing an already focused window</issue>
+        <issue url="https://github.com/elementary/gala/issues/2011">Meta.Window.begin_grab_op is broken</issue>
+        <issue url="https://github.com/elementary/gala/issues/2014">Taking screenshots is completely broken</issue>
+      </issues>
+    </release>
+
+    <release version="7.1.3" date="2023-11-09" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Changing the wallpaper or going to sleep respects the "Reduce Motion" option</li>
+          <li>Use appropriate drag-and-drop pointers when moving windows</li>
+          <li>Fix the issue when gestures in the multitasking view might stop working</li>
+          <li>Improve dynamic workspaces behaviour with multiple monitors</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/506">After login there is always 2 unpopulated workspaces open.</issue>
+        <issue url="https://github.com/elementary/gala/issues/695">Wrong workspaces behavior</issue>
+        <issue url="https://github.com/elementary/gala/issues/1109">Use gestures for "move to workspace"</issue>
+        <issue url="https://github.com/elementary/gala/issues/1261">Alt + Shift unnecessarily blocked when there is only one keyboard layout</issue>
+        <issue url="https://github.com/elementary/gala/issues/1518">Multitasking view breaks when switching displays &amp; strange Wingpanel position</issue>
+        <issue url="https://github.com/elementary/gala/issues/1750">Disconnecting external monitor breaks the multi-tasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/1753">Workspace wallpaper's aspect ratio with different monitors</issue>
+        <issue url="https://github.com/elementary/gala/discussions/1764">Counter Strike 2 causes segfault in libmutter on exit</issue>
+        <issue url="https://github.com/elementary/gala/issues/1774">Scheduled switch to dark style does not dim the wallpaper after cold reboot on elementary OS 7.1</issue>
+        <issue url="https://github.com/elementary/gala/issues/1783">Notifications appear in the middle of the screen</issue>
+      </issues>
+    </release>
+
+    <release version="7.1.2" date="2023-08-10" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Improve handling of move-to-workspace shortcut</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/573">Windows that start maximized or fullscreened should respect “Move windows to a new workspace”</issue>
+        <issue url="https://github.com/elementary/gala/issues/1004">Wallpaper in workspace clone and wallpaper clone should have the same style</issue>
+        <issue url="https://github.com/elementary/gala/issues/1704">Use dark wallpaper in dark mode when available</issue>
+        <issue url="https://github.com/elementary/gala/issues/1728">invisible windows in multitasking view after workspace switch, if done quickly</issue>
+      </issues>
+    </release>
+
+    <release version="7.1.1" date="2023-07-06" urgency="medium">
+      <description>
+        <p>Improvements:</p>
+        <ul>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1331">Dialog dim won't go off on gtk app</issue>
+        <issue url="https://github.com/elementary/gala/issues/1700">PiP doesn't become visible by changing workspaces</issue>
+        <issue url="https://github.com/elementary/gala/issues/1706">Alt+Tab switcher's background is always dark</issue>
+        <issue url="https://github.com/elementary/gala/issues/1712">gala 7.1.0-1 crashes on Arch</issue>
+      </issues>
+    </release>
+
+    <release version="7.1.0" date="2023-06-26" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1091">Accessibility grayscale and colourblind filters</issue>
+      </issues>
+    </release>
+
+    <release version="7.0.3" date="2023-05-01" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/124">Navigate with arrow keys while holding ALT+TAB</issue>
+        <issue url="https://github.com/elementary/gala/issues/508">Multitasking View open/close doesn't respect animations key</issue>
+        <issue url="https://github.com/elementary/gala/issues/536">Enable "Alt + ~" to switch between windows of the same application</issue>
+        <issue url="https://github.com/elementary/gala/issues/1343">Minimizing a single open application and then immediately doing alt+tab breaks the switcher and the session</issue>
+        <issue url="https://github.com/elementary/gala/issues/1355">Issue with rounded corners of window switcher</issue>
+        <issue url="https://github.com/elementary/gala/issues/1547">Window switcher doesn't respect animations key</issue>
+        <issue url="https://github.com/elementary/gala/issues/1641">Docks are placed under workspaces when animating</issue>
+        <issue url="https://github.com/elementary/gala/issues/1658">Topmost window is dimmed instead of modal's parent window</issue>
+      </issues>
+    </release>
+
+    <release version="7.0.2" date="2023-04-03" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/705">Notification windows don't appear in multitasking</issue>
+        <issue url="https://github.com/elementary/gala/issues/743">Keyboard media controls do not work when in "Show all windows" view</issue>
+        <issue url="https://github.com/elementary/gala/issues/913">Holding on keyboard shortcut to activate the action only once</issue>
+        <issue url="https://github.com/elementary/gala/issues/1059">Improper animation when use Multitasking View and Show all windows one after another</issue>
+        <issue url="https://github.com/elementary/gala/issues/1089">Maximise current window hot corner shouldn't maximise every app</issue>
+        <issue url="https://github.com/elementary/gala/issues/1229">Notification bubble appears in wrong corner on one workspace</issue>
+        <issue url="https://github.com/elementary/gala/issues/1347">Parity between right-clicking titlebars/headerbars on mouse and touchpad</issue>
+        <issue url="https://github.com/elementary/gala/issues/1387">Window menu sluggish/inoperative for apps with flathub origin</issue>
+        <issue url="https://github.com/elementary/gala/issues/1566">Hotkeys are not working with non-EN keyboard layout</issue>
+        <issue url="https://github.com/elementary/gala/issues/1578">Closing a window in multitasking view closes multitasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/1584">When 2 windows are tiled and then resized, the inactive one gets glitched, leaving its full-sized picture as an artifact when minimized</issue>
+        <issue url="https://github.com/elementary/gala/issues/1607">Picture-in-Picture drag seems to snap to a grid</issue>
+      </issues>
+    </release>
+
+    <release version="7.0.1" date="2023-02-27" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/24">Workspace switching shortcuts don't work in Multitasking View</issue>
+        <issue url="https://github.com/elementary/gala/issues/410">Multimedia keys are not working within multitasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/507">Close buttons in Multitasking View don't respect animations key</issue>
+        <issue url="https://github.com/elementary/gala/issues/510">PiP doesn't respect animations key</issue>
+        <issue url="https://github.com/elementary/gala/issues/849">Picture-in-Picture area selection being offset</issue>
+        <issue url="https://github.com/elementary/gala/issues/975">Accidental middle click to close workspace</issue>
+        <issue url="https://github.com/elementary/gala/issues/1081">"Move to Workspace" window menu action doesn't match what the Keyboard Shortcut do</issue>
+        <issue url="https://github.com/elementary/gala/issues/1185">Unmaximize effect not working with mutter >= 3.38</issue>
+        <issue url="https://github.com/elementary/gala/issues/1203">Artifact around non native apps in the overview mode</issue>
+        <issue url="https://github.com/elementary/gala/issues/1478">PiP: Log spam on elementary OS 7.0</issue>
+        <issue url="https://github.com/elementary/gala/issues/1482">Duplicate "Plus" workspaces</issue>
+        <issue url="https://github.com/elementary/gala/issues/1483">Wingpanel and applications menu stretch in multitasking view</issue>
+        <issue url="https://github.com/elementary/gala/issues/1505">"Not responding" dialog and not responding app close after inactivity</issue>
+        <issue url="https://github.com/elementary/gala/issues/1517">The second time I click on a workspace, all applications in that workspace close</issue>
+        <issue url="https://github.com/elementary/gala/issues/1536">Several (un-)maximize animations are not played</issue>
+        <issue url="https://github.com/elementary/gala/pull/1554">IconGroup: Make close button respect animations key</issue>
+      </issues>
+    </release>
+
+    <release version="7.0.0" date="2023-01-05" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1456">Crash when receiving notifications</issue>
+        <issue url="https://github.com/elementary/gala/issues/1443">Window switcher shadow persists until overdrawn</issue>
+        <issue url="https://github.com/elementary/gala/issues/1484">Quickly zooming in and out breaks zoom</issue>
+        <issue url="https://github.com/elementary/gala/issues/1481">Slow workspace switching animation in Multitasking View</issue>
+      </issues>
+    </release>
+
+    <release version="6.3.3" date="2022-10-16" urgency="medium">
+      <issues>
+        <issue url="https://github.com/elementary/gala/issues/1474">Can not resize Picture-in-Picture window</issue>
+        <issue url="https://github.com/elementary/gala/issues/1473">Clicking wallpaper does not quit Multitasking view</issue>
+      </issues>
+    </release>
+
+    <release version="6.3.2" date="2022-10-12" urgency="medium"/>
+  </releases>
+</component>

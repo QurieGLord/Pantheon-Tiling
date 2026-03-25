@@ -1,0 +1,768 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2026-02-22 18:33+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <https://l10n.elementaryos.org/projects/desktop/gala/"
+"he/>\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 5.11.4\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "החלפת טפט…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "הגדרות תצוגה…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "הגדרות מערכת…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "פתיחת הגדרות המערכת נכשלה"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr "חובה להתקין מנגנון שמטפל בכתובות מהתבנית „settings://‎”."
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "הסתרה"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "הזזה"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "שינוי גודל"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "תמיד עליון"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "תמיד בסביבת העבודה הגלויה"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "העברה לסביבת העבודה משמאל"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "העברה לסביבת העבודה מימין"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "צילום המסך"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "סגירה"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "ביטול פריסת אריחים"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "שחזור גודל"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "הגדלה"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking &amp; Window Management"
+msgid "Multitasking & Window Management"
+msgstr "ניהול ריבוי משימות וחלונות"
+
+#: data/gala.metainfo.xml.in:12
+#, fuzzy
+#| msgid "A window &amp; compositing manager for Pantheon"
+msgid "A window & compositing manager for Pantheon"
+msgstr "מנהל הרכבת חלונות עבור Pantheon"
+
+#: data/gala.metainfo.xml.in:14
+#, fuzzy
+#| msgid ""
+#| "A window &amp; compositing manager based on libmutter and designed by "
+#| "elementary for use with Pantheon."
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"מנהל הרכבת חלונות שמבוסס על libmutter ותוכנן על ידי elementary לעבוד עם "
+"Pantheon."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary בע״מ."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "שיפורים:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "התרגומים עודכנו"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr "תמיכה משופרת ב־HiDPI"
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr "שיפור התנהגות תנועה מופחתת"
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr "ביצועי התיצוג השתפרו"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr "המעגן והלוח נחשפים בצורה מתואמת עם ההפעלה"
+
+#: data/gala.metainfo.xml.in:96
+msgid "Improved workspace switch dock animation"
+msgstr "ההנפשה במעגן להחלפת סביבת עבודה השתפרה"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr "לחלונות תמונה בתוך תמונה יש כעת פינות מעוגלות"
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr "מצב החלון נשמר לפני מצב שינה וכיבוי"
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr "הסרת אפקט התאמת קנה מידה מהתפריטים"
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr "יש להחליק למעלה כדי לסגור חלונות בתצוגת ריבוי משימות"
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr "תוקנה קריסה שנגרמה כשחלון מעוגן חוסל"
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr "נוסף קיצור דרך לצילום מסך אינטראקטיבי"
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "תוקנה קריסה עקב שימוש בקיצורי דרך של ריצוף"
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr "ביצועי הצלליות השתפרו"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr "תוקנה קריסה שיכלה לקרות בעת העברת חלונות בין סביבות עבודה"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr "תוקנה הנפשת ההתראות בכניסה לתצוגת ריבוי משימות"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "שיפור ניווט המקלדת בתצוגת ריבוי משימות"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "החלפת צבע הלוח יחד עם מעבר תמונת הרקע"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr "החלפת טפט או שינה מכבדים את האפשרות „צמצום תנועה”"
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr "להשתמש בחיצי הגרירה בעת הזזת חלונות"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr "תוקנה תקלה שמחוות בתצוגת ריבוי משימות מפסיקות לעבוד"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr "שיפור התנהגות מרחבי עבודה דינמיים עם ריבוי צגים"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "שיפור הטיפול בקיצור הדרך להעברה למרחב עבודה"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "תצוגת ריבוי משימות"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "צפייה בכל סביבות העבודה והחלונות הפתוחים"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "אחר"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr "קובץ שולחן עבודה כמנגנון גיבוי להודעות מיישומים מיושנים."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "„%s” לא מגיב"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "יישום לא מגיב"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"אפשר לבחור להמתין למשך זמן קצר כדי שהיישום ימשיך או לאלץ אותו להסתיים "
+"לחלוטין."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "אילוץ יציאה"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "להמתין"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "„%s” רוצה למנוע את קיצורי המקשים של המערכת"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "יישום רוצה למנוע את קיצורי המקשים של המערכת"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "כל קיצורי המקשים של המערכת יופנו ליישום."
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "לאפשר"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "לסרב"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "החלון כבר ממוקד"
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "צילום מסך מ־%s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr "הצגה ב־%s"
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "המסך צולם"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr "צילום המסך נשמר ללוח הגזירים"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr "צילום המסך נשמר לתיקיית צילומי המסך"
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "צילומי מסך"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "בורר חלונות"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "השינויים יוחזרו לקדמותם אוטומטית לאחר שנייה."
+msgstr[1] "השינויים יוחזרו לקדמותם אוטומטית לאחר %i שניות."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "לשמור את הגדרות התצוגה החדשות?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "לשמור את ההגדרות"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "להשתמש בהגדרות הקודמות"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "פריסת המקלדת מוגדרת כראוי בהתחלה כדי שהמחוון יהיה תואם לפריסה הנבחרת"
+
+#~ msgid ""
+#~ "Correctly set the active workspace highlight when entering Multitasking "
+#~ "View and animate 1:1 with multitouch gestures"
+#~ msgstr ""
+#~ "הדגשת סביבת העבודה הפעילה מוגדרת נכון בעת כניסה למצב תצוגת ריבוי משימות "
+#~ "והנפשה של 1:1 עם מחוות ריבוי נקודות מגע"
+
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "שינוי קנה מידה של הפינות המעוגלות לפי תצוגה"
+
+#~ msgid "Support fractional scaling"
+#~ msgstr "תמיכה בשינוי קנה מידה מקוטע"
+
+#~ msgid "Performance improvements"
+#~ msgstr "שיפורי ביצועים"
+
+#~ msgid "Remove texture from Multitasking View"
+#~ msgstr "הוסר המרקם מתצוגת ריבוי משימות"
+
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "מניעת בחירה מקרית של חלונות במחליף החלונות"
+
+#~ msgid "Reload animated wallpapers when timezone changes"
+#~ msgstr "לרענן את הטפטים כשאזור הזמן מתחלף"
+
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "תוקנה גלילת שתי אצבעות משונה בתצוגת ריבוי משימות"
+
+#~ msgid "Improve multitasking view animation performance"
+#~ msgstr "שופרו ביצועי הנפשות תצוגת ריבוי משימות"
+
+#~ msgid "Fixes:"
+#~ msgstr "תיקונים:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "תוקנו תקלות שצצו מחדש ב־OS 7"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "להשתמש בשער הנגישות לאילוץ היציאה"
+
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr "מניעת מצב בו כותרות החלונות רחבות יותר ממחליף החלונות"
+
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "קנה המידה של סמלי היישומים במחליף החלונות מוגדר נכון"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "נמנעו קריסות אפשריות"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr "גודל מרחבי העבודה משתנה עם שינוי גודל התצוגה"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "טיפול בחלונות בלי כותרת"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr "להשתמש בשער הנגישות לאישור הגדרות התצוגה"
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "לאפשר סגירת תצוגת ריבוי משימות עם מקש חלונות (Super)"
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr "תוקנו קיטועי צלליות בחלונות שהעיטור שלהם מגיע מצד השרת"
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr "תמכה באירועי גלילה ברזולוציה גבוהה"
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr "מחליף Alt + Tab עוצב מחדש"
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "עמעום ההורים של חלוניות צפות"
+
+#~ msgid "Dialogs fall down on parents instead of shooting out"
+#~ msgstr "חלוניות נצמדות להוריהן במקום להתבלט עצמאית"
+
+#~ msgid "preferences-desktop-workspaces"
+#~ msgstr "preferences-desktop-workspaces"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "יכולות חדשות:"
+
+#~ msgid "Stash the picture-in-picture window by pushing it off screen"
+#~ msgstr "הצנעת חלון תמונה-בתוך-תמונה על ידי דחיקתו מהמסך"
+
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr "תוקנה תקלה אפשרית של קריסה בעת החלפת תמונות רקע"
+
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "לכלול את עיטורי החלונות בצילומי המסך לחלונות שהעיטור שלהם מגיע מצד השרת"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "נוספה תמיכה במחוות מגע במספר נקודות"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr "ניתן לסגור את מחליף ה־Alt + Tab בלחיצה על Esc מבלי לשחרר את ה־Alt"
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr "הגדלת רמת התקריב המרבית והצגת משוב כשאי אפשר להתקרב"
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr "הצגת תפריט הקשר בעת לחיצה משנית על הרקע"
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr "הנפשות חדשות להשהיית לחיצה ואיתור הסמן"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr "נוסף צילום מסך לתפריט ההקשר של החלון"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "תמיד להשמיע קול של צמצם עם צילום המסך"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "תיקונים חזותיים קלים"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "תיקוני אבחנה גבוהה"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "תיקון חלונות „תמיד במרחב העבודה הגלוי” שנעלמים בעת החלפת מרחבי עבודה"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr "תיקון חלונות שנעלמים בתצוגות משניות בעת החלפת מרחבי עבודה"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr "תיקון קריסה בעת החלפת מרחבי עבודה עם פתיחת חלון חולף"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr "לא להציג את שירותי הרקע של Gala במעגן"
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "תיקונים בטיפול במקשי מדיה"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr "הצגת קיצורי מקלדת בתפריטי כותרת"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr "תיקון הנפשות להזזה ולהגדלה של חלונות מרוצפים"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "התצוגה נראית בסדר?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "להשאיר את התצורה הזאת"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "שחזור התצורה הקודמת"
+
+#~ msgid "Minimize"
+#~ msgstr "מזעור"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "פעולה עבור הפינה השמאלית העליונה"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "אלגוריתם עבור פריסת סקירת החלונות"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "בחירת אלגוריתם שישמש לחשיפת החלונות."
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "פעולה עבור הפינה הימנית העליונה"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "פעולה עבור הפינה השמאלית התחתונה"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "פעולה עבור הפינה הימנית התחתונה"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr "הפקודה שתופעל עבור פעולת הפינה החמה ‚custom-command’ או מספר פינות"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "במקרה של הוספת פקודה בודדת, הפקודה הזאת תשמש לכל פינה חמה שמוקצית לה "
+#~ "‚custom-command’. אם במקום ייעשה שימוש בתבנית ‚hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command’ ייעשה שימוש בפקודות "
+#~ "מסוימות לפי כל פינה חמה. המזהים האפשריים הם ‚hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]’ ולאחר מכן ‚:’ ואז הפקודה. ניתן להשתמש "
+#~ "ב־‚;;’ כדי להפריד בין הגדרות פקודות."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "הפעלת ריצוף גבולות בעת השלכת חלונות על גבולות התצוגה"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "אם אפשרות זו מופעלת, השלכת חלונות על קצוות המסך האנכיים ממזערת אותם ומשנה "
+#~ "את גודלם כדי שיכסו מחצית מהאזור הזמין. השלכת חלונות על הקצה העליון של "
+#~ "המסך מגדיל אותם לגמרי."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "פעולת תפריט ראשי של חלונית"
+
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "הגדרת הפקודה להפעלה כאשר צירוף המקשים לתפריט ראשי של לוח (panel-main-"
+#~ "menu) נלחץ."
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "הפעלת מרחבי עבודה דינמיים במקום קבועים"
+
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "שימוש במספר שקטן וגדל באופן דינמי של סביבות עבודה, כפי הנדרש, במקום מספר "
+#~ "קבוע."
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr "שמות שמזוהים כחלונות מעגן עבור מחליף החלונות"
+
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "בעת טעינת מחליף החלונות, מנגנון Gala עובר על הפריטים ברשימה הזאת ומנסה "
+#~ "למצוא חלון עם שמות תואמים לאלה. אם הוא מוצא, הוא יסתיר את החלון ויעמעם "
+#~ "אותו לאחר סגירת מחליף החלונות."
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "צפייה בכל סביבות העבודה והחלונות הפתוחים"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "קיצור דרך לעבור לסביבת העבודה הראשונה"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "קיצור דרך לעבור לסביבת העבודה האחרונה"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "קיצור דרך להעביר את החלון הנוכחי לסביבת העבודה הראשונה"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "קיצור דרך להעביר את החלון הנוכחי לסביבת העבודה האחרונה"
+
+#~ msgid "Zoom in"
+#~ msgstr "התקרבות"
+
+#~ msgid "Zoom out"
+#~ msgstr "התרחקות"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "קיצור דרך לפתיחת סקירת חלונות"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "קיצור דרך לפתיחת סקירת כל החלונות"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "דפדוף לסביבת העבודה הבאה מימין או חזרה לראשונה"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "דפדוף אל פריסת המקלדת הבאה"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "השימוש הופסק: השימוש במפתח זה הופסק ואינו בשימוש עוד."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "דפדוף אל פריסת המקלדת הקודמת"
+
+#~ msgid "The shortcut to enable picture-in-picture window"
+#~ msgstr "קיצור הדרך להפעלת חלון בתוך חלון"
+
+#~ msgid "The shortcut to show the selection area to choose a window."
+#~ msgstr "קיצור הדרך להצגת אזור הבחירה לבחירת חלון."
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "הצמדת תיבות דו־שיח רכות"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "כשמוגדר לאמת, במקום סרגלי כותרת עצמאיים, יוצמדו תיבות דו־שיח בלתי מטרידות "
+#~ "לשורת הכותרת של חלון ההורה והן תזוזנה יחד עם חלון ההורה."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "סידור הכפתורים בשורת הכותרת"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "סידור הכפתורים בשורת הכותרת. הערך אמור להיות מחרוזת כגון: "
+#~ "„menu:minimize,maximize,spacer,close”, הנקודתיים מפרידים את הפינה הימנית "
+#~ "של החלון מהפינה השמאלית ושמות הכפתורים מופרדים בפסיקים. אסור כפתורים "
+#~ "כפולים. שמות כפתורים בלתי ידועים זוכים להתעלמות ללא שום הודעה כדי שתהיה "
+#~ "אפשרות להוסיף כפתורים בגרסאות עתידיות של metacity מבלי לשבש גרסאות ישנות. "
+#~ "ניתן להשתמש בתגית ריווח מיוחדת כדי להוסיף רווח בין שני כפתורים צמודים."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "תמונת רקע בה נעשה שימוש במחליף סביבות העבודה"
+
+#~ msgid "Enable Animations"
+#~ msgstr "הפעלת הנפשות"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "האם להציג הנפשות. לתשומת לבך: מדובר במקש גלובלי, הוא משנה את התנהגות מנהל "
+#~ "החלונות, הלוח וכן הלאה."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "משך הנפשת הסגירה"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "משך הנפשת ההצמדה בה נעשה שימוש להגדלה/ביטול הגדלה"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "משך הנפשת הסגירה"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "משך הנפשת המזעור"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "משך הנפשת מיפוי תפריט"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "הגדרת הצללה של חלונות ממוקדים רגילים"
+
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "הערך הראשון הוא הרדיוס של טשטוש הצל, השני הוא של העמעום העליון (בדרך כלל "
+#~ "פשוט ‎-1), השני והשלישי הם ההיסט בצירים x ו־y בהתאמה והאחרון זאת אטימות. "
+#~ "לפיכך [רדיוס טשטוש, עמעום מלמעלה, היסט x, היסט y, אטימות]."
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "הגדרת ההצללה של חלון רגיל שאינו במיקוד"
+
+#~ msgid "See normal-focused."
+#~ msgstr "הצגה במיקוד רגיל (normal-focused)."
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "הגדרת הצללה של תפריט"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "הגדרת הצללה של חלונית במיקוד"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "הגדרת הצללה של חלונית שאינה במיקוד"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "השבתת כל ההודעות"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "הפעלת בועות"
+
+#~ msgid "Enable sounds"
+#~ msgstr "הפעלת צלילים"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "הצגת הודעות שהוחמצו במרכז ההודעות"
+
+#~ msgid "Corner radius"
+#~ msgstr "רדיוס פינה"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "השבתת מיסוך פינות במסך מלא"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "אם האפשרות פעילה, כאשר יישום נמצא במצב מסך מלא (על כל המסך), מסיכות "
+#~ "הפינות יושבתו באותו הצג."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "הצגת מסיכות הפינות בצג הראשי בלבד"
+
+#~ msgid "Cancel"
+#~ msgstr "ביטול"

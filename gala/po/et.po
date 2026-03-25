@@ -1,0 +1,642 @@
+# Estonian translation for noise
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the noise package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: noise\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2019-12-16 18:35+0000\n"
+"Last-Translator: Daniel Foré <daniel@elementary.io>\n"
+"Language-Team: Estonian <https://l10n.elementary.io/projects/desktop/gala/et/"
+">\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr ""
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr ""
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr ""
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr ""
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Liigutamine"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Suuruse muutmine"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Alati pealmine"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Alati nähtaval tööalal"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Liigutamine vasakule tööalale"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Liigutamine paremale tööalale"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Sulge"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Algse suuruse taastamine"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Maksimeerimine"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking View"
+msgid "Multitasking & Window Management"
+msgstr "Tööalade ülevaade"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr ""
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:96
+#, fuzzy
+#| msgid "Duration of the workspace switch animation"
+msgid "Improved workspace switch dock animation"
+msgstr "Tööalade vahetamise animatsiooni kiirus"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:331
+#, fuzzy
+#| msgid "Multitasking View"
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Tööalade ülevaade"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr ""
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Tööalade ülevaade"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Kõikide avatud akende ja tööalade vaatamine"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Muu"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr ""
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr ""
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr ""
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr ""
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr ""
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr ""
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr ""
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Enable rounded corner mask"
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Ümarate ekraaninurkade lubamine"
+
+#, fuzzy
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "Taustal olevate akende läbipaistvus alt-tab kasutamisel."
+
+#, fuzzy
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr "Taustal olevate akende läbipaistvus alt-tab kasutamisel."
+
+#, fuzzy
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "Taustal olevate akende läbipaistvus alt-tab kasutamisel."
+
+#, fuzzy
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "Põhi aken, millele on kinnitatud põimitud dialoog, tumendatakse."
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Kas ekraani pilt tundub korras olevat?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Kinnita praegune seadistus"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Taasta eelmine seadistus"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimeerimine"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Vasakpoolse ülemise nurga funktsioon"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Akende ülevaate paigutuse algoritm"
+
+#, fuzzy
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Algoritmi valimine akende ülevaate jaoks"
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Parempoolse ülemise nurga funktsioon"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Vasakpoolse alumise nurga funktsioon"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Parempoolse alumise nurga funktsioon"
+
+#, fuzzy
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "Käsk, mida kasutatakse juhul kui abistava nurga funktsiooniks on valitud "
+#~ "\"kohandatud käsk\""
+
+#, fuzzy
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Ühe käsu lisades kasutatakse seda kõikide nurkade puhul, kus on valitud "
+#~ "kohandatud käsu käivitamine. Kasutades loogikat 'hotcorner-"
+#~ "topleft:käsk;;hotcorner-bottomright:käsk', käivitatakse erinev käsk "
+#~ "vastavalt nurgale. Sobilikud nimed nurkadele on: 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]', mille järgnevad ':' ning seejärel "
+#~ "käsk. ';;' pannakse erinevate nurkade käskude vahele."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "Akende lohistamisel ekraani servade nende paanimine"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Akende lohistamisel vasakusse või paremasse äärde maksimeeritakse aken "
+#~ "vertikaalselt ning horisontaalselt poole ekraani suuruseks. Akna "
+#~ "lohistamisel ülaserva maksimeeritakse aken täielikult."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Paneeli põhimenüü toiming"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr "Paneeli menuu avamise kiirklahvi vajutamisel käivitatav käsk"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Dünaamiliste tööalade lubamine"
+
+#, fuzzy
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Vastavalt vajadusele kasutatakse kindla arvu tööalade asemel hoopis "
+#~ "automaatselt suureneva või väheneva arvuga tööalasid"
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr "Nimed, mis tuvastatakse dokiakendena akende vahetamisel"
+
+#, fuzzy
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "Aknavahetaja kävitamisel peidetakse kõik nende nimedega aknad ning "
+#~ "aknavahetaja sulgemisel kuvatakse antud aknad tavaliselt, nii nagu varem."
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "Kõikide avatud akende ja tööalade vaatamine"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Kiirklahv esimesele tööalale liikumiseks"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Kiirklahv viimasele tööalale liikumiseks"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Kiirklahv, et aktiivne aken esimesele tööalale liigutada"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "Kiirklahv, et aktiivne aken viimasele tööalale liigutada"
+
+#~ msgid "Zoom in"
+#~ msgstr "Suurendamine"
+
+#~ msgid "Zoom out"
+#~ msgstr "Vähendamine"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Kiirklahv akende ülevaate avamiseks"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Kiirklahv kõikide tööaladel olevate akende ülevaate avamiseks"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "Vahetamine järgmisele tööalale (paremale) või eelmisele (vasakule)"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Järgmise klaviatuurpaigutuse valimine"
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Eelmise klaviatuurpaigutuse valimine"
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Põimitud dialoogid"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Dialooge näidatakse tavalise eraldatud akna asemel rakenduse põhiaknas. "
+#~ "Dialoog kinnitatakse rakenduse tiitliribale ning rakenduse akna "
+#~ "liigutamisel liigub dialoog samuti kaasa."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Nuppude paigutus tiitlilribal"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "Nuppude paigutus tiitlilribal. Väärtus peaks olema sarnane sõnele "
+#~ "\"menu:minimize,maximize,spacer,close\"; koolon eraldab akna vasakut "
+#~ "nurka paremast, nuppude nimed eraldatakse komaga. Topeltnupud pole "
+#~ "lubatud. Tundmatute nuppude nimesid eiratakse vaikides, et metacity "
+#~ "järgmistes versioonides saaks lisada uusi nuppe ilma rikkumata ühilduvust "
+#~ "vanade versioonidega. Kahe nupu vahele ruumi tegemiseks saab kasutada "
+#~ "erilist ruumimärki (spacer)."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Pilt, mida kasutatakse töölaua vahetajas"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Animatsioonide lubamine"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Kas animatsioone kuvatakse. Märkus: see on globaalne võti, mis muudab ka "
+#~ "aknahalduri, paneeli jne. käitumist."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "Akna sulgemise animatsiooni kiirus"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "Maksimeerimise ja minimeerimise animatsiooni kestvus."
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Akna sulgemise animatsiooni kiirus"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Akna minimeerimise animatsiooni kiirus"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Menüü animatsiooni kestvus"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Aktiivse akna varju tugevus"
+
+#, fuzzy
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "Esimene väärtus on varju raadius, teine väärtus on ülemine vari (peaks "
+#~ "olema -1), kolmas ja neljas väärtused on x- ja y-kalle aknast ning "
+#~ "viimane väärtus tähistab läbipaistvust. Seega [varju-raadius, ülemine-"
+#~ "vari, x-kalle, y-kalle, läbipaistvus]"
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Taustal oleva akna varju tugevus"
+
+#, fuzzy
+#~ msgid "See normal-focused."
+#~ msgstr "Normaalfokuseeritud"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Menüü varju tugevus"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Aktiivse dialoogi varju tugevus"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Taustal oleva dialoogi varju tugevus"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Kõikide märguannete keelamine"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Märguannete mullide lubamine"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Märguannete helide lubamine"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Tähelepanuta märguannete näitamine märguannete keskuses"
+
+#~ msgid "Corner radius"
+#~ msgstr "Nurga raadius"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr ""
+#~ "Ümarate ekraaninurkade lubamine, kui rakendus on täisekraani režiimis"
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Ümarate ekraaninurkade lubamine ainult põhiekraanil"
+
+#~ msgid "Cancel"
+#~ msgstr "Loobu"
+
+#~ msgid "Restart"
+#~ msgstr "Taaskäivita"
+
+#~ msgid "Are you sure you want to Shut Down?"
+#~ msgstr "Oled sa kindel, et soovid välja lülitada?"
+
+#~ msgid "Shut Down"
+#~ msgstr "Lülita välja"
+
+#~ msgid "Are you sure you want to Log Out?"
+#~ msgstr "Oled sa kindel, et soovid välja logida?"
+
+#~ msgid "Log Out"
+#~ msgstr "Logi välja"
+
+#~ msgid "This will close any open app and turn off your device."
+#~ msgstr "Kõik avatud rakendused suletakse ning seade lülitatakse välja."

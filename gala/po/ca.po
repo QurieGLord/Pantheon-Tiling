@@ -1,0 +1,842 @@
+# Catalan translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2026-02-24 09:55+0000\n"
+"Last-Translator: David M <rbndavid@gmail.com>\n"
+"Language-Team: Catalan <https://l10n.elementaryos.org/projects/desktop/gala/"
+"ca/>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
+"X-Launchpad-Export-Date: 2017-04-05 07:08+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "Canvia el fons de pantalla…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "Paràmetres de la pantalla…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "Paràmetres del sistema…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "Ha fallat obrir els paràmetres del sistema."
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr "Cal instal·lar un gestor per a l'esquema d'URI \"settings://\"."
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "Amaga"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Mou"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Canvia'n la mida"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Sempre al davant"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Sempre a l'espai de treball visible"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Mou a l'espai de treball de l'esquerra"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Mou a l'espai de treball de la dreta"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "Fes una captura"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Tanca"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "No en mosaic"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Desmaximitza"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Maximitza"
+
+#: data/gala.metainfo.xml.in:11
+msgid "Multitasking & Window Management"
+msgstr "Multitasca i gestió de finestres"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr "Un gestor de finestres i de composició per al Pantheon"
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"Un gestor de finestres i de composició basat en libmutter i dissenyat per "
+"l'elementary per usar amb el Pantheon."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "Millores:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "Traduccions actualitzades"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr "Suport per a HiDPI millorat"
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr "Millora del comportament del moviment reduït"
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr "Rendiment de renderització millorat"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr "Revelació de l'acoblador i el plafó sincronitzats a l'inici"
+
+#: data/gala.metainfo.xml.in:96
+msgid "Improved workspace switch dock animation"
+msgstr "Animació millorada de l'acoblador per canviar l'espai de treball"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr "Les finestres d'imatge dins d'imatge ara tenen cantonades arrodonides."
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr "L'estat de la finestra ara es desa en suspensió i aturat"
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr "Suprimeix l'efecte d'escala dels menús"
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+"Feu lliscar el dit amunt per tancar les finestres a la vista de multitasca"
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+"S'ha solucionat una fallada rara de quan es matava una finestra de "
+"l'acoblador."
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr "S'ha afegit una drecera interactiva de captura de pantalla."
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "Correcció de l'error de quan s'usaven les dreceres de mosaic"
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr "Rendiment de les ombres millorat"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr ""
+"Solució d'un error potencial en moure finestres entre espais de treball"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr ""
+"Correcció de l'animació de notificació quan entreu a la vista multitasca"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Millora de la navegació amb el teclat a la vista multitasca"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "Canvia el color del plafó alhora que la transició del fons de pantalla"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+"Canviar el fons de pantalla o l'opció de dormir respecta l'opció \"Redueix "
+"el moviment\"."
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+"Useu els punters d'arrossegar i deixar anar adequats quan moveu finestres"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+"Solució del problema que els gestos de la vista de multitasca poden deixar "
+"de funcionar"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+"Millora del comportament dinàmic dels espais de treball amb diversos monitors"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "Millora del maneig de la drecera de desplaçament a l'espai de treball"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Vista de multitasca"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Visualitza totes les finestres obertes i totes les àrees de treball"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Altres"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+"Fitxer d'escriptori alternatiu per a notificacions d'aplicacions "
+"desactualitzades."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "Desconegut"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "%s no respon."
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "L'aplicació no respon."
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"Podeu triar esperar una estona perquè l'aplicació continuï o forçar-la "
+"perquè es tanqui completament."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "Força'n la sortida"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "Espera"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "%s vol inhibir les dreceres del sistema"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "Una aplicació vol inhibir les dreceres del sistema."
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "Totes les dreceres del sistema es redirigiran a l'aplicació."
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "Permet-ho"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "Denega-ho"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "La finestra ja té el focus."
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "Captura de %s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr "Mostra-ho a %s"
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "Captura feta"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr "La captura de pantalla es desa al porta-retalls"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr "Captura de pantalla desada a la carpeta de captures de pantalla"
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "Captures de pantalla"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "Canviador de finestres"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Els canvis es revertiran automàticament després d'%i segon."
+msgstr[1] "Els canvis es revertiran automàticament després de %i segons."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "Voleu mantenir la configuració nova de la pantalla?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "Mantén la configuració"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "Usa la configuració anterior"
+
+#, c-format
+#~ msgid "Open in %s"
+#~ msgstr "Obre-ho a %s"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "Configura la disposició del teclat correctament a l'inici perquè "
+#~ "l'indicador coincideixi amb la disposició seleccionada"
+
+#~ msgid ""
+#~ "Correctly set the active workspace highlight when entering Multitasking "
+#~ "View and animate 1:1 with multitouch gestures"
+#~ msgstr ""
+#~ "Estableix correctament el ressaltat de l'espai de treball actiu quan "
+#~ "entreu a la Visualització multitasca i animeu 1:1 amb gestos multitàctils"
+
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Escala els cantons arrodonits per pantalla"
+
+#~ msgid "Support fractional scaling"
+#~ msgstr "Admet l'escala fraccionada"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Millores de rendiment"
+
+#~ msgid "Remove texture from Multitasking View"
+#~ msgstr "Suprimeix la textura de la vista multitasca"
+
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr ""
+#~ "Evita seleccionar finestres accidentalment al commutador de finestres"
+
+#~ msgid "Reload animated wallpapers when timezone changes"
+#~ msgstr ""
+#~ "Torna a carregar fons de pantalla animats quan canviï la zona horària."
+
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr ""
+#~ "Correcció del desplaçament incòmode de dos dits a la vista multitasca"
+
+#~ msgid "Improve multitasking view animation performance"
+#~ msgstr "Millora del rendiment de l'animació de visualització multitasca"
+
+#~ msgid "Fixes:"
+#~ msgstr "Correccions:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "Correcció de les regressions per a SO 7"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "Useu el portal d'accés per forçar la sortida."
+
+#, fuzzy
+#~| msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr ""
+#~ "Evita seleccionar finestres accidentalment al commutador de finestres"
+
+#, fuzzy
+#~| msgid "Properly update accent color in the window switcher"
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr ""
+#~ "Actualització correcta del color d'accentuació al commutador de finestres"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "Prevenció de fallades"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr "Canvia la mida dels espais de treball quan canvien les pantalles"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "Gestió de finestres sense títol"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr ""
+#~ "Useu el portal d'accés per a la confirmació de la configuració de "
+#~ "visualització."
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "Permet tancar la vista de multitasca amb la tecla súper."
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr ""
+#~ "Correcció del retall d'ombres a les finestres decorades al costat del "
+#~ "servidor"
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr "Suport per a esdeveniments de desplaçament en alta resolució"
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr "Redisseny del canviador Alt + Tab"
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "Atenua els diàlegs pares dels diàlegs modals."
+
+#~ msgid "Dialogs fall down on parents instead of shooting out"
+#~ msgstr "Els diàlegs es despleguen sobre els pares."
+
+#~ msgid "preferences-desktop-workspaces"
+#~ msgstr "preferences-desktop-workspaces"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "Característiques noves:"
+
+#~ msgid "Stash the picture-in-picture window by pushing it off screen"
+#~ msgstr "Deseu la finestra d'imatge en imatge fent-la fora de la pantalla"
+
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr ""
+#~ "Solució d'un bloqueig potencial mentre es canvien els fons de pantalla"
+
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "Inclou decoracions de finestres a les captures de pantalla per a les "
+#~ "finestres decorades del costat del servidor"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "Afegeix gests multitàctils"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr "Tanqueu el commutador Alt + Tab prement Esc sense deixar anar Alt."
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr ""
+#~ "Incrementeu el nivell màxim de zoom i proporcioneu comentaris quan no "
+#~ "pugueu fer zoom."
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr "Mostra un menú contextual quan es fa clic secundari al fons."
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr "Animacions noves del clic d'aturada i de localització del punter"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr ""
+#~ "Afegeix l'opció de fer una captura de pantalla al menú contextual de la "
+#~ "finestra"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "Reprodueix sempre el so de l'obturador en fer captures de pantalla"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "Millores visuals menors"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "Correccions d'HiDPI"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "Correcció de les finestres \"Sempre visible a l'espai de treball\" que "
+#~ "desapareixien en canviar d'espai de treball"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr ""
+#~ "Correcció de les finestres a les pantalles no primàries que desapareixien "
+#~ "quan es canviava d'espai de treball"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr ""
+#~ "Correcció del bloqueig en canviar d’espai de treball mentre s’obre una "
+#~ "finestra transitòria"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr "No es mostren els serveis de fons de Gala a l'acoblador."
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "Correccions per a la gestió de les tecles multimèdia"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr "Mostra les dreceres de teclat als menús de la barra de capçalera"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr ""
+#~ "Correcció de les animacions per moure i maximitzar les finestres en mosaic"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "La pantalla es veu bé?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Mantén aquesta configuració"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Restaura la configuració anterior"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimitza"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Acció per al cantó de dalt a l'esquerra"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Algoritme per a la disposició de la vista de finestres"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Trieu l'algoritme usat per exposar les finestres."
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Acció per al cantó de dalt a la dreta"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Acció per a la canotnada de baix a l'esquerra"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Acció per al cantó de baix a la dreta"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "L'ordre que s'executarà per a l'acció del cantó actiu amb \"ordre "
+#~ "personalitzada\" o múltiple"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Si hi poseu una sola ordre, s'usarà per a cada cantó actiu assignat a "
+#~ "\"ordre personalitzada\". Si, en canvi, feu servir el patró \"hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command\" s'usaran les ordres "
+#~ "específiques per a cada cantó. Els identificadors possibles són "
+#~ "\"hotcorner-[topleft; topright; bottomleft; bottomright]\" seguits de \":"
+#~ "\" i després l'ordre. ';;' s'usa com a  delimitador entre definicions "
+#~ "d'ordre."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr ""
+#~ "Habilita el mosaic quan es deixin anar finestres a les vores de la "
+#~ "pantalla"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Si està habilitat, deixar anar les finestres a les vores verticals de la "
+#~ "pantalla les maximitza verticalment i els canvia la mida horitzontalment "
+#~ "per cobrir la meitat de la superfície disponible. Deixar anar les "
+#~ "finestres a la part superior de la pantalla les maximitza completament."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Acció del menú del plafó principal"
+
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "Estableix l'ordre per executar quan es prem la combinació de tecles del "
+#~ "menú - plafó principal."
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Habilita l'espai de treball dinàmic en comptes dels estàtics"
+
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Usa un nombre dinàmicament creixent o decreixent, segons calgui, dels "
+#~ "espais de treball en lloc d'un nombre estàtic, fix."
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr ""
+#~ "Els noms que es reconeixen com a finestres de l'acoblador per al "
+#~ "commutador de finestres"
+
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "En obrir el commutador de finestres, el Gala itera aquesta llista i "
+#~ "intenta trobar una finestra que coincideixi amb els noms. Si ho fa, "
+#~ "ocultarà aquesta finestra i la tornarà a fer aparèixer quan el commutador "
+#~ "estigui tancat."
+
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr ""
+#~ "Les finestres maximitzades es mouen automàticament a un espai de treball "
+#~ "nou."
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Drecera per anar al primer espai de treball"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Drecera per anar a l'últim espai de treball"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Drecera per desplaçar la finestra actual al primer espai de treball"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "Drecera per desplaçar la finestra actual a l'últim espai de treball"
+
+#~ msgid "Zoom in"
+#~ msgstr "Amplia"
+
+#~ msgid "Zoom out"
+#~ msgstr "Redueix"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Drecera per obrir el resum de finestres"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Drecera per obrir el resum de finestres per a totes les finestres"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr ""
+#~ "Continua cap a l'espai de treball següent a la dreta o torna enrere cap "
+#~ "al primer"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Continua cap a la disposició de teclat següent"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "OBSOLET: aquesta clau està obsoleta i s'ignora."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Continua cap a la disposició de teclat anterior"
+
+#~ msgid "The shortcut to enable picture-in-picture window"
+#~ msgstr "La drecera per habilitar la finestra d'imatge dins d'imatge"
+
+#~ msgid "The shortcut to show the selection area to choose a window."
+#~ msgstr "La drecera per mostrar l'àrea de selecció per triar una finestra."
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Adjunta-hi diàlegs de mode"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Quan sigui cert, en comptes de tenir barres de títol independents, els "
+#~ "diàlegs modals apareixen enganxats a la finestra pare i es mouen "
+#~ "conjuntament amb la finestra."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Disposició dels botons a la barra de títol"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "La disposició dels botons a la barra de títol. El valor ha de ser una "
+#~ "cadena, com ara «menu:minimize,maximize,spacer,close» (menú, minimitza, "
+#~ "maximitza, espaiat, tanca). Els dos punts separen el cantó esquerre de la "
+#~ "finestra de la dreta, i els noms dels botons se separen amb comes. No es "
+#~ "poden duplicar els botons. Els noms de botons desconeguts es descartaran "
+#~ "sense cap notificació, de manera que es puguin afegir botons en futures "
+#~ "versions del Metacity sense trencar les versions antigues. Es pot afegir "
+#~ "una etiqueta especial d'espaiament («spacer») per inserir una determinada "
+#~ "quantitat d'espai entre dos botons adjacents."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Imatge de fons usada al commutador d'espais de treball"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Habilita les animacions"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Si s'han de mostrar les animacions. Nota: és una clau global, canvia el "
+#~ "comportament del gestor de finestres, el plafó, etc."
+
+#~ msgid "Duration of the open animation"
+#~ msgstr "Durada de l'animació d'obertura"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr ""
+#~ "Durada de l'animació de desplaçament com l'usada per maximitzar / "
+#~ "desmaximitzar"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Durada de l'animació de tancament"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Durada de l'animació de minimització"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Durada de l'animació de mapatge del menú"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Defineix l'ombra de les finestres normals amb el focus"
+
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "El primer valor és el radi del desenfocament de l'ombra; el segon, "
+#~ "l'esvaïment superior (que sempre és només -1); el tercer i el quart són "
+#~ "el desplaçament x i y, i l'últim és l'opacitat. Per tant: [blur-radius, "
+#~ "top-fade, x-offset, y-offset, opacity]."
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Defineix l'ombra de la finestra normal sense el focus"
+
+#~ msgid "See normal-focused."
+#~ msgstr "Vegeu el focus normal."
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Defineix l'ombra d'un menú"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Defineix l'ombra d'un diàleg amb el focus"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Defineix l'ombra d'un diàleg sense el focus"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Inhabilita totes les notificacions"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Habilita les bafarades"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Habilita els sons"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr ""
+#~ "Mostra les notificacions que no s'han vist al centre de notificacions"
+
+#~ msgid "Corner radius"
+#~ msgstr "Radi del cantó"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Inhabilita la màscara de cantó en pantalla completa"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Si s'habilita, quan una aplicació està en pantalla completa (omple el "
+#~ "monitor), les màscares dels cantons s'inhabilitaran al monitor."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Mostra només les màscares de cantó a la pantalla primària"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel·la"
+
+#~ msgid "Restart"
+#~ msgstr "Reinicia"
+
+#~ msgid "Are you sure you want to Shut Down?"
+#~ msgstr "Esteu segur que voleu aturar l'ordinador?"
+
+#~ msgid "Shut Down"
+#~ msgstr "Atura"
+
+#~ msgid "Are you sure you want to Log Out?"
+#~ msgstr "Esteu segur que voleu sortir de la sessió?"
+
+#~ msgid "Log Out"
+#~ msgstr "Surt de la sessió"

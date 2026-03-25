@@ -1,0 +1,816 @@
+# Portuguese translation for gala
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the gala package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gala\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2024-07-09 14:02+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese <https://l10n.elementary.io/projects/desktop/gala/"
+"pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "Mudar o papel de parede…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "Definições de Ecrã…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "Definições do Sistema…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "Falha ao abrir as Definições do Sistema"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr ""
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "Ocultar"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Mover"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Redimensionar"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Sempre por cima"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Sempre na área de trabalho visível"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Mover para a área de trabalho à esquerda"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Mover para a área de trabalho à direita"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "Tirar captura de ecrã"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Fechar"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "Desagrupar"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Restaurar"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Maximizar"
+
+#: data/gala.metainfo.xml.in:11
+#, fuzzy
+#| msgid "Multitasking &amp; Window Management"
+msgid "Multitasking & Window Management"
+msgstr "Multitarefa e Gestão de janelas"
+
+#: data/gala.metainfo.xml.in:12
+#, fuzzy
+#| msgid "A window &amp; compositing manager for Pantheon"
+msgid "A window & compositing manager for Pantheon"
+msgstr "Um gestor de janelas e composição para o Pantheon"
+
+#: data/gala.metainfo.xml.in:14
+#, fuzzy
+#| msgid ""
+#| "A window &amp; compositing manager based on libmutter and designed by "
+#| "elementary for use with Pantheon."
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"Um gestor de janelas e composição baseado em libmutter e projetado pelo "
+"elementary para uso com o Pantheon."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "Melhorias:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "Traduções atualizadas"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:94
+#, fuzzy
+#| msgid "Improve window shadows for legacy apps"
+msgid "Improved render performance"
+msgstr "Melhora as sombras das janelas para aplicações antigas"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:96
+#, fuzzy
+#| msgid "Duration of the workspace switch animation"
+msgid "Improved workspace switch dock animation"
+msgstr "Duração da animação de mudança de área de trabalho"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:242
+#, fuzzy
+#| msgid "Fix potential crash when taking screenshots"
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "Corrige possíveis falhas ao tirar capturas de ecrã"
+
+#: data/gala.metainfo.xml.in:271
+#, fuzzy
+#| msgid "Improve window shadows for legacy apps"
+msgid "Improved shadows performance"
+msgstr "Melhora as sombras das janelas para aplicações antigas"
+
+#: data/gala.metainfo.xml.in:315
+#, fuzzy
+#| msgid "Fix potential crash when taking screenshots"
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr "Corrige possíveis falhas ao tirar capturas de ecrã"
+
+#: data/gala.metainfo.xml.in:316
+#, fuzzy
+#| msgid "Fix notification position after changing DPI"
+msgid "Fix notification animation when entering multitasking view"
+msgstr "Corrige a posição da notificação após a modificação do DPI"
+
+#: data/gala.metainfo.xml.in:331
+#, fuzzy
+#| msgid "Multitasking View"
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Vista de Tarefas"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr ""
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Vista de Tarefas"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Ver todas as janelas e ambientes de trabalho"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Outros"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr ""
+"Ficheiro de retorno do ambiente de trabalho para notificações de aplicações "
+"desatualizadas."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr ""
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "“%s” não está a responder"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "A aplicação não está a responder"
+
+#: src/Dialogs/CloseDialog.vala:28
+#, fuzzy
+#| msgid ""
+#| "You may choose to wait a short while for it to continue or force the "
+#| "application quit entirely."
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"Pode optar por aguardar um momento para continuar ou forçar a aplicação a "
+"terminar."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "Forçar o Sair"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "Aguardar"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr ""
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "Permitir"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr ""
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr ""
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "Captura de ecrã de %s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr ""
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "Captura de ecrã tirada"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr ""
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr ""
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "Capturas de ecrã"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr ""
+
+#: src/WindowManager.vala:1655
+#, fuzzy, c-format
+#| msgid "Changes will automatically revert after 30 seconds."
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "As alterações irão reverter automaticamente após 30 segundos."
+msgstr[1] "As alterações irão reverter automaticamente após 30 segundos."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "Manter novas definições de ecrã?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "Manter definições"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "Usar definições anteriores"
+
+#, fuzzy
+#~| msgid "Enable rounded corner mask"
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Ativar mascarar cantos redondos"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Melhorias de desempenho"
+
+#, fuzzy
+#~| msgid "Fix selecting windows underneath the window switcher"
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "Corrige a seleção de janelas por baixo do comutador da janela"
+
+#, fuzzy
+#~| msgid "Show window titles in multitasking view"
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "Mostra títulos de janelas em vista multitarefa"
+
+#~ msgid "Fixes:"
+#~ msgstr "Correções:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "Corrige regressões para o OS 7"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "Utilizar o portal de acesso para forçar saída"
+
+#, fuzzy
+#~| msgid "Fix selecting windows underneath the window switcher"
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr "Corrige a seleção de janelas por baixo do comutador da janela"
+
+#, fuzzy
+#~| msgid "Properly update accent color in the window switcher"
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "Atualiza corretamente a cor de destaque no comutador de janela"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "Prevenir potenciais falhas"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr "Redimensionar as áreas de trabalho quando os ecrãs mudam"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "Gerir janelas sem título"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr "Utilizar o portal de acesso para confirmação das definições de ecrã"
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "Permitir fechar a vista de tarefas com a tecla Super"
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr ""
+#~ "Corrije o recorte de sombra em janelas decoradas do lado do servidor "
+#~ "gráfico"
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr "Suporte para eventos de deslocamento de alta resolução"
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr "Alternador de Alt + Tab redesenhado"
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "Escurecer os principais dos diálogos modais"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "Novas funcionalidades:"
+
+#, fuzzy
+#~| msgid "Fix potential crash when taking screenshots"
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr "Corrige possíveis falhas ao tirar capturas de ecrã"
+
+#, fuzzy
+#~| msgid "Include window decorations for server-side decorated windows"
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "Incluir decorações de janela para janelas decoradas pelo servidor gráfico"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "Adicionar gestos multitoque"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr "Fecha o alternador Alt + Tab ao pressionar o Esc sem soltar o Alt"
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr ""
+#~ "Aumenta o nível máximo de zoom e fornece o feedback quando não for "
+#~ "possível fazer zoom"
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr ""
+#~ "Mostrar um menu de contexto ao fazer um clique secundário sobre o fundo"
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr "Novas animações de clique Dwell e localizador de cursor"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr "Adiciona o tirar captura de ecrã ao menu de contexto da janela"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "Reproduzir sempre o som do obturador ao tirar capturas de ecrã"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "Pequenas melhorias visuais"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "Correções de HiDPI"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "Corrige as janelas \"Sempre na área de trabalho visível\" que desaparecem "
+#~ "ao mudar de área de trabalho"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr ""
+#~ "Corrige as janelas em ecrãs não principais que desaparecem ao alterar as "
+#~ "áreas de trabalho"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr ""
+#~ "Corrige falha ao alterar áreas de trabalho enquanto uma janela "
+#~ "transitória está a ser aberta"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr "Não mostra os serviços de segundo plano do Gala na doca"
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "Correcções para o manuseamento de teclas multimédia"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr "Mostrar atalhos de teclado nos menus da Barra de Cabeçalho"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr "Corrige as animações para mover e maximizar janelas em mosaico"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "O ecrã parece-lhe estar bem?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Manter esta configuração"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Restaurar as configuração anteriores"
+
+#~ msgid "Minimize"
+#~ msgstr "Minimizar"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Ação do canto superior esquerdo"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Algoritmo para o esquema da visão geral de janelas"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Escolher o algoritmo usado para expor as janelas."
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Ação do canto superior direito"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Ação do canto inferior esquerdo"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Ação do canto inferior direito"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "Os comandos a serem executados para os cantos com a ação \"custom-"
+#~ "command\" ou múltiplos"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Se colocar apenas um comando, será usado para todos os cantos associados "
+#~ "a \"custom-command\". Se em vez disso usar o padrão  'hotcorner-"
+#~ "topleft:comando;;hotcorner-bottomright:comando' os comandos específicos "
+#~ "serão usados por cada canto. Identificadores de canto possíveis são "
+#~ "'hotcorner-[topleft; topright; bottomleft; bottomright]' seguidos de ':' "
+#~ "e o comando pretendido. ';;' é o separador usado entre definições de "
+#~ "comandos."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr ""
+#~ "Ativar agrupar aos cantos quando se largar janelas nos cantos do ecrã"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Se ativado, largar janelas na borda vertical do ecrã maximiza-as "
+#~ "verticalmente e redimensiona-as horizontalmente para ocupar metade da "
+#~ "área disponível. largar janelas na borda superior do ecrã maximiza-as "
+#~ "completamente."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Ação do menu principal do painel"
+
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "Define o comando a executar quando o atalho panel-main-menu é premido."
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Ativar áreas de trabalho dinâmicas ao invés de fixas"
+
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Usar um número dinâmico crescente ou decrescente de áreas de trabalho, "
+#~ "conforme o necessário, ao invés de um número estático, fixo."
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr ""
+#~ "Nomes a serem reconhecidos como janelas da dock para o alternador de "
+#~ "janelas"
+
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "Ao abrir o alternador de janelas, Gala itera sobre esta lista e tenta "
+#~ "encontrar uma janela com um desses nomes. Se encontrar, esconderá a "
+#~ "janela e volta a mostrá-la quando o alternador for fechado."
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "Ver todas as janelas e ambientes de trabalho"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Atalho para ir para a primeira área de trabalho"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Atalho para ir para a última área de trabalho"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Atalho para mover a janela em foco para a primeira área de trabalho"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr ""
+#~ "Atalho para mover a janela em primeiro plano para a última área de "
+#~ "trabalho"
+
+#~ msgid "Zoom in"
+#~ msgstr "Aumentar zoom"
+
+#~ msgid "Zoom out"
+#~ msgstr "Reduzir zoom"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Atalho para abrir a visão geral de janelas"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Atalho para abrir a visão geral de todas janelas"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr ""
+#~ "Alternar para a próxima área de trabalho à direita ou de volta para a "
+#~ "primeira"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Mudar para a disposição de teclado seguinte"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "DESCONTINUADA: esta chave está obsoleta e ignorada."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Mudar para a disposição de teclado anterior"
+
+#~ msgid "The shortcut to enable picture-in-picture window"
+#~ msgstr "O atalho para ativar uma janela imagem-em-imagem"
+
+#~ msgid "The shortcut to show the selection area to choose a window."
+#~ msgstr "O atalho para mostrar a área de seleção para escolher uma janela."
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Anexar diálogos modais"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Se verdadeiro, em vez de barras de título independentes, os diálogos "
+#~ "modais aparecem anexados à barra de título da janela-mãe, e são movidos "
+#~ "junto com a janela-mãe."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Disposição dos botões na barra de título"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "Disposição dos botões na barra de título. O valor deverá ser uma "
+#~ "expressão, tal como \"menu:minimize,maximize,spacer,close\"; o dois-"
+#~ "pontos separa o canto esquerdo da janela do direito, e os nomes dos "
+#~ "botões são separados por vírgulas. Não são permitidos botões duplicados. "
+#~ "Nomes de botões desconhecidos são ignorados para que possam ser "
+#~ "adicionados botões em versões futuras do metacity sem gerar erros em "
+#~ "versões antigas. Pode ser utilizada uma etiqueta especial de espaçamento "
+#~ "(spacer) para inserir algum espaço entre dois botões adjacentes."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Imagem de fundo usada no alternador de áreas de trabalho"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Ativar Animações"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Se as animações deverão ou não ser apresentadas. Nota: Esta é uma chave "
+#~ "global, altera o comportamento do gestor de janelas, painel, etc."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "Duração da animação de fechar"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "Duração da animação de snap usada ao maximizar/restaurar"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Duração da animação de fechar"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Duração da animação de minimizar"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Duração da animação do mapeamento do menu"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Define a sombra de uma janela normal em foco"
+
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "O primeiro valor é o raio do desfoque da sombra, o segundo o "
+#~ "desvanecimento do topo (normalmente -1), o terceiro e o quarto são os "
+#~ "valores x- e y- para o offset e o último a opacidade. Em suma [blur-"
+#~ "radius, top-fade, x-offset, y-offset, opacity]."
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Define a sombra de uma janela normal em segundo plano"
+
+#~ msgid "See normal-focused."
+#~ msgstr "Ver foco-normal."
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Define a sombra de um menu"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Define a sombra de um diálogo focado"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Define a sombra de um diálogo em segundo plano"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Desativar todas as notificações"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Ativar balões"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Ativar sons"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Mostrar notificações não lidas no centro de notificações"
+
+#~ msgid "Corner radius"
+#~ msgstr "Raio dos cantos"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Desativar mascarar cantos em ecrã cheio"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Se ativado, quando uma aplicação está em ecrã cheio (preenche o monitor), "
+#~ "os atalhos de canto serão desativados nesse monitor."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Apenas mostrar cantos mascarados no monitor primário"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "This will close any open app and turn off your device."
+#~ msgstr "Irá fechar todas as aplicações abertas e desligar o computador."
+
+#~ msgid "Restart"
+#~ msgstr "Reiniciar"
+
+#~ msgid "Are you sure you want to Shut Down?"
+#~ msgstr "Tem a certeza que pretende desligar?"
+
+#~ msgid "Shut Down"
+#~ msgstr "Desligar"
+
+#~ msgid "Are you sure you want to Log Out?"
+#~ msgstr "Tem a certeza que pretende sair da sessão?"
+
+#~ msgid "Log Out"
+#~ msgstr "Sair"

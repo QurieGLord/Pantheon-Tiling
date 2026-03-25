@@ -1,0 +1,793 @@
+# Russian translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: https://github.com/elementary/gala/issues\n"
+"POT-Creation-Date: 2026-03-17 16:29+0000\n"
+"PO-Revision-Date: 2026-03-02 01:51+0000\n"
+"Last-Translator: кубик круглый <megarainbow29@gmail.com>\n"
+"Language-Team: Russian <https://l10n.elementaryos.org/projects/desktop/gala/"
+"ru/>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.11.4\n"
+"X-Launchpad-Export-Date: 2017-02-21 05:47+0000\n"
+
+#: daemon/DBus.vala:46 daemon-gtk3/BackgroundMenu.vala:11
+msgid "Change Wallpaper…"
+msgstr "Сменить обои…"
+
+#: daemon/DBus.vala:50 daemon-gtk3/BackgroundMenu.vala:16
+msgid "Display Settings…"
+msgstr "Параметры экрана…"
+
+#: daemon/DBus.vala:56 daemon-gtk3/BackgroundMenu.vala:22
+msgid "System Settings…"
+msgstr "Параметры системы…"
+
+#: daemon/DBus.vala:180 daemon-gtk3/BackgroundMenu.vala:47
+msgid "Failed to open System Settings"
+msgstr "Не удалось открыть Параметры системы"
+
+#: daemon/DBus.vala:181 daemon-gtk3/BackgroundMenu.vala:48
+msgid "A handler for the “settings://” URI scheme must be installed."
+msgstr "Обработчик для схемы URI «settings://» должен быть установлен."
+
+#: daemon-gtk3/WindowMenu.vala:36 daemon/WindowMenu.vala:38
+msgid "Hide"
+msgstr "Скрыть"
+
+#: daemon-gtk3/WindowMenu.vala:49 daemon/WindowMenu.vala:54
+msgid "Move"
+msgstr "Переместить"
+
+#: daemon-gtk3/WindowMenu.vala:57 daemon/WindowMenu.vala:64
+msgid "Resize"
+msgstr "Изменить размер"
+
+#: daemon-gtk3/WindowMenu.vala:65 daemon/WindowMenu.vala:74
+msgid "Always on Top"
+msgstr "Поверх всех окон"
+
+#: daemon-gtk3/WindowMenu.vala:73 daemon/WindowMenu.vala:84
+msgid "Always on Visible Workspace"
+msgstr "Всегда на видимом рабочем столе"
+
+#: daemon-gtk3/WindowMenu.vala:81 daemon/WindowMenu.vala:94
+msgid "Move to Workspace Left"
+msgstr "Переместить на рабочий стол слева"
+
+#: daemon-gtk3/WindowMenu.vala:89 daemon/WindowMenu.vala:104
+msgid "Move to Workspace Right"
+msgstr "Переместить на рабочий стол справа"
+
+#: daemon-gtk3/WindowMenu.vala:97 daemon/WindowMenu.vala:114
+msgid "Take Screenshot"
+msgstr "Сделать снимок"
+
+#: daemon-gtk3/WindowMenu.vala:105 daemon/WindowMenu.vala:124
+msgid "Close"
+msgstr "Закрыть"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Untile"
+msgstr "Открепить"
+
+#: daemon-gtk3/WindowMenu.vala:138 daemon/WindowMenu.vala:167
+msgid "Unmaximize"
+msgstr "Восстановить"
+
+#: daemon-gtk3/WindowMenu.vala:140 daemon/WindowMenu.vala:169
+msgid "Maximize"
+msgstr "Развернуть"
+
+#: data/gala.metainfo.xml.in:11
+msgid "Multitasking & Window Management"
+msgstr "Многозадачность и управление окнами"
+
+#: data/gala.metainfo.xml.in:12
+msgid "A window & compositing manager for Pantheon"
+msgstr "Оконный менеджер и композитор для Pantheon"
+
+#: data/gala.metainfo.xml.in:14
+msgid ""
+"A window & compositing manager based on libmutter and designed by elementary "
+"for use with Pantheon."
+msgstr ""
+"Оконный менеджер и композитор на основе libmutter, разработанный elementary "
+"для использования в Pantheon."
+
+#: data/gala.metainfo.xml.in:24
+msgid "elementary, Inc."
+msgstr "elementary, Inc."
+
+#: data/gala.metainfo.xml.in:32 data/gala.metainfo.xml.in:46
+#: data/gala.metainfo.xml.in:66 data/gala.metainfo.xml.in:90
+#: data/gala.metainfo.xml.in:125 data/gala.metainfo.xml.in:137
+#: data/gala.metainfo.xml.in:152 data/gala.metainfo.xml.in:178
+#: data/gala.metainfo.xml.in:190 data/gala.metainfo.xml.in:204
+#: data/gala.metainfo.xml.in:237 data/gala.metainfo.xml.in:268
+#: data/gala.metainfo.xml.in:281 data/gala.metainfo.xml.in:296
+#: data/gala.metainfo.xml.in:313 data/gala.metainfo.xml.in:329
+#: data/gala.metainfo.xml.in:370 data/gala.metainfo.xml.in:395
+#: data/gala.metainfo.xml.in:411
+msgid "Improvements:"
+msgstr "Улучшения:"
+
+#: data/gala.metainfo.xml.in:34 data/gala.metainfo.xml.in:48
+#: data/gala.metainfo.xml.in:68 data/gala.metainfo.xml.in:92
+#: data/gala.metainfo.xml.in:127 data/gala.metainfo.xml.in:139
+#: data/gala.metainfo.xml.in:154 data/gala.metainfo.xml.in:180
+#: data/gala.metainfo.xml.in:192 data/gala.metainfo.xml.in:206
+#: data/gala.metainfo.xml.in:239 data/gala.metainfo.xml.in:270
+#: data/gala.metainfo.xml.in:283 data/gala.metainfo.xml.in:298
+#: data/gala.metainfo.xml.in:317 data/gala.metainfo.xml.in:333
+#: data/gala.metainfo.xml.in:376 data/gala.metainfo.xml.in:398
+#: data/gala.metainfo.xml.in:413
+msgid "Updated translations"
+msgstr "Обновлены переводы"
+
+#: data/gala.metainfo.xml.in:49 data/gala.metainfo.xml.in:69
+#: data/gala.metainfo.xml.in:93
+msgid "Improved HiDPI support"
+msgstr "Улучшена поддержка HiDPI"
+
+#: data/gala.metainfo.xml.in:70
+msgid "Improve Reduced Motion behavior"
+msgstr "Улучшено поведение при уменьшенных анимациях"
+
+#: data/gala.metainfo.xml.in:94
+msgid "Improved render performance"
+msgstr "Улучшена производительность отрисовки"
+
+#: data/gala.metainfo.xml.in:95
+msgid "Reveal dock and panel in sync when starting"
+msgstr "Появление дока и панели при запуске теперь синхронизированы"
+
+#: data/gala.metainfo.xml.in:96
+msgid "Improved workspace switch dock animation"
+msgstr "Улучшена анимация дока при смене рабочего стола"
+
+#: data/gala.metainfo.xml.in:97
+msgid "Picture-in-Picture windows now have rounded corners"
+msgstr "Окна режима «Картинка-в-картинке» теперь имеют закруглённые углы"
+
+#: data/gala.metainfo.xml.in:207
+msgid "Window state is now saved on sleep and shutdown"
+msgstr "Состояние окон теперь сохраняется при сне и выключении"
+
+#: data/gala.metainfo.xml.in:208
+msgid "Remove scaling effect from menus"
+msgstr "Удалён эффект приближения у меню"
+
+#: data/gala.metainfo.xml.in:209
+msgid "Swipe up to close windows in Multitasking View"
+msgstr "Жест проведения вверх для закрытия окон в Многозадачном виде"
+
+#: data/gala.metainfo.xml.in:240
+msgid "Fixed rare crash when a dock window was killed"
+msgstr "Исправлен редкий сбой, когда окно Дока оказывалось убито"
+
+#: data/gala.metainfo.xml.in:241
+msgid "Added interactive screenshot shortcut"
+msgstr "Добавлено сочетание клавиш интерактивного снимка экрана"
+
+#: data/gala.metainfo.xml.in:242
+msgid "Fixed crash when using tiling shortcuts"
+msgstr "Исправлен сбой при использовании сочетаний клавиш закрепления окон"
+
+#: data/gala.metainfo.xml.in:271
+msgid "Improved shadows performance"
+msgstr "Улучшена производительность теней"
+
+#: data/gala.metainfo.xml.in:315
+msgid "Fix a potential crash when moving windows between workspaces"
+msgstr "Исправлен возможный сбой при перемещении окон между рабочими столами"
+
+#: data/gala.metainfo.xml.in:316
+msgid "Fix notification animation when entering multitasking view"
+msgstr "Исправлена анимация уведомлений при переходе в многозадачный вид"
+
+#: data/gala.metainfo.xml.in:331
+msgid "Improve keyboard navigation in Multitasking View"
+msgstr "Улучшена навигация с клавиатуры в режиме многозадачности"
+
+#: data/gala.metainfo.xml.in:332
+msgid "Change panel color at the same time as wallpaper transition"
+msgstr "Обновление цвета панели одновременно со сменой обоев"
+
+#: data/gala.metainfo.xml.in:372
+msgid ""
+"Changing the wallpaper or going to sleep respects the \"Reduce Motion\" "
+"option"
+msgstr ""
+"Смена обоев и переход в спящий режим теперь учитывают опцию «Уменьшить "
+"анимации»"
+
+#: data/gala.metainfo.xml.in:373
+msgid "Use appropriate drag-and-drop pointers when moving windows"
+msgstr "Соответствующие указатели перетаскивания при перемещении окон"
+
+#: data/gala.metainfo.xml.in:374
+msgid "Fix the issue when gestures in the multitasking view might stop working"
+msgstr ""
+"Исправлена ошибка, из-за которой жесты в режиме многозадачности могли "
+"перестать работать"
+
+#: data/gala.metainfo.xml.in:375
+msgid "Improve dynamic workspaces behaviour with multiple monitors"
+msgstr ""
+"Улучшено поведение динамических рабочих столов с несколькими мониторами"
+
+#: data/gala.metainfo.xml.in:397
+msgid "Improve handling of move-to-workspace shortcut"
+msgstr "Улучшено сочетание клавиш «Переместить на рабочий стол»"
+
+#: data/gala-multitaskingview.desktop.in:3
+#: data/gala-multitaskingview.desktop.in:5
+msgid "Multitasking View"
+msgstr "Многозадачный вид"
+
+#: data/gala-multitaskingview.desktop.in:4
+msgid "View all open windows and workspaces"
+msgstr "Просмотр всех открытых окон и рабочих столов"
+
+#: data/gala-other.desktop.in:3
+msgid "Other"
+msgstr "Другие"
+
+#: data/gala-other.desktop.in:4
+msgid "Fallback desktop file for notifications from outdated applications."
+msgstr "Устаревший файл desktop для уведомлений от устаревших приложений."
+
+#: lib/App.vala:51
+msgctxt "program"
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: src/Dialogs/CloseDialog.vala:23
+#, c-format
+msgid "“%s” is not responding"
+msgstr "«%s» не отвечает"
+
+#: src/Dialogs/CloseDialog.vala:25
+msgid "Application is not responding"
+msgstr "Приложение не отвечает"
+
+#: src/Dialogs/CloseDialog.vala:28
+msgid ""
+"You may choose to wait a short while for the application to continue, or "
+"force it to quit entirely."
+msgstr ""
+"Вы можете подождать, пока приложение ответит, либо принудительно закрыть его."
+
+#: src/Dialogs/CloseDialog.vala:29
+msgid "Force Quit"
+msgstr "Принудительно закрыть"
+
+#: src/Dialogs/CloseDialog.vala:30
+msgid "Wait"
+msgstr "Подождать"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:23
+#, c-format
+msgid "“%s” wants to inhibit system shortcuts"
+msgstr "«%s» желает перехватывать системные сочетания клавиш"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:25
+msgid "An application wants to inhibit system shortcuts"
+msgstr "Приложение желает перехватывать системные сочетания клавиш"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:28
+msgid "All system shortcuts will be redirected to the application."
+msgstr "Все системные сочетания клавиш будут перенаправлены этому приложению."
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:29
+msgid "Allow"
+msgstr "Разрешить"
+
+#: src/Dialogs/InhibitShortcutsDialog.vala:30
+msgid "Deny"
+msgstr "Запретить"
+
+#: src/DesktopIntegration.vala:210
+msgid "Window has already focus"
+msgstr "Окно уже сфокусировано"
+
+#. / TRANSLATORS: %s represents a timestamp here
+#: src/ScreenshotManager.vala:103
+#, c-format
+msgid "Screenshot from %s"
+msgstr "Снимок экрана от %s"
+
+#. / TRANSLATORS: %s represents a name of file manager
+#: src/ScreenshotManager.vala:168
+#, c-format
+msgid "Show in %s"
+msgstr "Показать в %s"
+
+#: src/ScreenshotManager.vala:175 src/ScreenshotManager.vala:555
+msgid "Screenshot taken"
+msgstr "Снимок экрана сделан"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot is saved to clipboard"
+msgstr "Снимок сохранён в буфер обмена"
+
+#: src/ScreenshotManager.vala:176
+msgid "Screenshot saved to screenshots folder"
+msgstr "Снимок сохранён в папку снимков экрана"
+
+#: src/ScreenshotManager.vala:470
+msgid "Screenshots"
+msgstr "Снимки экрана"
+
+#: src/Widgets/WindowSwitcher/WindowSwitcher.vala:55
+msgid "Window switcher"
+msgstr "Переключатель окон"
+
+#: src/WindowManager.vala:1655
+#, c-format
+msgid "Changes will automatically revert after %i second."
+msgid_plural "Changes will automatically revert after %i seconds."
+msgstr[0] "Изменения будут отменены через %i секунду."
+msgstr[1] "Изменения будут отменены через %i секунды."
+msgstr[2] "Изменения будут отменены через %i секунд."
+
+#: src/WindowManager.vala:1662
+msgid "Keep new display settings?"
+msgstr "Сохранить новые настройки экрана?"
+
+#: src/WindowManager.vala:1666
+msgid "Keep Settings"
+msgstr "Сохранить настройки"
+
+#: src/WindowManager.vala:1667
+msgid "Use Previous Settings"
+msgstr "Использовать предыдущие настройки"
+
+#, c-format
+#~ msgid "Open in %s"
+#~ msgstr "Открыть в %s"
+
+#~ msgid ""
+#~ "Set the keyboard layout correctly at startup so that the indicator "
+#~ "matches the selected layout"
+#~ msgstr ""
+#~ "Исправлен выбор раскладки клавиатуры при запуске, чтобы индикатор "
+#~ "соответствовал выбранной раскладке"
+
+#~ msgid ""
+#~ "Correctly set the active workspace highlight when entering Multitasking "
+#~ "View and animate 1:1 with multitouch gestures"
+#~ msgstr ""
+#~ "Исправлена подсветка активного рабочего стола при открытии режима "
+#~ "многозадачности, и добавлены мулититач жесты для анимации подсветки"
+
+#~ msgid "Scale rounded corners per-display"
+#~ msgstr "Масштабирование закруглённых углов для каждого экрана"
+
+#~ msgid "Support fractional scaling"
+#~ msgstr "Поддержка дробного масштабирования"
+
+#~ msgid "Performance improvements"
+#~ msgstr "Улучшения производительности"
+
+#~ msgid "Remove texture from Multitasking View"
+#~ msgstr "Удалена текстура из многозадачного вида"
+
+#~ msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgstr "Исправлен случайный выбор окон в переключателе окон"
+
+#~ msgid "Reload animated wallpapers when timezone changes"
+#~ msgstr "Перезагрузка анимированных обоев при смене часовых поясов"
+
+#~ msgid "Fix awkward two-finger scroll in multitasking view"
+#~ msgstr "Исправлена неудобная прокрутка двумя пальцами в многозадачном виде"
+
+#~ msgid "Improve multitasking view animation performance"
+#~ msgstr "Улучшена производительность анимации многозадачного вида"
+
+#~ msgid "Fixes:"
+#~ msgstr "Исправления:"
+
+#~ msgid "Fix regressions for OS 7"
+#~ msgstr "Исправлены ошибки на OS 7"
+
+#~ msgid "Use access portal for force quit"
+#~ msgstr "Теперь для принудительного выхода используется портал доступа"
+
+#, fuzzy
+#~| msgid "Avoid accidentally selecting windows in the window switcher"
+#~ msgid "Prevent window titles from being wider than the window switcher"
+#~ msgstr "Исправлен случайный выбор окон в переключателе окон"
+
+#, fuzzy
+#~| msgid "Properly update accent color in the window switcher"
+#~ msgid "Correctly set the scale of app icons in the window switcher"
+#~ msgstr "Корректное обновление акцентного цвета в переключателе окон"
+
+#~ msgid "Prevent potential crashes"
+#~ msgstr "Предотвращены возможные сбои"
+
+#~ msgid "Resize workspaces when displays change"
+#~ msgstr "Рабочие столы теперь меняют размер при смене монитора"
+
+#~ msgid "Handle windows with no title"
+#~ msgstr "Поддержка окон без заголовка"
+
+#~ msgid "Use access portal for display settings confirmation"
+#~ msgstr ""
+#~ "Теперь для отображения подтверждения настроек экрана используется портал "
+#~ "доступа"
+
+#~ msgid "Allow closing multitasking view with Super"
+#~ msgstr "Возможность закрыть многозадачный вид по нажатию Super"
+
+#~ msgid "Fix shadow clipping on server-side decorated windows"
+#~ msgstr "Исправлен показ тени у окон декорированных на стороне сервера"
+
+#~ msgid "Support for high-resolution scroll events"
+#~ msgstr "Поддержка прокрутки высокого разрешения"
+
+#~ msgid "Redesigned Alt + Tab switcher"
+#~ msgstr "Переработан внешний вид переключателя Alt + Tab"
+
+#~ msgid "Dim the parents of modal dialogs"
+#~ msgstr "Затемнять родительские модальные окна"
+
+#~ msgid "Dialogs fall down on parents instead of shooting out"
+#~ msgstr "Исправлен выпад диалоговых окон вниз"
+
+#~ msgid "applications-other"
+#~ msgstr "applications-other"
+
+#~ msgid "New features:"
+#~ msgstr "Новые возможности:"
+
+#~ msgid "Stash the picture-in-picture window by pushing it off screen"
+#~ msgstr ""
+#~ "Скрывание окна картинка в картинке при его выталкивании за границы экрана"
+
+#~ msgid "Fix a potential crash while changing wallpapers"
+#~ msgstr "Исправлена вероятность сбоя при смене обоев"
+
+#~ msgid ""
+#~ "Include window decorations in screenshots for server-side decorated "
+#~ "windows"
+#~ msgstr ""
+#~ "Включить декорации окон в снимки экрана для окон декорированных на "
+#~ "стороне сервера"
+
+#~ msgid "Add multitouch gestures"
+#~ msgstr "Добавлены мультитач-жесты"
+
+#~ msgid "Close the Alt + Tab switcher by pressing Esc without releasing Alt"
+#~ msgstr "Закрытие переключателя Alt + Tab нажатием клавиши Esc без Alt"
+
+#~ msgid "Increase maximum zoom level and provide feedback when unable to zoom"
+#~ msgstr ""
+#~ "Увеличен максимальный уровень масштабирования и обеспечена обратная "
+#~ "связь, когда не удаётся увеличить"
+
+#~ msgid "Show a context menu when secondary clicking the background"
+#~ msgstr ""
+#~ "Отображения контекстного меню после щелчка правой кнопкой мыши по фону"
+
+#~ msgid "New Dwell Click and Locate Pointer animations"
+#~ msgstr ""
+#~ "Новые анимации для Автонажатия при наведении курсора и Обнаружения "
+#~ "указателя"
+
+#~ msgid "Add Take Screenshot to window context menu"
+#~ msgstr "Добавлена функция снимка экрана в контекстном меню окна"
+
+#~ msgid "Always play shutter sound when taking screenshots"
+#~ msgstr "Всегда воспроизводить звук затвора при создании снимков экрана"
+
+#~ msgid "Minor visual improvements"
+#~ msgstr "Незначительные визуальные улучшения"
+
+#~ msgid "HiDPI fixes"
+#~ msgstr "Исправление для HiDPI"
+
+#~ msgid ""
+#~ "Fix “Always on Visible Workspace” windows disappearing when changing "
+#~ "workspaces"
+#~ msgstr ""
+#~ "Исправлено исчезновение окон из-за включённого режима «Всегда на видимом "
+#~ "рабочем столе» при смене рабочих столов"
+
+#~ msgid ""
+#~ "Fix windows on non-primary displays disappearing when changing workspaces"
+#~ msgstr ""
+#~ "Исправлена ошибка, при которой окна на неосновных дисплеях исчезают при "
+#~ "смене рабочих столов"
+
+#~ msgid ""
+#~ "Fix crash when changing workspaces while a transient window is opening"
+#~ msgstr ""
+#~ "Исправлена ошибка падения, когда, при изменении рабочих столов "
+#~ "открывалось временное окно"
+
+#~ msgid "Don't show Gala Background Services in the dock"
+#~ msgstr "Скрыты фоновые службы Gala из дока"
+
+#~ msgid "Fixes for media key handling"
+#~ msgstr "Исправление обработки мультимедийных ключей"
+
+#~ msgid "Show keyboard shortcuts in HeaderBar menus"
+#~ msgstr "Показывать сочетания клавиш в меню HeaderBar"
+
+#~ msgid "Fix animations for moving and maximizing tiled windows"
+#~ msgstr "Исправлена анимация для перемещения и максимизации окон"
+
+#~ msgid "multitasking-view"
+#~ msgstr "multitasking-view"
+
+#~ msgid "Does the display look OK?"
+#~ msgstr "Монитор настроен правильно?"
+
+#~ msgid "Keep This Configuration"
+#~ msgstr "Сохранить текущие настройки"
+
+#~ msgid "Restore Previous Configuration"
+#~ msgstr "Восстановить предыдущие настройки"
+
+#~ msgid "Minimize"
+#~ msgstr "Свернуть"
+
+#~ msgid "Action for the top left corner"
+#~ msgstr "Действие в левом верхнем углу"
+
+#~ msgid "Algorithm for window overview layout"
+#~ msgstr "Алгоритм просмотра окон"
+
+#~ msgid "Choose the algorithm used for exposing the windows."
+#~ msgstr "Выберите алгоритм, используемый для раскрытия окна."
+
+#~ msgid "Action for the top right corner"
+#~ msgstr "Действие в правом верхнем углу"
+
+#~ msgid "Action for the bottom left corner"
+#~ msgstr "Действие в левом нижнем углу"
+
+#~ msgid "Action for the bottom right corner"
+#~ msgstr "Действие в правом нижнем углу"
+
+#~ msgid ""
+#~ "The command that will be executed for the hot corner action 'custom-"
+#~ "command' or multiple"
+#~ msgstr ""
+#~ "Одна или несколько команд, выполняющиеся при выбранном для активного угла "
+#~ "действии «Выполнить команду»"
+
+#~ msgid ""
+#~ "If you just put a single command, it will be used for every hot corner "
+#~ "assigned to 'custom-command'. If you instead use the pattern 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command' the specific commands "
+#~ "will be used per hotcorner. Possible identifiers are 'hotcorner-[topleft; "
+#~ "topright; bottomleft; bottomright]' followed by a ':' and then the "
+#~ "command. ';;' is used as delimiter between command defintions."
+#~ msgstr ""
+#~ "Если указана только одна команда, то она будет выполняться для любого "
+#~ "активного угла с соответствующим действием. Чтобы указать отдельную "
+#~ "команду для определённого угла необходимо использовать шаблон 'hotcorner-"
+#~ "topleft:command;;hotcorner-bottomright:command'. Возможные идентификаторы "
+#~ "— 'hotcorner-[topleft; topright; bottomleft; bottomright]', после которых "
+#~ "идёт ':' и затем команда. ';;' используется как разделитель."
+
+#~ msgid "Enable edge tiling when dropping windows on screen edges"
+#~ msgstr "Включить закрепление окон у границ экрана"
+
+#~ msgid ""
+#~ "If enabled, dropping windows on vertical screen edges maximizes them "
+#~ "vertically and resizes them horizontally to cover half of the available "
+#~ "area. Dropping windows on the top screen edge maximizes them completely."
+#~ msgstr ""
+#~ "Если активно, то при перетаскивании окна к левому/правому краю экрана, "
+#~ "оно будет развёрнуто на всю высоту и занимать половину экрана по ширине. "
+#~ "При перетаскивании окна к верхнему краю экрана, оно будет развёрнуто на "
+#~ "весь рабочий стол."
+
+#~ msgid "Panel main menu action"
+#~ msgstr "Панель меню «Основные действия»"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sets the command to run when the panel-main-menu keybinding is pressed."
+#~ msgstr ""
+#~ "Команда, которая выполняется при нажатии соответствующих горячих клавиш"
+
+#~ msgid "Enable dynamic workspace instead of static ones"
+#~ msgstr "Включить динамические рабочие места вместо статичных"
+
+#, fuzzy
+#~ msgid ""
+#~ "Use a dynamically increasing or decreasing number, as needed, of "
+#~ "workspaces instead of a static, fixed number."
+#~ msgstr ""
+#~ "Использовать переменное количество рабочих столов, изменяющееся по мере "
+#~ "необходимости"
+
+#~ msgid "Names that are recognized as dock windows for the window switcher"
+#~ msgstr "Имена, которые переключатель окон признаёт в качестве «доков»"
+
+#, fuzzy
+#~ msgid ""
+#~ "When launching the window-switcher, Gala iterates over this list and "
+#~ "attempts to find a window matching the names. If it does, it will hide "
+#~ "this window and fade it back in, once the the switcher is closed."
+#~ msgstr ""
+#~ "При запуске переключателя окон, gala проходит по этому списку и пытается "
+#~ "найти соответствие. При положительном результате этот «док» будет скрыт в "
+#~ "переключателе и выведен обратно по завершении переключения окон."
+
+#, fuzzy
+#~ msgid "Automatically move maximized windows to a new workspace"
+#~ msgstr "Просмотр всех открытых окон и рабочих столов"
+
+#~ msgid "Shortcut to move to first workspace"
+#~ msgstr "Ярлык для перемещения на первый рабочий стол"
+
+#~ msgid "Shortcut to move to last workspace"
+#~ msgstr "Ярлык для перемещения на последний рабочий стол"
+
+#~ msgid "Shortcut to move the current window to first workspace"
+#~ msgstr "Ярлык для перемещения текущего окна на первый рабочий стол"
+
+#~ msgid "Shortcut to move the current window to last workspace"
+#~ msgstr "Ярлык для перемещения текущего окна на последний рабочий стол"
+
+#~ msgid "Zoom in"
+#~ msgstr "Приблизить"
+
+#~ msgid "Zoom out"
+#~ msgstr "Отдалить"
+
+#~ msgid "Shortcut to open the window overview"
+#~ msgstr "Ярлык для открытия обзора окон"
+
+#~ msgid "Shortcut to open the window overview for all windows"
+#~ msgstr "Ярлык для открытия обзора всех окон"
+
+#~ msgid "Cycle to the next workspace to the right or to back to the first"
+#~ msgstr "Цикличное перемещение по рабочим столам, слева направо"
+
+#~ msgid "Cycle to next keyboard layout"
+#~ msgstr "Цикличное переключение на следующую раскладку клавиатуры"
+
+#~ msgid "DEPRECATED: This key is deprecated and ignored."
+#~ msgstr "УСТАРЕЛО: Это сочетание клавиш устарело и игнорируется."
+
+#~ msgid "Cycle to previous keyboard layout"
+#~ msgstr "Цикличное переключение на предыдущую раскладку клавиатуры"
+
+#~ msgid "Attach modal dialogs"
+#~ msgstr "Прикреплять модальные диалоги"
+
+#~ msgid ""
+#~ "When true, instead of having independent titlebars, modal dialogs appear "
+#~ "attached to the titlebar of the parent window and are moved together with "
+#~ "the parent window."
+#~ msgstr ""
+#~ "Если активно, то диалоговые окна будут объединены с вызвавшим их окном и "
+#~ "перемещаться вместе с ним."
+
+#~ msgid "Arrangement of buttons on the titlebar"
+#~ msgstr "Расположение кнопок в панели заголовка"
+
+#~ msgid ""
+#~ "Arrangement of buttons on the titlebar. The value should be a string, "
+#~ "such as \"menu:minimize,maximize,spacer,close\"; the colon separates the "
+#~ "left corner of the window from the right corner, and the button names are "
+#~ "comma-separated. Duplicate buttons are not allowed. Unknown button names "
+#~ "are silently ignored so that buttons can be added in future metacity "
+#~ "versions without breaking older versions. A special spacer tag can be "
+#~ "used to insert some space between two adjacent buttons."
+#~ msgstr ""
+#~ "Расположение кнопок в заголовке окна. Значение должно быть строкой, "
+#~ "например, «menu:minimize,maximize,spacer,close». Двоеточие разделяет "
+#~ "левую и правую сторону заголовка окна, а имена кнопок разделяются "
+#~ "запятыми. Дублирование кнопок не допускается. Неизвестные имена кнопок "
+#~ "игнорируются без уведомления. Специальный элемент spacer может "
+#~ "использоваться для вставки промежутка между двумя кнопками."
+
+#~ msgid "Background-image used in the workspace-switcher"
+#~ msgstr "Фоновое изображение, используемое в переключателе рабочих столов"
+
+#~ msgid "Enable Animations"
+#~ msgstr "Включить анимации"
+
+#~ msgid ""
+#~ "Whether animations should be displayed. Note: This is a global key, it "
+#~ "changes the behaviour of the window manager, the panel etc."
+#~ msgstr ""
+#~ "Показывать ли анимацию. Заметьте, это глобальный ключ, он изменяет "
+#~ "поведение оконного менеджера, панели и т. д."
+
+#, fuzzy
+#~ msgid "Duration of the open animation"
+#~ msgstr "Длительность анимации закрытия"
+
+#~ msgid "Duration of the snap animation as used by maximize/unmaximize"
+#~ msgstr "Длительность анимации разворачивания/восстановления"
+
+#~ msgid "Duration of the close animation"
+#~ msgstr "Длительность анимации закрытия"
+
+#~ msgid "Duration of the minimize animation"
+#~ msgstr "Длительность анимации сворачивания"
+
+#~ msgid "Duration of the menu mapping animation"
+#~ msgstr "Длительность анимации вывода меню"
+
+#~ msgid "Defines the shadow of normal focused windows"
+#~ msgstr "Определяет тень активного окна"
+
+#, fuzzy
+#~ msgid ""
+#~ "The first value is the radius of the blur of the shadow, the second one "
+#~ "the top fade (which is usually just -1), the third and fourth the x- and "
+#~ "y-offset and the last the opacity. So [blur-radius, top-fade, x-offset, y-"
+#~ "offset, opacity]."
+#~ msgstr ""
+#~ "Первое значение определяет размытие тени, второе — угасание тени (обычно "
+#~ "-1), третье и четвёртое значения — смещение по x и y, последнее значение "
+#~ "определяет прозрачность. [размытие, угасание, смещение-по-x, смещение-по-"
+#~ "y, прозрачность]"
+
+#~ msgid "Defines the shadow of a normal unfocused window"
+#~ msgstr "Тень неактивного окна"
+
+#, fuzzy
+#~ msgid "See normal-focused."
+#~ msgstr "Смотри normal-focused"
+
+#~ msgid "Defines the shadow of a menu"
+#~ msgstr "Определяет тень от меню"
+
+#~ msgid "Defines the shadow of a focused dialog"
+#~ msgstr "Определять тень активного окна"
+
+#~ msgid "Defines the shadow of an unfocused dialog"
+#~ msgstr "Определять тень неактивного окна"
+
+#~ msgid "Disable all notifications"
+#~ msgstr "Отключить все уведомления"
+
+#~ msgid "Enable bubbles"
+#~ msgstr "Включить всплывающие уведомления"
+
+#~ msgid "Enable sounds"
+#~ msgstr "Включить звуки"
+
+#~ msgid "Show missed notifications in notification center"
+#~ msgstr "Показывать пропущенные уведомления в центре уведомлений"
+
+#~ msgid "Corner radius"
+#~ msgstr "Радиус закругления углов"
+
+#~ msgid "Disable corner mask on fullscreen"
+#~ msgstr "Отключить закруглённые углы при разворачивании окна на весь экран"
+
+#~ msgid ""
+#~ "If enabled, when an application is fullscreen (fills the monitor), the "
+#~ "corner masks will be disabled on that monitor."
+#~ msgstr ""
+#~ "Если включено, то, когда приложение находится в полноэкранном режиме, "
+#~ "скругление углов будет отключено на данном экране."
+
+#~ msgid "Only show corner masks on primary monitor"
+#~ msgstr "Отображать закруглённые углы только на основном мониторе"
+
+#~ msgid "Cancel"
+#~ msgstr "Отмена"
