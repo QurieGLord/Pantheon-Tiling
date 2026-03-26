@@ -26,6 +26,9 @@ if not wingpanel_dep.found()
     wingpanel_indicatorsdir = join_paths(prefix, get_option('libdir'), 'wingpanel')
 endif
 
+gtk_dep = dependency('gtk+-3.0')
+granite_dep = dependency('granite', required: false)
+
 shared_module(
     meson.project_name(),
     gresource,
@@ -36,8 +39,8 @@ shared_module(
         dependency('gio-2.0'),
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
-        dependency('granite-7'),
-        dependency('gtk4'),
+        gtk_dep,
+        granite_dep,
         wingpanel_dep
     ],
     install: true,

@@ -23,7 +23,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
     private Gtk.Button? promote_button = null;
     private Gtk.Button? rotate_button = null;
     private Gtk.Button? rotate_back_button = null;
-    private Wingpanel.PopoverMenuItem? help_button = null;
+    private Gtk.Button? help_button = null;
 
     private bool syncing_controls = false;
 
@@ -39,9 +39,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         behavior_settings = new GLib.Settings (BEHAVIOR_SCHEMA);
         keybinding_settings = new GLib.Settings (KEYBINDINGS_SCHEMA);
 
-        display_icon = new Gtk.Image.from_icon_name ("view-grid-symbolic") {
-            pixel_size = 16
-        };
+        display_icon = new Gtk.Image.from_icon_name ("view-grid-symbolic", Gtk.IconSize.MENU);
 
         visible = true;
 
@@ -93,24 +91,25 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             halign = Gtk.Align.START,
             xalign = 0.0f
         };
-        title_label.add_css_class ("title-4");
-        content.append (title_label);
+        title_label.use_markup = true;
+        title_label.label = "<b>BSP Tiling</b>";
+        content.pack_start (title_label, false, false, 0);
 
         status_label = new Gtk.Label ("") {
             halign = Gtk.Align.START,
             xalign = 0.0f,
             wrap = true
         };
-        status_label.add_css_class ("dim-label");
-        content.append (status_label);
+        status_label.get_style_context ().add_class ("dim-label");
+        content.pack_start (status_label, false, false, 0);
 
-        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false, 0);
 
-        content.append (create_switch_row (
+        content.pack_start (create_switch_row (
             "Enable BSP",
             "Turn tiling on or off globally",
             out bsp_enabled_switch
-        ));
+        ), false, false, 0);
         bsp_enabled_switch.notify["active"].connect (() => {
             if (syncing_controls) {
                 return;
@@ -121,11 +120,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
 
-        content.append (create_switch_row (
+        content.pack_start (create_switch_row (
             "This Workspace",
             "Enable BSP for the active workspace and keep per-workspace state",
             out workspace_switch
-        ));
+        ), false, false, 0);
         workspace_switch.notify["active"].connect (() => {
             if (syncing_controls) {
                 return;
@@ -136,11 +135,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
 
-        content.append (create_spin_row (
+        content.pack_start (create_spin_row (
             "Inner Gap",
             "Gap between tiled windows",
             out inner_gap_spin
-        ));
+        ), false, false, 0);
         inner_gap_spin.value_changed.connect (() => {
             if (syncing_controls) {
                 return;
@@ -149,11 +148,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_int ("inner-gap", (int) inner_gap_spin.get_value ());
         });
 
-        content.append (create_spin_row (
+        content.pack_start (create_spin_row (
             "Outer Gap",
             "Gap between the layout and the screen edge",
             out outer_gap_spin
-        ));
+        ), false, false, 0);
         outer_gap_spin.value_changed.connect (() => {
             if (syncing_controls) {
                 return;
@@ -162,11 +161,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_int ("outer-gap", (int) outer_gap_spin.get_value ());
         });
 
-        content.append (create_switch_row (
+        content.pack_start (create_switch_row (
             "Live Reorder",
             "Rebuild the BSP tree while dragging tiled windows",
             out live_reorder_switch
-        ));
+        ), false, false, 0);
         live_reorder_switch.notify["active"].connect (() => {
             if (syncing_controls) {
                 return;
@@ -175,13 +174,13 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             bsp_settings.set_boolean ("live-reorder-on-drag", live_reorder_switch.active);
         });
 
-        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false, 0);
 
-        content.append (create_switch_row (
+        content.pack_start (create_switch_row (
             "Focus Follows Mouse",
             "Focus windows when the pointer enters them",
             out focus_follows_mouse_switch
-        ));
+        ), false, false, 0);
         focus_follows_mouse_switch.notify["active"].connect (() => {
             if (syncing_controls) {
                 return;
@@ -190,11 +189,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             behavior_settings.set_boolean ("focus-follows-mouse", focus_follows_mouse_switch.active);
         });
 
-        content.append (create_switch_row (
+        content.pack_start (create_switch_row (
             "Mouse Follows Focus",
             "Warp the pointer to the newly focused window",
             out mouse_follows_focus_switch
-        ));
+        ), false, false, 0);
         mouse_follows_focus_switch.notify["active"].connect (() => {
             if (syncing_controls) {
                 return;
@@ -203,14 +202,15 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             behavior_settings.set_boolean ("mouse-follows-focus", mouse_follows_focus_switch.active);
         });
 
-        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false, 0);
 
         var actions_label = new Gtk.Label ("Window Actions") {
             halign = Gtk.Align.START,
             xalign = 0.0f
         };
-        actions_label.add_css_class ("heading");
-        content.append (actions_label);
+        actions_label.use_markup = true;
+        actions_label.label = "<b>Window Actions</b>";
+        content.pack_start (actions_label, false, false, 0);
 
         var actions_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6) {
             homogeneous = true
@@ -219,32 +219,31 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             gala_client.toggle_focused_window_floating ();
             refresh_ui ();
         });
-        actions_box.append (float_button);
+        actions_box.pack_start (float_button, true, true, 0);
 
         promote_button = create_action_button ("Promote", () => {
             gala_client.promote_focused_window ();
             refresh_ui ();
         });
-        actions_box.append (promote_button);
+        actions_box.pack_start (promote_button, true, true, 0);
 
         rotate_button = create_action_button ("Rotate", () => {
             gala_client.rotate_group_forward ();
             refresh_ui ();
         });
-        actions_box.append (rotate_button);
+        actions_box.pack_start (rotate_button, true, true, 0);
 
         rotate_back_button = create_action_button ("Rotate Back", () => {
             gala_client.rotate_group_backward ();
             refresh_ui ();
         });
-        actions_box.append (rotate_back_button);
-        content.append (actions_box);
+        actions_box.pack_start (rotate_back_button, true, true, 0);
+        content.pack_start (actions_box, false, false, 0);
 
-        content.append (new Gtk.Separator (Gtk.Orientation.HORIZONTAL));
+        content.pack_start (new Gtk.Separator (Gtk.Orientation.HORIZONTAL), false, false, 0);
 
-        help_button = new Wingpanel.PopoverMenuItem () {
-            text = "Keyboard Shortcuts and Help…"
-        };
+        help_button = new Gtk.Button.with_label ("Keyboard Shortcuts and Help...");
+        help_button.halign = Gtk.Align.FILL;
         help_button.clicked.connect (() => {
             if (help_overlay == null) {
                 help_overlay = new HelpOverlay (keybinding_settings);
@@ -252,17 +251,19 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
 
             help_overlay.present ();
         });
-        content.append (help_button);
+        content.pack_start (help_button, false, false, 0);
 
-        var scrolled = new Gtk.ScrolledWindow () {
+        var scrolled = new Gtk.ScrolledWindow (null, null) {
             hscrollbar_policy = Gtk.PolicyType.NEVER,
-            min_content_width = 340,
-            max_content_height = 560,
-            child = content
+            min_content_width = 340
         };
+        scrolled.set_policy (Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        scrolled.set_propagate_natural_height (true);
+        scrolled.add (content);
 
         popover_widget = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
-        popover_widget.append (scrolled);
+        popover_widget.pack_start (scrolled, true, true, 0);
+        popover_widget.show_all ();
     }
 
     private Gtk.Widget create_switch_row (string title, string subtitle, out Gtk.Switch switch_widget) {
@@ -270,20 +271,21 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             halign = Gtk.Align.START,
             xalign = 0.0f
         };
-        title_label.add_css_class ("heading");
+        title_label.use_markup = true;
+        title_label.label = "<b>%s</b>".printf (GLib.Markup.escape_text (title));
 
         var subtitle_label = new Gtk.Label (subtitle) {
             halign = Gtk.Align.START,
             xalign = 0.0f,
             wrap = true
         };
-        subtitle_label.add_css_class ("dim-label");
+        subtitle_label.get_style_context ().add_class ("dim-label");
 
         var labels_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2) {
             hexpand = true
         };
-        labels_box.append (title_label);
-        labels_box.append (subtitle_label);
+        labels_box.pack_start (title_label, false, false, 0);
+        labels_box.pack_start (subtitle_label, false, false, 0);
 
         switch_widget = new Gtk.Switch () {
             halign = Gtk.Align.END,
@@ -291,8 +293,8 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         };
 
         var row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
-        row.append (labels_box);
-        row.append (switch_widget);
+        row.pack_start (labels_box, true, true, 0);
+        row.pack_start (switch_widget, false, false, 0);
         return row;
     }
 
@@ -301,20 +303,21 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             halign = Gtk.Align.START,
             xalign = 0.0f
         };
-        title_label.add_css_class ("heading");
+        title_label.use_markup = true;
+        title_label.label = "<b>%s</b>".printf (GLib.Markup.escape_text (title));
 
         var subtitle_label = new Gtk.Label (subtitle) {
             halign = Gtk.Align.START,
             xalign = 0.0f,
             wrap = true
         };
-        subtitle_label.add_css_class ("dim-label");
+        subtitle_label.get_style_context ().add_class ("dim-label");
 
         var labels_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2) {
             hexpand = true
         };
-        labels_box.append (title_label);
-        labels_box.append (subtitle_label);
+        labels_box.pack_start (title_label, false, false, 0);
+        labels_box.pack_start (subtitle_label, false, false, 0);
 
         spin_button = new Gtk.SpinButton.with_range (0, 96, 1) {
             halign = Gtk.Align.END,
@@ -324,14 +327,14 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         };
 
         var row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
-        row.append (labels_box);
-        row.append (spin_button);
+        row.pack_start (labels_box, true, true, 0);
+        row.pack_start (spin_button, false, false, 0);
         return row;
     }
 
     private Gtk.Button create_action_button (string title, owned ActionCallback callback) {
         var button = new Gtk.Button.with_label (title);
-        button.add_css_class (Granite.STYLE_CLASS_FLAT);
+        button.relief = Gtk.ReliefStyle.NONE;
         button.clicked.connect (() => {
             callback ();
         });

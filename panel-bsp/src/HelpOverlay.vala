@@ -13,7 +13,7 @@ namespace PanelBsp {
             window = builder.get_object ("bsp_help_window") as Gtk.ShortcutsWindow;
             assert (window != null);
 
-            window.close_request.connect (() => {
+            window.delete_event.connect (() => {
                 window.hide ();
                 return true;
             });
@@ -27,6 +27,7 @@ namespace PanelBsp {
 
         public void present () {
             refresh_shortcuts ();
+            window.show_all ();
             window.present ();
         }
 
