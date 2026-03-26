@@ -28,17 +28,38 @@ namespace Gala {
 
         private BspNode? root = null;
         private Gee.HashMap<Object, BspNode> leaves = new Gee.HashMap<Object, BspNode> ();
+        private Gee.ArrayList<Object> ordered_tiles = new Gee.ArrayList<Object> ();
+        private bool master_enabled = true;
+        private bool master_left = true;
 
         public uint size {
             get {
-                return (uint) leaves.size;
+                return (uint) ordered_tiles.size;
             }
         }
 
         public bool is_empty {
             get {
-                return leaves.size == 0;
+                return ordered_tiles.size == 0;
             }
+        }
+
+        public void set_master_options (bool enabled, bool left = true) {
+            if (master_enabled == enabled && master_left == left) {
+                return;
+            }
+
+            master_enabled = enabled;
+            master_left = left;
+            rebuild_from_order (get_tiles_in_order ());
+        }
+
+        public bool get_master_enabled () {
+            return master_enabled;
+        }
+
+        public bool get_master_left () {
+            return master_left;
         }
 
         public bool contains (Object tile) {
@@ -46,19 +67,22 @@ namespace Gala {
         }
 
         public Object? get_any_tile () {
-            var leaf = get_first_leaf (root);
-            return leaf != null ? leaf.tile : null;
+            return ordered_tiles.size > 0 ? ordered_tiles[0] : null;
         }
 
         public Gee.ArrayList<Object> get_tiles_in_order () {
             var tiles = new Gee.ArrayList<Object> ();
-            collect_tiles (root, tiles);
+            foreach (var tile in ordered_tiles) {
+                tiles.add (tile);
+            }
             return tiles;
         }
 
         public BspLayout copy () {
             var layout = new BspLayout ();
-            layout.root = clone_node (root, null, layout.leaves);
+            layout.master_enabled = master_enabled;
+            layout.master_left = master_left;
+            layout.rebuild_from_order (ordered_tiles);
             return layout;
         }
 
@@ -67,39 +91,18 @@ namespace Gala {
                 return;
             }
 
-            if (root == null) {
-                root = new BspNode ();
-                root.tile = tile;
-                leaves[tile] = root;
-                return;
+            var tiles = get_tiles_in_order ();
+            var insert_index = tiles.size;
+
+            if (split_target != null) {
+                var target_index = tiles.index_of (split_target);
+                if (target_index >= 0) {
+                    insert_index = target_index + 1;
+                }
             }
 
-            var target_leaf = choose_target_leaf (split_target);
-            if (target_leaf == null) {
-                return;
-            }
-
-            unowned var existing_tile = target_leaf.tile;
-            if (existing_tile == null) {
-                return;
-            }
-
-            var depth = get_depth (target_leaf);
-
-            target_leaf.tile = null;
-            target_leaf.split_ratio = 0.5;
-            target_leaf.split_horizontal = depth % 2 == 0;
-
-            target_leaf.left = new BspNode ();
-            target_leaf.left.parent = target_leaf;
-            target_leaf.left.tile = existing_tile;
-
-            target_leaf.right = new BspNode ();
-            target_leaf.right.parent = target_leaf;
-            target_leaf.right.tile = tile;
-
-            leaves[existing_tile] = target_leaf.left;
-            leaves[tile] = target_leaf.right;
+            tiles.insert (insert_index, tile);
+            rebuild_from_order (tiles);
         }
 
         public void remove (Object tile) {
@@ -122,16 +125,17 @@ namespace Gala {
                 return false;
             }
 
-            var first_node = leaves[first_tile];
-            var second_node = leaves[second_tile];
-            if (first_node == null || second_node == null) {
+            var tiles = get_tiles_in_order ();
+            var first_index = tiles.index_of (first_tile);
+            var second_index = tiles.index_of (second_tile);
+            if (first_index < 0 || second_index < 0) {
                 return false;
             }
 
-            first_node.tile = second_tile;
-            second_node.tile = first_tile;
-            leaves[first_tile] = second_node;
-            leaves[second_tile] = first_node;
+            var tmp = tiles[first_index];
+            tiles[first_index] = tiles[second_index];
+            tiles[second_index] = tmp;
+            rebuild_from_order (tiles);
             return true;
         }
 
@@ -193,90 +197,90 @@ namespace Gala {
             apply_layout (root, area, func, min_size_func);
         }
 
-        private BspNode? choose_target_leaf (Object? split_target) {
-            if (split_target != null) {
-                var explicit_target = leaves[split_target];
-                if (explicit_target != null) {
-                    return explicit_target;
-                }
-            }
-
-            return get_first_leaf (root);
-        }
-
-        private BspNode? get_first_leaf (BspNode? node) {
-            if (node == null) {
-                return null;
-            }
-
-            if (node.is_leaf ()) {
-                return node;
-            }
-
-            var left_leaf = get_first_leaf (node.left);
-            if (left_leaf != null) {
-                return left_leaf;
-            }
-
-            return get_first_leaf (node.right);
-        }
-
-        private int get_depth (BspNode node) {
-            var depth = 0;
-
-            for (unowned var current = node.parent; current != null; current = current.parent) {
-                depth++;
-            }
-
-            return depth;
-        }
-
-        private void collect_tiles (BspNode? node, Gee.ArrayList<Object> tiles) {
-            if (node == null) {
-                return;
-            }
-
-            if (node.is_leaf ()) {
-                if (node.tile != null) {
-                    tiles.add (node.tile);
-                }
-
-                return;
-            }
-
-            collect_tiles (node.left, tiles);
-            collect_tiles (node.right, tiles);
-        }
-
-        private BspNode? clone_node (BspNode? node, BspNode? parent, Gee.HashMap<Object, BspNode> target_leaves) {
-            if (node == null) {
-                return null;
-            }
-
-            var clone = new BspNode ();
-            clone.parent = parent;
-            clone.tile = node.tile;
-            clone.split_ratio = node.split_ratio;
-            clone.split_horizontal = node.split_horizontal;
-
-            if (clone.tile != null && node.is_leaf ()) {
-                target_leaves[clone.tile] = clone;
-            }
-
-            clone.left = clone_node (node.left, clone, target_leaves);
-            clone.right = clone_node (node.right, clone, target_leaves);
-            return clone;
-        }
-
         private void rebuild_from_order (Gee.List<Object> tiles) {
             root = null;
             leaves.clear ();
+            ordered_tiles.clear ();
 
-            Object? split_target = null;
             foreach (var tile in tiles) {
-                insert (tile, split_target);
-                split_target = tile;
+                ordered_tiles.add (tile);
             }
+
+            if (ordered_tiles.size == 0) {
+                return;
+            }
+
+            if (master_enabled && ordered_tiles.size > 1) {
+                root = build_master_tree ();
+            } else {
+                root = build_balanced_tree (ordered_tiles, 0, ordered_tiles.size, true, null);
+            }
+        }
+
+        private BspNode create_leaf (Object tile, BspNode? parent) {
+            var leaf = new BspNode ();
+            leaf.parent = parent;
+            leaf.tile = tile;
+            leaves[tile] = leaf;
+            return leaf;
+        }
+
+        private BspNode build_master_tree () {
+            var node = new BspNode ();
+            node.split_horizontal = true;
+            node.split_ratio = 0.5;
+
+            var master_leaf = create_leaf (ordered_tiles[0], node);
+            var stack_root = build_stack_tree (ordered_tiles, 1, ordered_tiles.size - 1, false, node);
+
+            if (master_left) {
+                node.left = master_leaf;
+                node.right = stack_root;
+            } else {
+                node.left = stack_root;
+                node.right = master_leaf;
+            }
+
+            return node;
+        }
+
+        private BspNode? build_stack_tree (Gee.List<Object> tiles, int start, int count, bool split_horizontal, BspNode? parent) {
+            if (count <= 0) {
+                return null;
+            }
+
+            if (count == 1) {
+                return create_leaf (tiles[start], parent);
+            }
+
+            var node = new BspNode ();
+            node.parent = parent;
+            node.split_horizontal = split_horizontal;
+            node.split_ratio = 0.5;
+            node.left = create_leaf (tiles[start], node);
+            node.right = build_stack_tree (tiles, start + 1, count - 1, !split_horizontal, node);
+            return node;
+        }
+
+        private BspNode? build_balanced_tree (Gee.List<Object> tiles, int start, int count, bool split_horizontal, BspNode? parent) {
+            if (count <= 0) {
+                return null;
+            }
+
+            if (count == 1) {
+                return create_leaf (tiles[start], parent);
+            }
+
+            var node = new BspNode ();
+            node.parent = parent;
+            node.split_horizontal = split_horizontal;
+            node.split_ratio = 0.5;
+
+            var first_count = int.max (1, count / 2);
+            var second_count = count - first_count;
+            node.left = build_balanced_tree (tiles, start, first_count, !split_horizontal, node);
+            node.right = build_balanced_tree (tiles, start + first_count, second_count, !split_horizontal, node);
+            return node;
         }
 
         private int clamp_split_size (int size, double ratio) {

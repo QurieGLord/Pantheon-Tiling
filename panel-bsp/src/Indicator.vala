@@ -14,9 +14,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
     private Gtk.Label? status_label = null;
     private Gtk.Switch? bsp_enabled_switch = null;
     private Gtk.Switch? workspace_switch = null;
+    private Gtk.Switch? master_enabled_switch = null;
     private Gtk.Switch? focus_follows_mouse_switch = null;
     private Gtk.Switch? mouse_follows_focus_switch = null;
     private Gtk.Switch? live_reorder_switch = null;
+    private Gtk.ComboBoxText? master_side_combo = null;
     private Gtk.SpinButton? inner_gap_spin = null;
     private Gtk.SpinButton? outer_gap_spin = null;
     private Gtk.Button? float_button = null;
@@ -135,17 +137,73 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             refresh_ui ();
         });
 
+        content.pack_start (create_switch_row (
+            "Master Window",
+            "Keep a dedicated master tile and place the remaining windows in the stack area",
+            out master_enabled_switch
+        ), false, false, 0);
+        master_enabled_switch.notify["active"].connect (() => {
+            if (syncing_controls) {
+                return;
+            }
+
+            bool current_state;
+            if (!gala_client.set_master_enabled (master_enabled_switch.active, out current_state)) {
+                bsp_settings.set_boolean ("master-enabled", master_enabled_switch.active);
+            }
+
+            refresh_ui ();
+        });
+
+        content.pack_start (create_combo_row (
+            "Master Side",
+            "Choose which side of the screen the master tile uses",
+            out master_side_combo
+        ), false, false, 0);
+        master_side_combo.append ("left", "Left");
+        master_side_combo.append ("right", "Right");
+        master_side_combo.changed.connect (() => {
+            if (syncing_controls) {
+                return;
+            }
+
+            var active_id = master_side_combo.get_active_id ();
+            if (active_id == null || active_id == "") {
+                return;
+            }
+
+            string applied_side;
+            if (!gala_client.set_master_side (active_id, out applied_side)) {
+                bsp_settings.set_string ("master-side", active_id);
+            }
+
+            refresh_ui ();
+        });
+
         content.pack_start (create_spin_row (
             "Inner Gap",
             "Gap between tiled windows",
             out inner_gap_spin
         ), false, false, 0);
+        inner_gap_spin.update_policy = Gtk.SpinButtonUpdatePolicy.IF_VALID;
         inner_gap_spin.value_changed.connect (() => {
             if (syncing_controls) {
                 return;
             }
 
-            bsp_settings.set_int ("inner-gap", (int) inner_gap_spin.get_value ());
+            apply_gap_value (inner_gap_spin, true);
+        });
+        inner_gap_spin.activate.connect (() => {
+            if (!syncing_controls) {
+                apply_gap_value (inner_gap_spin, true);
+            }
+        });
+        inner_gap_spin.focus_out_event.connect ((event) => {
+            if (!syncing_controls) {
+                apply_gap_value (inner_gap_spin, true);
+            }
+
+            return false;
         });
 
         content.pack_start (create_spin_row (
@@ -153,12 +211,25 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             "Gap between the layout and the screen edge",
             out outer_gap_spin
         ), false, false, 0);
+        outer_gap_spin.update_policy = Gtk.SpinButtonUpdatePolicy.IF_VALID;
         outer_gap_spin.value_changed.connect (() => {
             if (syncing_controls) {
                 return;
             }
 
-            bsp_settings.set_int ("outer-gap", (int) outer_gap_spin.get_value ());
+            apply_gap_value (outer_gap_spin, false);
+        });
+        outer_gap_spin.activate.connect (() => {
+            if (!syncing_controls) {
+                apply_gap_value (outer_gap_spin, false);
+            }
+        });
+        outer_gap_spin.focus_out_event.connect ((event) => {
+            if (!syncing_controls) {
+                apply_gap_value (outer_gap_spin, false);
+            }
+
+            return false;
         });
 
         content.pack_start (create_switch_row (
@@ -332,6 +403,60 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         return row;
     }
 
+    private Gtk.Widget create_combo_row (string title, string subtitle, out Gtk.ComboBoxText combo) {
+        var title_label = new Gtk.Label (title) {
+            halign = Gtk.Align.START,
+            xalign = 0.0f
+        };
+        title_label.use_markup = true;
+        title_label.label = "<b>%s</b>".printf (GLib.Markup.escape_text (title));
+
+        var subtitle_label = new Gtk.Label (subtitle) {
+            halign = Gtk.Align.START,
+            xalign = 0.0f,
+            wrap = true
+        };
+        subtitle_label.get_style_context ().add_class ("dim-label");
+
+        var labels_box = new Gtk.Box (Gtk.Orientation.VERTICAL, 2) {
+            hexpand = true
+        };
+        labels_box.pack_start (title_label, false, false, 0);
+        labels_box.pack_start (subtitle_label, false, false, 0);
+
+        combo = new Gtk.ComboBoxText ();
+        combo.halign = Gtk.Align.END;
+        combo.valign = Gtk.Align.CENTER;
+
+        var row = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 12);
+        row.pack_start (labels_box, true, true, 0);
+        row.pack_start (combo, false, false, 0);
+        return row;
+    }
+
+    private void apply_gap_value (Gtk.SpinButton spin_button, bool inner_gap) {
+        var requested_value = spin_button.get_value_as_int ();
+        int applied_value;
+
+        if (inner_gap) {
+            if (!gala_client.set_inner_gap (requested_value, out applied_value)) {
+                bsp_settings.set_int ("inner-gap", requested_value);
+                applied_value = requested_value;
+            }
+        } else {
+            if (!gala_client.set_outer_gap (requested_value, out applied_value)) {
+                bsp_settings.set_int ("outer-gap", requested_value);
+                applied_value = requested_value;
+            }
+        }
+
+        if (!spin_button.has_focus) {
+            syncing_controls = true;
+            spin_button.set_value ((double) applied_value);
+            syncing_controls = false;
+        }
+    }
+
     private Gtk.Button create_action_button (string title, owned ActionCallback callback) {
         var button = new Gtk.Button.with_label (title);
         button.relief = Gtk.ReliefStyle.NONE;
@@ -346,6 +471,8 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         var active_scope = "global";
         var global_enabled = bsp_settings.get_boolean ("enabled");
         var active_workspace_enabled = global_enabled;
+        var master_enabled = bsp_settings.get_boolean ("master-enabled");
+        var master_side = bsp_settings.get_string ("master-side");
         var inner_gap = bsp_settings.get_int ("inner-gap");
         var outer_gap = bsp_settings.get_int ("outer-gap");
         var has_gala_state = false;
@@ -355,6 +482,8 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             active_scope = gala_state.scope;
             global_enabled = gala_state.enabled;
             active_workspace_enabled = gala_state.active_workspace_enabled;
+            master_enabled = gala_state.master_enabled;
+            master_side = gala_state.master_side;
             inner_gap = gala_state.inner_gap;
             outer_gap = gala_state.outer_gap;
             has_gala_state = true;
@@ -374,9 +503,11 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         if (status_label != null) {
             var mode_text = active_scope == "workspace" ? "Per-workspace" : "Global";
             status_label.label = has_gala_state
-                ? "Mode: %s\nCurrent workspace: %s\nInner gap: %d px\nOuter gap: %d px".printf (
+                ? "Mode: %s\nCurrent workspace: %s\nMaster: %s (%s)\nInner gap: %d px\nOuter gap: %d px".printf (
                     mode_text,
                     active_workspace_enabled ? "enabled" : "disabled",
+                    master_enabled ? "enabled" : "disabled",
+                    master_side,
                     inner_gap,
                     outer_gap
                 )
@@ -393,12 +524,26 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
             workspace_switch.sensitive = has_gala_state;
         }
 
+        if (master_enabled_switch != null) {
+            master_enabled_switch.active = master_enabled;
+            master_enabled_switch.sensitive = true;
+        }
+
+        if (master_side_combo != null) {
+            master_side_combo.set_active_id (master_side == "right" ? "right" : "left");
+            master_side_combo.sensitive = master_enabled;
+        }
+
         if (inner_gap_spin != null) {
-            inner_gap_spin.set_value ((double) inner_gap);
+            if (!inner_gap_spin.has_focus) {
+                inner_gap_spin.set_value ((double) inner_gap);
+            }
         }
 
         if (outer_gap_spin != null) {
-            outer_gap_spin.set_value ((double) outer_gap);
+            if (!outer_gap_spin.has_focus) {
+                outer_gap_spin.set_value ((double) outer_gap);
+            }
         }
 
         if (live_reorder_switch != null) {
@@ -434,8 +579,10 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         }
 
         display_icon.opacity = active_workspace_enabled ? 1.0 : 0.55;
-        display_icon.tooltip_text = "BSP: %s, inner gap %d px, outer gap %d px".printf (
+        display_icon.tooltip_text = "BSP: %s, master %s (%s), inner gap %d px, outer gap %d px".printf (
             active_workspace_enabled ? "enabled" : "disabled",
+            master_enabled ? "enabled" : "disabled",
+            master_side,
             inner_gap,
             outer_gap
         );

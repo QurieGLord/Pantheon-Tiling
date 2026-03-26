@@ -107,6 +107,14 @@ public class Gala.DBus {
         return wm.bsp_tree.is_enabled_for_active_workspace ();
     }
 
+    public bool get_bsp_master_enabled () throws DBusError, IOError {
+        return wm.bsp_tree.get_master_enabled ();
+    }
+
+    public string get_bsp_master_side () throws DBusError, IOError {
+        return wm.bsp_tree.get_master_side ();
+    }
+
     public int get_bsp_inner_gap () throws DBusError, IOError {
         return wm.bsp_tree.get_inner_gap ();
     }
@@ -127,6 +135,14 @@ public class Gala.DBus {
         return wm.bsp_tree.toggle_focused_window_floating ();
     }
 
+    public bool set_bsp_master_enabled (bool enabled) throws DBusError, IOError {
+        return wm.bsp_tree.set_master_enabled (enabled);
+    }
+
+    public string set_bsp_master_side (string side) throws DBusError, IOError {
+        return wm.bsp_tree.set_master_side (side);
+    }
+
     public bool promote_bsp_focused_window () throws DBusError, IOError {
         return wm.bsp_tree.promote_focused_window ();
     }
@@ -143,12 +159,20 @@ public class Gala.DBus {
         return wm.bsp_tree.adjust_inner_gap (4);
     }
 
+    public int set_bsp_inner_gap (int value) throws DBusError, IOError {
+        return wm.bsp_tree.set_inner_gap (value);
+    }
+
     public int decrease_bsp_inner_gap () throws DBusError, IOError {
         return wm.bsp_tree.adjust_inner_gap (-4);
     }
 
     public int increase_bsp_outer_gap () throws DBusError, IOError {
         return wm.bsp_tree.adjust_outer_gap (4);
+    }
+
+    public int set_bsp_outer_gap (int value) throws DBusError, IOError {
+        return wm.bsp_tree.set_outer_gap (value);
     }
 
     public int decrease_bsp_outer_gap () throws DBusError, IOError {

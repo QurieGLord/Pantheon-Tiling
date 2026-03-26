@@ -586,6 +586,14 @@ namespace Gala {
             return is_workspace_enabled (display.get_workspace_manager ().get_active_workspace ());
         }
 
+        public bool get_master_enabled () {
+            return config.master_enabled;
+        }
+
+        public string get_master_side () {
+            return config.master_side;
+        }
+
         public int get_inner_gap () {
             return config.inner_gap;
         }
@@ -634,15 +642,34 @@ namespace Gala {
         }
 
         public int adjust_inner_gap (int delta) {
-            var new_gap = int.max (0, config.inner_gap + delta);
+            return set_inner_gap (config.inner_gap + delta);
+        }
+
+        public int adjust_outer_gap (int delta) {
+            return set_outer_gap (config.outer_gap + delta);
+        }
+
+        public int set_inner_gap (int value) {
+            var new_gap = int.max (0, value);
             settings.set_int ("inner-gap", new_gap);
             return new_gap;
         }
 
-        public int adjust_outer_gap (int delta) {
-            var new_gap = int.max (0, config.outer_gap + delta);
+        public int set_outer_gap (int value) {
+            var new_gap = int.max (0, value);
             settings.set_int ("outer-gap", new_gap);
             return new_gap;
+        }
+
+        public bool set_master_enabled (bool enabled) {
+            settings.set_boolean ("master-enabled", enabled);
+            return enabled;
+        }
+
+        public string set_master_side (string side) {
+            var normalized_side = normalize_master_side (side);
+            settings.set_string ("master-side", normalized_side);
+            return normalized_side;
         }
 
         public bool increase_inner_gap () {
@@ -907,11 +934,13 @@ namespace Gala {
         private BspGroup get_or_create_group (Meta.Window window, string key) {
             var group = groups[key];
             if (group != null) {
+                configure_layout (group.layout);
                 return group;
             }
 
             unowned var workspace = window.get_workspace ();
             group = new BspGroup (workspace.index (), window.get_monitor (), key);
+            configure_layout (group.layout);
             groups[key] = group;
             return group;
         }
@@ -1279,6 +1308,8 @@ namespace Gala {
         private void load_settings () {
             config.enabled = settings.get_boolean ("enabled");
             config.scope = normalize_scope (settings.get_string ("scope"));
+            config.master_enabled = settings.get_boolean ("master-enabled");
+            config.master_side = normalize_master_side (settings.get_string ("master-side"));
             config.inner_gap = int.max (0, settings.get_int ("inner-gap"));
             config.outer_gap = int.max (0, settings.get_int ("outer-gap"));
             config.border_width = int.max (0, settings.get_int ("border-width"));
@@ -1296,6 +1327,8 @@ namespace Gala {
         private void on_settings_changed (string key) {
             var old_enabled = config.enabled;
             var old_scope = config.scope;
+            var old_master_enabled = config.master_enabled;
+            var old_master_side = config.master_side;
             var old_inner_gap = config.inner_gap;
             var old_outer_gap = config.outer_gap;
             var old_live_reorder = config.live_reorder_on_drag;
@@ -1306,7 +1339,11 @@ namespace Gala {
                 case "enabled":
                 case "scope":
                 case "workspace-enabled":
+                case "master-enabled":
+                case "master-side":
                     if (old_enabled != config.enabled || old_scope != config.scope || key == "workspace-enabled") {
+                        queue_full_rebuild ();
+                    } else if (old_master_enabled != config.master_enabled || old_master_side != config.master_side) {
                         queue_full_rebuild ();
                     }
                     break;
@@ -1328,6 +1365,14 @@ namespace Gala {
 
         private string normalize_scope (string scope) {
             return scope == "workspace" ? scope : "global";
+        }
+
+        private string normalize_master_side (string side) {
+            return side == "right" ? "right" : "left";
+        }
+
+        private void configure_layout (BspLayout layout) {
+            layout.set_master_options (config.master_enabled, config.master_side == "left");
         }
 
         private bool is_workspace_enabled (Meta.Workspace? workspace) {

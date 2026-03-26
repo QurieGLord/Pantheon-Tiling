@@ -4,11 +4,17 @@ namespace PanelBsp {
         public abstract bool get_bsp_enabled () throws DBusError, IOError;
         public abstract string get_bsp_scope () throws DBusError, IOError;
         public abstract bool get_bsp_enabled_for_active_workspace () throws DBusError, IOError;
+        public abstract bool get_bsp_master_enabled () throws DBusError, IOError;
+        public abstract string get_bsp_master_side () throws DBusError, IOError;
         public abstract int get_bsp_inner_gap () throws DBusError, IOError;
         public abstract int get_bsp_outer_gap () throws DBusError, IOError;
         public abstract bool toggle_bsp_enabled () throws DBusError, IOError;
         public abstract bool toggle_bsp_active_workspace_enabled () throws DBusError, IOError;
         public abstract bool toggle_bsp_focused_window_floating () throws DBusError, IOError;
+        public abstract bool set_bsp_master_enabled (bool enabled) throws DBusError, IOError;
+        public abstract string set_bsp_master_side (string side) throws DBusError, IOError;
+        public abstract int set_bsp_inner_gap (int value) throws DBusError, IOError;
+        public abstract int set_bsp_outer_gap (int value) throws DBusError, IOError;
         public abstract bool promote_bsp_focused_window () throws DBusError, IOError;
         public abstract bool rotate_bsp_group_forward () throws DBusError, IOError;
         public abstract bool rotate_bsp_group_backward () throws DBusError, IOError;
@@ -18,6 +24,8 @@ namespace PanelBsp {
         public bool enabled { get; set; default = false; }
         public string scope { get; set; default = "global"; }
         public bool active_workspace_enabled { get; set; default = false; }
+        public bool master_enabled { get; set; default = true; }
+        public string master_side { get; set; default = "left"; }
         public int inner_gap { get; set; default = 0; }
         public int outer_gap { get; set; default = 0; }
     }
@@ -105,6 +113,8 @@ namespace PanelBsp {
                 state.enabled = proxy.get_bsp_enabled ();
                 state.scope = proxy.get_bsp_scope ();
                 state.active_workspace_enabled = proxy.get_bsp_enabled_for_active_workspace ();
+                state.master_enabled = proxy.get_bsp_master_enabled ();
+                state.master_side = proxy.get_bsp_master_side ();
                 state.inner_gap = proxy.get_bsp_inner_gap ();
                 state.outer_gap = proxy.get_bsp_outer_gap ();
                 return true;
@@ -206,6 +216,70 @@ namespace PanelBsp {
                 return proxy.rotate_bsp_group_backward ();
             } catch (Error e) {
                 warning ("Failed to rotate BSP group backward: %s", e.message);
+                invalidate_proxy ();
+                return false;
+            }
+        }
+
+        public bool set_master_enabled (bool enabled, out bool current_state) {
+            current_state = enabled;
+            if (!ensure_proxy ()) {
+                return false;
+            }
+
+            try {
+                current_state = proxy.set_bsp_master_enabled (enabled);
+                return true;
+            } catch (Error e) {
+                warning ("Failed to update BSP master mode: %s", e.message);
+                invalidate_proxy ();
+                return false;
+            }
+        }
+
+        public bool set_master_side (string side, out string applied_side) {
+            applied_side = side;
+            if (!ensure_proxy ()) {
+                return false;
+            }
+
+            try {
+                applied_side = proxy.set_bsp_master_side (side);
+                return true;
+            } catch (Error e) {
+                warning ("Failed to update BSP master side: %s", e.message);
+                invalidate_proxy ();
+                return false;
+            }
+        }
+
+        public bool set_inner_gap (int value, out int current_value) {
+            current_value = value;
+            if (!ensure_proxy ()) {
+                return false;
+            }
+
+            try {
+                current_value = proxy.set_bsp_inner_gap (value);
+                return true;
+            } catch (Error e) {
+                warning ("Failed to update BSP inner gap: %s", e.message);
+                invalidate_proxy ();
+                return false;
+            }
+        }
+
+        public bool set_outer_gap (int value, out int current_value) {
+            current_value = value;
+            if (!ensure_proxy ()) {
+                return false;
+            }
+
+            try {
+                current_value = proxy.set_bsp_outer_gap (value);
+                return true;
+            } catch (Error e) {
+                warning ("Failed to update BSP outer gap: %s", e.message);
                 invalidate_proxy ();
                 return false;
             }

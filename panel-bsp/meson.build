@@ -5,18 +5,10 @@ project(
     meson_version: '>= 0.58.0'
 )
 
-gnome = import('gnome')
-
 prefix = get_option('prefix')
 libdir = prefix / get_option('libdir')
 
 add_project_arguments('-DG_LOG_DOMAIN="io.elementary.panel.bsp"', language: 'c')
-
-gresource = gnome.compile_resources(
-    'panel-bsp-resources',
-    'data/gresource.xml',
-    source_dir: 'data'
-)
 
 wingpanel_dep = dependency('wingpanel-9', required: false)
 wingpanel_indicatorsdir = join_paths(prefix, get_option('libdir'), 'wingpanel-9')
@@ -31,12 +23,12 @@ granite_dep = dependency('granite', required: false)
 
 shared_module(
     meson.project_name(),
-    gresource,
     'src/GalaClient.vala',
     'src/HelpOverlay.vala',
     'src/Indicator.vala',
     dependencies: [
         dependency('gio-2.0'),
+        dependency('gee-0.8'),
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
         gtk_dep,

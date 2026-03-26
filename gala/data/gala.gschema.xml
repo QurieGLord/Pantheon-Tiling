@@ -322,6 +322,16 @@
       <summary>Workspace indices with BSP tiling enabled</summary>
       <description>Only used when the scope is set to 'workspace'.</description>
     </key>
+    <key type="b" name="master-enabled">
+      <default>true</default>
+      <summary>Whether BSP uses a dedicated master tile</summary>
+      <description>When disabled, all windows are distributed through the full BSP tree without reserving a master area.</description>
+    </key>
+    <key type="s" name="master-side">
+      <default>'left'</default>
+      <summary>Which side the BSP master tile occupies</summary>
+      <description>Supported values are 'left' and 'right'.</description>
+    </key>
     <key type="i" name="inner-gap">
       <default>0</default>
       <summary>Gap between tiled windows</summary>
