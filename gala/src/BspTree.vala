@@ -266,10 +266,7 @@ namespace Gala {
         }
 
         private void on_window_first_frame (Meta.Window window) {
-            log_window_event (window, "first-frame");
-            windows_waiting_for_first_frame.remove (window);
-            windows_with_first_frame.add (window);
-            schedule_initial_sync_after_settle (window);
+            mark_window_first_frame_ready (window, "signal");
         }
 
         private void on_grab_op_begin (Meta.Window window, Meta.GrabOp op) {
@@ -309,8 +306,12 @@ namespace Gala {
 
             if (windows_waiting_for_first_frame.contains (window)
                 && !windows_with_first_frame.contains (window)) {
-                log_window_event (window, "skip-queue/wait-first-frame");
-                return;
+                if (can_assume_first_frame_ready (window)) {
+                    mark_window_first_frame_ready (window, "fallback");
+                } else {
+                    log_window_event (window, "skip-queue/wait-first-frame");
+                    return;
+                }
             }
 
             if (windows_waiting_for_initial_settle.contains (window) && !window_groups.has_key (window)) {
@@ -326,8 +327,12 @@ namespace Gala {
         private void queue_initial_sync (Meta.Window window) {
             if (windows_waiting_for_first_frame.contains (window)
                 && !windows_with_first_frame.contains (window)) {
-                log_window_event (window, "wait-first-frame");
-                return;
+                if (can_assume_first_frame_ready (window)) {
+                    mark_window_first_frame_ready (window, "fallback");
+                } else {
+                    log_window_event (window, "wait-first-frame");
+                    return;
+                }
             }
 
             if (windows_waiting_for_initial_settle.contains (window)) {
@@ -859,6 +864,40 @@ namespace Gala {
                 && !NotificationStack.is_notification (window);
         }
 
+        private void mark_window_first_frame_ready (Meta.Window window, string reason) {
+            if (windows_with_first_frame.contains (window)) {
+                return;
+            }
+
+            windows_waiting_for_first_frame.remove (window);
+            windows_with_first_frame.add (window);
+            log_window_event (window, "first-frame", reason);
+            schedule_initial_sync_after_settle (window);
+        }
+
+        private bool can_assume_first_frame_ready (Meta.Window window) {
+            if (window.get_client_type () != Meta.WindowClientType.X11) {
+                return false;
+            }
+
+            var actor = window.get_compositor_private () as Meta.WindowActor;
+            if (actor == null || actor.is_destroyed ()) {
+                return false;
+            }
+
+            var frame_rect = window.get_frame_rect ();
+            var buffer_rect = window.get_buffer_rect ();
+            if (frame_rect.width <= 1 || frame_rect.height <= 1
+                || buffer_rect.width <= 1 || buffer_rect.height <= 1) {
+                return false;
+            }
+
+            float actor_width;
+            float actor_height;
+            actor.get_size (out actor_width, out actor_height);
+            return actor_width > 1.0f && actor_height > 1.0f;
+        }
+
         private void hook_window_actor (Meta.Window window) {
             if (first_frame_handlers.has_key (window)) {
                 return;
@@ -872,6 +911,16 @@ namespace Gala {
             first_frame_handlers[window] = actor.first_frame.connect (() => {
                 on_window_first_frame (window);
             });
+
+            if (can_assume_first_frame_ready (window)) {
+                Idle.add (() => {
+                    if (monitored_windows.contains (window)) {
+                        mark_window_first_frame_ready (window, "hook-fallback");
+                    }
+
+                    return Source.REMOVE;
+                });
+            }
         }
 
         public void prepare_window_actor_for_target_rect (Meta.Window window, Mtk.Rectangle target_frame_rect) {
