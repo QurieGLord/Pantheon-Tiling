@@ -7,6 +7,7 @@ GALA_BUILD_DIR="${GALA_BUILD_DIR:-$ROOT_DIR/gala/builddir}"
 PANEL_BUILD_DIR="${PANEL_BUILD_DIR:-$ROOT_DIR/panel-bsp/builddir}"
 RUN_GALA_TESTS="${RUN_GALA_TESTS:-1}"
 INSTALL_PANEL="${INSTALL_PANEL:-1}"
+WINGPANEL_PKG_CONFIG_NAME="${WINGPANEL_PKG_CONFIG_NAME:-}"
 
 msg() {
     printf '\n==> %s\n' "$1"
@@ -58,16 +59,25 @@ if [[ "$INSTALL_PANEL" == "0" ]]; then
     msg "Skipping panel-bsp"
 else
     msg "Configuring panel-bsp"
-    if ! pkg-config --exists wingpanel-9; then
+    if [[ -z "$WINGPANEL_PKG_CONFIG_NAME" ]]; then
+        if pkg-config --exists wingpanel-9; then
+            WINGPANEL_PKG_CONFIG_NAME="wingpanel-9"
+        elif pkg-config --exists wingpanel; then
+            WINGPANEL_PKG_CONFIG_NAME="wingpanel"
+        fi
+    fi
+
+    if [[ -z "$WINGPANEL_PKG_CONFIG_NAME" ]]; then
         cat >&2 <<'EOF'
-wingpanel-9 was not found via pkg-config.
+Neither wingpanel-9 nor wingpanel was found via pkg-config.
 
 Install a Wingpanel development package or export PKG_CONFIG_PATH so that
-the wingpanel-9.pc file is discoverable before running this script again.
+the appropriate Wingpanel .pc file is discoverable before running this script again.
 EOF
         exit 1
     fi
 
+    msg "Using Wingpanel pkg-config package: $WINGPANEL_PKG_CONFIG_NAME"
     ensure_meson_setup "$ROOT_DIR/panel-bsp" "$PANEL_BUILD_DIR"
 
     msg "Building panel-bsp"

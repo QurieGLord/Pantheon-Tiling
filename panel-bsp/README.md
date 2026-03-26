@@ -14,7 +14,7 @@ Current scope:
 
 ## Build
 
-This project expects the `wingpanel-9` development package to be available via `pkg-config`.
+This project expects a Wingpanel development package to be available via `pkg-config` under either `wingpanel-9` or `wingpanel`, depending on the target elementary OS release.
 
 ```bash
 meson setup builddir --prefix=/usr

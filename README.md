@@ -66,12 +66,12 @@ sudo apt install -y git build-essential meson ninja-build valac pkg-config gette
 
 For `gala`, install the same build dependencies you have already been using in the VM, including the correct `libmutter-*` development package for your elementary OS version.
 
-For `panel-bsp`, the important extra dependency is a Wingpanel development package exporting `wingpanel-9` through `pkg-config`.
+For `panel-bsp`, the important extra dependency is a Wingpanel development package exporting either `wingpanel-9` or `wingpanel` through `pkg-config`, depending on the target elementary OS release.
 
 You can verify that with:
 
 ```bash
-pkg-config --exists wingpanel-9 && echo ok
+pkg-config --exists wingpanel-9 && echo wingpanel-9 || pkg-config --exists wingpanel && echo wingpanel
 ```
 
 If it is missing, install the relevant `wingpanel` development package or point `PKG_CONFIG_PATH` at a local Wingpanel build.
