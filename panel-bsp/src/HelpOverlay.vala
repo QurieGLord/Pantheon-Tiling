@@ -10,11 +10,13 @@ namespace PanelBsp {
 
     public class HelpOverlay : Object {
         private GLib.Settings keybinding_settings;
+        private Gtk.Application? application;
         private Gtk.Window window;
         private Gee.HashMap<string, Gtk.Label> shortcut_labels = new Gee.HashMap<string, Gtk.Label> ();
 
-        public HelpOverlay (GLib.Settings keybinding_settings) {
+        public HelpOverlay (GLib.Settings keybinding_settings, Gtk.Application? application = null) {
             this.keybinding_settings = keybinding_settings;
+            this.application = application;
             window = build_window ();
 
             this.keybinding_settings.changed.connect (() => {
@@ -39,6 +41,10 @@ namespace PanelBsp {
                 modal = false,
                 window_position = Gtk.WindowPosition.CENTER
             };
+            if (application != null) {
+                help_window.application = application;
+            }
+
             help_window.set_type_hint (Gdk.WindowTypeHint.DIALOG);
             help_window.delete_event.connect (() => {
                 help_window.hide ();

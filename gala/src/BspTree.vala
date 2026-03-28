@@ -496,7 +496,7 @@ namespace Gala {
                 return false;
             }
 
-            return window.get_workspace () != null && window.get_monitor () >= 0;
+            return window.get_workspace () != null && resolve_window_monitor (window) >= 0;
         }
 
         public bool should_skip_map_animation (Meta.Window window) {
@@ -532,12 +532,17 @@ namespace Gala {
                 return false;
             }
 
+            var monitor = resolve_window_monitor (window);
+            if (monitor < 0) {
+                return false;
+            }
+
             var workspace = display.get_workspace_manager ().get_workspace_by_index (window.get_workspace ().index ());
             if (workspace == null) {
                 return false;
             }
 
-            var work_area = workspace.get_work_area_for_monitor (window.get_monitor ());
+            var work_area = workspace.get_work_area_for_monitor (monitor);
             work_area = apply_outer_gap (work_area);
             if (work_area.width <= 0 || work_area.height <= 0) {
                 return false;
@@ -761,6 +766,32 @@ namespace Gala {
             return true;
         }
 
+        public bool focus_window_on_monitor (int monitor) {
+            var workspace = display.get_workspace_manager ().get_active_workspace ();
+            if (workspace == null || monitor < 0) {
+                return false;
+            }
+
+            var group = groups[build_key (workspace.index (), monitor)];
+            if (group == null || group.layout.is_empty) {
+                return false;
+            }
+
+            Meta.Window? target = null;
+            if (group.active_window != null && window_groups[group.active_window] == group) {
+                target = group.active_window;
+            } else {
+                target = group.layout.get_any_tile () as Meta.Window;
+            }
+
+            if (target == null) {
+                return false;
+            }
+
+            target.activate (display.get_current_time ());
+            return true;
+        }
+
         public bool swap_focused_window_in_direction (Meta.MotionDirection direction) {
             return move_focused_window_in_direction (direction);
         }
@@ -969,7 +1000,12 @@ namespace Gala {
                 return null;
             }
 
-            return build_key (workspace.index (), window.get_monitor ());
+            var monitor = resolve_window_monitor (window);
+            if (monitor < 0) {
+                return null;
+            }
+
+            return build_key (workspace.index (), monitor);
         }
 
         private string build_key (int workspace_index, int monitor) {
@@ -988,7 +1024,7 @@ namespace Gala {
             }
 
             unowned var workspace = window.get_workspace ();
-            group = new BspGroup (workspace.index (), window.get_monitor (), key);
+            group = new BspGroup (workspace.index (), resolve_window_monitor (window), key);
             configure_layout (group.layout);
             groups[key] = group;
             return group;
@@ -1422,6 +1458,26 @@ namespace Gala {
 
         private void configure_layout (BspLayout layout) {
             layout.set_master_options (config.master_enabled, config.master_side == "left");
+        }
+
+        private int resolve_window_monitor (Meta.Window window) {
+            var frame_rect = window.get_frame_rect ();
+            if (frame_rect.width > 1 && frame_rect.height > 1) {
+                var rect_monitor = display.get_monitor_index_for_rect (frame_rect);
+                if (rect_monitor >= 0) {
+                    return rect_monitor;
+                }
+            }
+
+            var buffer_rect = window.get_buffer_rect ();
+            if (buffer_rect.width > 1 && buffer_rect.height > 1) {
+                var rect_monitor = display.get_monitor_index_for_rect (buffer_rect);
+                if (rect_monitor >= 0) {
+                    return rect_monitor;
+                }
+            }
+
+            return window.get_monitor ();
         }
 
         private bool is_workspace_enabled (Meta.Workspace? workspace) {

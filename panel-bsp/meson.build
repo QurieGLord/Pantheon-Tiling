@@ -20,21 +20,29 @@ endif
 
 gtk_dep = dependency('gtk+-3.0')
 granite_dep = dependency('granite', required: false)
+common_deps = [
+    dependency('gio-2.0'),
+    dependency('gee-0.8'),
+    dependency('glib-2.0'),
+    dependency('gobject-2.0'),
+    gtk_dep,
+    granite_dep
+]
 
 shared_module(
     meson.project_name(),
     'src/GalaClient.vala',
     'src/HelpOverlay.vala',
     'src/Indicator.vala',
-    dependencies: [
-        dependency('gio-2.0'),
-        dependency('gee-0.8'),
-        dependency('glib-2.0'),
-        dependency('gobject-2.0'),
-        gtk_dep,
-        granite_dep,
-        wingpanel_dep
-    ],
+    dependencies: common_deps + [wingpanel_dep],
     install: true,
     install_dir: wingpanel_indicatorsdir
+)
+
+executable(
+    'panel-bsp-help',
+    'src/HelpOverlay.vala',
+    'src/HelpMain.vala',
+    dependencies: common_deps,
+    install: true
 )

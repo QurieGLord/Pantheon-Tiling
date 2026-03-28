@@ -741,8 +741,9 @@ namespace Gala {
                 return;
             }
 
-            var target_monitor = get_monitor_in_direction (window.get_monitor (), direction);
-            if (target_monitor < 0 || target_monitor == window.get_monitor ()) {
+            var origin_monitor = get_window_monitor (window);
+            var target_monitor = get_monitor_in_direction (origin_monitor, direction);
+            if (target_monitor < 0 || target_monitor == origin_monitor) {
                 InternalUtils.bell_notify (display);
                 return;
             }
@@ -755,11 +756,21 @@ namespace Gala {
                 return false;
             }
 
-            if (!bsp_tree.focus_in_direction (direction)) {
-                InternalUtils.bell_notify (display);
+            if (bsp_tree.focus_in_direction (direction)) {
+                return true;
             }
 
-            return true;
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var target_monitor = get_monitor_in_direction (get_window_monitor (focus_window), direction);
+            if (target_monitor < 0) {
+                return false;
+            }
+
+            return bsp_tree.focus_window_on_monitor (target_monitor);
         }
 
         private bool try_handle_bsp_swap_binding (Meta.Display display, Meta.MotionDirection direction) {
@@ -767,11 +778,7 @@ namespace Gala {
                 return false;
             }
 
-            if (!bsp_tree.move_focused_window_in_direction (direction)) {
-                InternalUtils.bell_notify (display);
-            }
-
-            return true;
+            return bsp_tree.move_focused_window_in_direction (direction);
         }
 
         private Meta.MotionDirection? keybinding_name_to_direction (string name) {
@@ -859,6 +866,18 @@ namespace Gala {
             }
 
             return best_monitor;
+        }
+
+        private int get_window_monitor (Meta.Window window) {
+            var frame_rect = window.get_frame_rect ();
+            if (frame_rect.width > 1 && frame_rect.height > 1) {
+                var frame_monitor = get_display ().get_monitor_index_for_rect (frame_rect);
+                if (frame_monitor >= 0) {
+                    return frame_monitor;
+                }
+            }
+
+            return window.get_monitor ();
         }
 
         private void handle_switch_to_workspace_end (Meta.Display display, Meta.Window? window,

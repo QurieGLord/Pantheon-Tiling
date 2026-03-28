@@ -2,12 +2,12 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
     private const string BSP_SCHEMA = "io.elementary.desktop.wm.bsp";
     private const string BEHAVIOR_SCHEMA = "io.elementary.desktop.wm.behavior";
     private const string KEYBINDINGS_SCHEMA = "io.elementary.desktop.wm.keybindings";
+    private const string HELP_BINARY = "panel-bsp-help";
 
     private GalaClient gala_client;
     private GLib.Settings bsp_settings;
     private GLib.Settings behavior_settings;
     private GLib.Settings keybinding_settings;
-    private HelpOverlay? help_overlay = null;
 
     private Gtk.Image display_icon;
     private Gtk.Box? popover_widget = null;
@@ -316,11 +316,7 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         help_button = new Gtk.Button.with_label ("Keyboard Shortcuts and Help...");
         help_button.halign = Gtk.Align.FILL;
         help_button.clicked.connect (() => {
-            if (help_overlay == null) {
-                help_overlay = new HelpOverlay (keybinding_settings);
-            }
-
-            help_overlay.present ();
+            launch_help_overlay ();
         });
         content.pack_start (help_button, false, false, 0);
 
@@ -465,6 +461,21 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         });
 
         return button;
+    }
+
+    private void launch_help_overlay () {
+        var helper_path = Environment.find_program_in_path (HELP_BINARY);
+        if (helper_path == null || helper_path == "") {
+            helper_path = "/usr/bin/%s".printf (HELP_BINARY);
+        }
+
+        try {
+            string[] argv = { helper_path, null };
+            Pid child_pid;
+            Process.spawn_async (null, argv, null, SpawnFlags.SEARCH_PATH, null, out child_pid);
+        } catch (Error e) {
+            warning ("Failed to launch BSP help overlay: %s", e.message);
+        }
     }
 
     private void refresh_ui () {
