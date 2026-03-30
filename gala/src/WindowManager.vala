@@ -144,6 +144,9 @@ namespace Gala {
         private Gee.HashMap<Meta.WindowActor, BspRevealRequest> bsp_reveal_requests = new Gee.HashMap<Meta.WindowActor, BspRevealRequest> ();
         private Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> bsp_flow_animation_requests = new Gee.HashMap<Meta.WindowActor, BspFlowAnimationRequest> ();
         private Gee.HashMap<Meta.WindowActor, Clutter.Actor> bsp_flow_snapshots = new Gee.HashMap<Meta.WindowActor, Clutter.Actor> ();
+        private Gee.HashSet<Meta.WindowActor> bsp_frame_clipped_actors = new Gee.HashSet<Meta.WindowActor> ();
+        private Gee.HashMap<Meta.WindowActor, uint> bsp_frame_clip_timeout_ids = new Gee.HashMap<Meta.WindowActor, uint> ();
+        private Gee.HashMap<Meta.WindowActor, uint> bsp_cross_monitor_restore_ids = new Gee.HashMap<Meta.WindowActor, uint> ();
         private Gee.HashSet<Meta.WindowActor> destroying = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> unminimizing = new Gee.HashSet<Meta.WindowActor> ();
         private Gee.HashSet<Meta.WindowActor> bypassing_size_change_effects = new Gee.HashSet<Meta.WindowActor> ();
@@ -536,7 +539,10 @@ namespace Gala {
             });
 
             display.window_created.connect ((window) => {
-                if (!bsp_tree.should_skip_map_animation (window)) {
+                var is_bsp_window = bsp_tree.should_skip_map_animation (window);
+                log_bsp_map_path ("window-created", window, is_bsp_window);
+
+                if (!is_bsp_window) {
                     return;
                 }
 
@@ -545,7 +551,9 @@ namespace Gala {
                         return;
                     }
 
+                    log_bsp_actor_state ("actor-ready-before-redraw", window_actor);
                     window_actor.opacity = 0U;
+                    log_bsp_actor_state ("actor-force-transparent-before-redraw", window_actor);
                 });
             });
 
@@ -745,6 +753,12 @@ namespace Gala {
             var target_monitor = get_monitor_in_direction (origin_monitor, direction);
             if (target_monitor < 0 || target_monitor == origin_monitor) {
                 InternalUtils.bell_notify (display);
+                return;
+            }
+
+            if (bsp_tree.is_enabled_for_active_workspace ()
+                && bsp_tree.is_window_tiled (window)
+                && bsp_tree.move_focused_window_to_monitor (target_monitor)) {
                 return;
             }
 
@@ -1500,7 +1514,7 @@ namespace Gala {
             old_rect_size_change = old_frame_rect;
 
             if (bsp_tree.should_skip_size_change_animation (actor.get_meta_window ())) {
-                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                if (is_bsp_debug_enabled ()) {
                     message (
                         "[BSP] bypass-size-change title=\"%s\" change=%d old-frame=(%d,%d %dx%d)",
                         actor.get_meta_window ().title ?? "(untitled)",
@@ -1529,7 +1543,7 @@ namespace Gala {
         // size_changed gets called after frame_rect has updated
         public override void size_changed (Meta.WindowActor actor) {
             if (bypassing_size_change_effects.remove (actor)) {
-                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+                if (is_bsp_debug_enabled ()) {
                     var new_rect = actor.get_meta_window ().get_frame_rect ();
                     message (
                         "[BSP] bypass-size-changed title=\"%s\" frame=(%d,%d %dx%d)",
@@ -1774,8 +1788,23 @@ namespace Gala {
             var has_bsp_target_rect = false;
             var defer_bsp_map_reveal = false;
 
+            log_bsp_map_path ("map", window, is_bsp_window);
+
             if (is_bsp_window) {
+                bsp_tree.queue_map_reveal (window);
                 has_bsp_target_rect = bsp_tree.try_get_initial_frame_rect (window, out bsp_target_rect);
+                log_bsp_map_path (
+                    "map/target",
+                    window,
+                    is_bsp_window,
+                    "has-target=%s target=(%d,%d %dx%d)".printf (
+                        has_bsp_target_rect ? "true" : "false",
+                        bsp_target_rect.x,
+                        bsp_target_rect.y,
+                        bsp_target_rect.width,
+                        bsp_target_rect.height
+                    )
+                );
             }
 
             actor.remove_all_transitions ();
@@ -1784,10 +1813,42 @@ namespace Gala {
                 actor.opacity = 0U;
             }
 
-            actor.show ();
-
-            if (has_bsp_target_rect) {
+            if (has_bsp_target_rect
+                && !(is_bsp_window
+                    && Meta.Prefs.get_gnome_animations ()
+                    && !NotificationStack.is_notification (window))) {
                 bsp_tree.prepare_window_actor_for_target_rect (window, bsp_target_rect);
+            }
+
+            if (is_bsp_window
+                && has_bsp_target_rect
+                && Meta.Prefs.get_gnome_animations ()
+                && !NotificationStack.is_notification (window)) {
+                defer_bsp_map_reveal = true;
+                pending_bsp_map_reveals.add (actor);
+
+                if (is_bsp_debug_enabled ()) {
+                    message (
+                        "[BSP] map-defer title=\"%s\" has-target=%s target=(%d,%d %dx%d)",
+                        window.title ?? "(untitled)",
+                        has_bsp_target_rect ? "true" : "false",
+                        bsp_target_rect.x,
+                        bsp_target_rect.y,
+                        bsp_target_rect.width,
+                        bsp_target_rect.height
+                    );
+                }
+
+                log_bsp_map_path ("map/defer-wait-target-ready", window, true);
+                log_bsp_actor_state ("map/deferred-show", actor);
+            } else {
+                if (is_bsp_window) {
+                    bsp_tree.cancel_map_reveal (window);
+                }
+
+                log_bsp_actor_state ("map/pre-show", actor);
+                actor.show ();
+                log_bsp_actor_state ("map/post-show", actor);
             }
 
             // Notifications initial animation is handled by the notification stack
@@ -1803,24 +1864,6 @@ namespace Gala {
                 dim_parent_window (window);
                 map_completed (actor);
                 return;
-            }
-
-            if (is_bsp_window) {
-                defer_bsp_map_reveal = true;
-                pending_bsp_map_reveals.add (actor);
-                bsp_tree.queue_map_reveal (window);
-
-                if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
-                    message (
-                        "[BSP] map-defer title=\"%s\" has-target=%s target=(%d,%d %dx%d)",
-                        window.title ?? "(untitled)",
-                        has_bsp_target_rect ? "true" : "false",
-                        bsp_target_rect.x,
-                        bsp_target_rect.y,
-                        bsp_target_rect.width,
-                        bsp_target_rect.height
-                    );
-                }
             }
 
             if (defer_bsp_map_reveal) {
@@ -1842,8 +1885,11 @@ namespace Gala {
             }
 
             bsp_tree.prepare_window_actor_for_target_rect (window, rect);
+            apply_bsp_frame_clip (actor, window, rect, "map-target");
             actor.opacity = 0U;
+            log_bsp_actor_state ("target-ready/pre-show", actor);
             actor.show ();
+            log_bsp_actor_state ("target-ready/post-show", actor);
 
             queue_bsp_reveal_after_damage (actor, window, rect);
         }
@@ -1864,6 +1910,33 @@ namespace Gala {
             }
 
             clear_bsp_flow_snapshot (actor, true);
+
+            var old_monitor = get_display ().get_monitor_index_for_rect (old_rect);
+            var new_monitor = get_display ().get_monitor_index_for_rect (new_rect);
+            if (old_monitor >= 0 && new_monitor >= 0 && old_monitor != new_monitor) {
+                if (is_bsp_debug_enabled ()) {
+                    message (
+                        "[BSP] reflow-cross-monitor-snap title=\"%s\" old-monitor=%d new-monitor=%d old=(%d,%d %dx%d) new=(%d,%d %dx%d)",
+                        window.title ?? "(untitled)",
+                        old_monitor,
+                        new_monitor,
+                        old_rect.x,
+                        old_rect.y,
+                        old_rect.width,
+                        old_rect.height,
+                        new_rect.x,
+                        new_rect.y,
+                        new_rect.width,
+                        new_rect.height
+                    );
+                }
+
+                actor.opacity = 0U;
+                bsp_tree.prepare_window_actor_for_target_rect (window, new_rect);
+                apply_bsp_frame_clip (actor, window, new_rect, "cross-monitor-correct");
+                schedule_bsp_cross_monitor_restore (actor, BSP_REVEAL_FALLBACK_MS + 20);
+                return;
+            }
 
             Clutter.Actor? snapshot = null;
             if (old_rect.width > 0 && old_rect.height > 0) {
@@ -1932,6 +2005,9 @@ namespace Gala {
                 request.old_rect.y - request.new_rect.y,
                 0.0f
             );
+
+            apply_bsp_frame_clip (actor, actor.get_meta_window (), request.new_rect, "reflow-target");
+            schedule_bsp_frame_clip_clear (actor, BSP_FLOW_ANIMATION_DURATION_MS + 40);
         }
 
         private void animate_bsp_reflow (Meta.WindowActor actor, BspFlowAnimationRequest request) {
@@ -1999,7 +2075,7 @@ namespace Gala {
                 return;
             }
 
-            if (Environment.get_variable ("GALA_BSP_DEBUG") == "1") {
+            if (is_bsp_debug_enabled ()) {
                 message (
                     "[BSP] reveal-map title=\"%s\" target=(%d,%d %dx%d) reason=%s",
                     request.window.title ?? "(untitled)",
@@ -2011,6 +2087,8 @@ namespace Gala {
                 );
             }
 
+            log_bsp_actor_state ("reveal-entry", actor);
+            bsp_tree.complete_map_reveal (request.window);
             mapping.add (actor);
             animate_map.begin (actor);
         }
@@ -2034,6 +2112,122 @@ namespace Gala {
             bsp_reveal_requests.unset (actor);
         }
 
+        private void apply_bsp_frame_clip (Meta.WindowActor actor, Meta.Window window, Mtk.Rectangle target_frame_rect, string reason) {
+            if (actor == null || actor.is_destroyed ()) {
+                return;
+            }
+
+            clear_bsp_frame_clip_timeout (actor);
+
+            var frame_rect = window.get_frame_rect ();
+            var buffer_rect = window.get_buffer_rect ();
+            var buffer_offset_x = buffer_rect.x - frame_rect.x;
+            var buffer_offset_y = buffer_rect.y - frame_rect.y;
+            var buffer_width_delta = buffer_rect.width - frame_rect.width;
+            var buffer_height_delta = buffer_rect.height - frame_rect.height;
+            var target_buffer_x = target_frame_rect.x + buffer_offset_x;
+            var target_buffer_y = target_frame_rect.y + buffer_offset_y;
+            var target_buffer_width = int.max (1, target_frame_rect.width + buffer_width_delta);
+            var target_buffer_height = int.max (1, target_frame_rect.height + buffer_height_delta);
+            var clip_x = (float) (target_frame_rect.x - target_buffer_x);
+            var clip_y = (float) (target_frame_rect.y - target_buffer_y);
+            var clip_width = (float) target_frame_rect.width;
+            var clip_height = (float) target_frame_rect.height;
+            var target_monitor = get_display ().get_monitor_index_for_rect (target_frame_rect);
+            var monitor_rect = get_display ().get_monitor_geometry (target_monitor);
+            var spill_left = int.max (0, monitor_rect.x - target_buffer_x);
+            var spill_right = int.max (0, (target_buffer_x + target_buffer_width) - (monitor_rect.x + monitor_rect.width));
+            var spill_top = int.max (0, monitor_rect.y - target_buffer_y);
+            var spill_bottom = int.max (0, (target_buffer_y + target_buffer_height) - (monitor_rect.y + monitor_rect.height));
+
+            actor.set_clip (clip_x, clip_y, clip_width, clip_height);
+            bsp_frame_clipped_actors.add (actor);
+
+            log_bsp_actor_state (
+                "frame-clip",
+                actor,
+                "reason=%s frame-target=(%d,%d %dx%d) buffer-target=(%d,%d %dx%d) clip=(%.1f,%.1f %.1fx%.1f) monitor=%d geom=(%d,%d %dx%d) spill-monitor=(l=%d r=%d t=%d b=%d)".printf (
+                    reason,
+                    target_frame_rect.x,
+                    target_frame_rect.y,
+                    target_frame_rect.width,
+                    target_frame_rect.height,
+                    target_buffer_x,
+                    target_buffer_y,
+                    target_buffer_width,
+                    target_buffer_height,
+                    clip_x,
+                    clip_y,
+                    clip_width,
+                    clip_height,
+                    target_monitor,
+                    monitor_rect.x,
+                    monitor_rect.y,
+                    monitor_rect.width,
+                    monitor_rect.height,
+                    spill_left,
+                    spill_right,
+                    spill_top,
+                    spill_bottom
+                )
+            );
+        }
+
+        private void schedule_bsp_frame_clip_clear (Meta.WindowActor actor, uint delay_ms) {
+            clear_bsp_frame_clip_timeout (actor);
+
+            bsp_frame_clip_timeout_ids[actor] = Timeout.add (delay_ms, () => {
+                clear_bsp_frame_clip (actor);
+                return Source.REMOVE;
+            });
+        }
+
+        private void clear_bsp_frame_clip_timeout (Meta.WindowActor actor) {
+            var timeout_id = bsp_frame_clip_timeout_ids[actor];
+            if (timeout_id == 0) {
+                return;
+            }
+
+            Source.remove (timeout_id);
+            bsp_frame_clip_timeout_ids.unset (actor);
+        }
+
+        private void clear_bsp_frame_clip (Meta.WindowActor actor) {
+            clear_bsp_frame_clip_timeout (actor);
+
+            if (actor == null || actor.is_destroyed () || !bsp_frame_clipped_actors.remove (actor)) {
+                return;
+            }
+
+            actor.remove_clip ();
+            log_bsp_actor_state ("frame-unclip", actor);
+        }
+
+        private void schedule_bsp_cross_monitor_restore (Meta.WindowActor actor, uint delay_ms) {
+            clear_bsp_cross_monitor_restore (actor, false);
+
+            bsp_cross_monitor_restore_ids[actor] = Timeout.add (delay_ms, () => {
+                clear_bsp_cross_monitor_restore (actor, true);
+                return Source.REMOVE;
+            });
+        }
+
+        private void clear_bsp_cross_monitor_restore (Meta.WindowActor actor, bool restore_actor) {
+            var timeout_id = bsp_cross_monitor_restore_ids[actor];
+            if (timeout_id != 0) {
+                Source.remove (timeout_id);
+                bsp_cross_monitor_restore_ids.unset (actor);
+            }
+
+            if (!restore_actor || actor == null || actor.is_destroyed ()) {
+                return;
+            }
+
+            actor.opacity = 255U;
+            log_bsp_actor_state ("cross-monitor-restore", actor);
+            clear_bsp_frame_clip (actor);
+        }
+
         private void clear_bsp_flow_snapshot (Meta.WindowActor actor, bool restore_actor_visibility = true) {
             var snapshot = bsp_flow_snapshots[actor];
             if (snapshot != null) {
@@ -2052,10 +2246,88 @@ namespace Gala {
             }
         }
 
+        private bool is_bsp_debug_enabled () {
+            return Environment.get_variable ("GALA_BSP_DEBUG") == "1";
+        }
+
+        private string get_bsp_workspace_debug_string (Meta.Window window, bool effective = false) {
+            Meta.Workspace? workspace = window.get_workspace ();
+            if (effective && workspace == null) {
+                workspace = get_display ().get_workspace_manager ().get_active_workspace ();
+            }
+
+            return workspace != null ? workspace.index ().to_string () : "null";
+        }
+
+        private void log_bsp_map_path (string event, Meta.Window window, bool is_bsp_window, string extra = "") {
+            if (!is_bsp_debug_enabled ()) {
+                return;
+            }
+
+            var suffix = extra != "" ? " %s".printf (extra) : "";
+            message (
+                "[BSP] %s title=\"%s\" is-bsp=%s workspace=%s effective-workspace=%s raw-monitor=%d type=%d allows-move=%s allows-resize=%s transient=%s floating=%s%s",
+                event,
+                window.title ?? "(untitled)",
+                is_bsp_window ? "true" : "false",
+                get_bsp_workspace_debug_string (window),
+                get_bsp_workspace_debug_string (window, true),
+                window.get_monitor (),
+                (int) window.window_type,
+                window.allows_move () ? "true" : "false",
+                window.allows_resize () ? "true" : "false",
+                window.get_transient_for () != null ? "true" : "false",
+                bsp_tree.is_window_floating (window) ? "true" : "false",
+                suffix
+            );
+        }
+
+        private void log_bsp_actor_state (string event, Meta.WindowActor actor, string extra = "") {
+            if (!is_bsp_debug_enabled () || actor == null || actor.is_destroyed ()) {
+                return;
+            }
+
+            unowned var window = actor.get_meta_window ();
+            var frame_rect = window.get_frame_rect ();
+            var buffer_rect = window.get_buffer_rect ();
+            float actor_width = 0.0f;
+            float actor_height = 0.0f;
+            actor.get_size (out actor_width, out actor_height);
+
+            var suffix = extra != "" ? " %s".printf (extra) : "";
+            message (
+                "[BSP] %s title=\"%s\" visible=%s opacity=%u frame=(%d,%d %dx%d) buffer=(%d,%d %dx%d) actor=(%.1f,%.1f %.1fx%.1f scale=%.3f/%.3f trans=%.1f/%.1f) pending-reveal=%s mapping=%s%s",
+                event,
+                window.title ?? "(untitled)",
+                actor.visible ? "true" : "false",
+                actor.opacity,
+                frame_rect.x,
+                frame_rect.y,
+                frame_rect.width,
+                frame_rect.height,
+                buffer_rect.x,
+                buffer_rect.y,
+                buffer_rect.width,
+                buffer_rect.height,
+                actor.x,
+                actor.y,
+                actor_width,
+                actor_height,
+                actor.scale_x,
+                actor.scale_y,
+                actor.translation_x,
+                actor.translation_y,
+                pending_bsp_map_reveals.contains (actor) ? "true" : "false",
+                mapping.contains (actor) ? "true" : "false",
+                suffix
+            );
+        }
+
         private async void animate_map (Meta.WindowActor actor) {
             var window = actor.meta_window;
 
             mapping.add (actor);
+            log_bsp_actor_state ("animate-map/start", actor);
 
             switch (window.window_type) {
                 case Meta.WindowType.NORMAL:
@@ -2097,6 +2369,8 @@ namespace Gala {
                     break;
             }
 
+            log_bsp_actor_state ("animate-map/end", actor);
+            clear_bsp_frame_clip (actor);
             mapping.remove (actor);
             map_completed (actor);
         }
@@ -2107,6 +2381,8 @@ namespace Gala {
             actor.remove_all_transitions ();
             pending_bsp_map_reveals.remove (actor);
             clear_bsp_reveal_request (actor);
+            clear_bsp_cross_monitor_restore (actor, false);
+            clear_bsp_frame_clip (actor);
             clear_bsp_flow_snapshot (actor, false);
             bsp_flow_animation_requests.unset (actor);
             bsp_tree.cancel_map_reveal (window);
@@ -2280,6 +2556,8 @@ namespace Gala {
             end_animation (ref destroying, actor);
             end_animation (ref unmaximizing, actor);
             end_animation (ref maximizing, actor);
+            clear_bsp_cross_monitor_restore (actor, false);
+            clear_bsp_frame_clip (actor);
             clear_bsp_flow_snapshot (actor);
             bsp_flow_animation_requests.unset (actor);
         }

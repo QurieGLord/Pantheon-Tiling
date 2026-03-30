@@ -1,4 +1,7 @@
 namespace Gala {
+    [CCode (cname = "meta_window_is_always_on_all_workspaces", cheader_filename = "meta/window.h")]
+    private extern bool meta_window_is_always_on_all_workspaces (Meta.Window window);
+
     private class BspGroup : Object {
         public int workspace_index;
         public int monitor;
@@ -57,7 +60,6 @@ namespace Gala {
 
         private Meta.Display display;
         private GLib.Settings settings;
-        private bool debug_enabled = Environment.get_variable ("GALA_BSP_DEBUG") == "1";
         private Gee.HashMap<string, BspGroup> groups = new Gee.HashMap<string, BspGroup> ();
         private Gee.HashMap<Meta.Window, BspGroup> window_groups = new Gee.HashMap<Meta.Window, BspGroup> ();
         private Gee.HashMap<Meta.Window, ulong> first_frame_handlers = new Gee.HashMap<Meta.Window, ulong> ();
@@ -65,6 +67,8 @@ namespace Gala {
         private Gee.HashMap<Meta.Window, Meta.Window> interactive_swap_targets = new Gee.HashMap<Meta.Window, Meta.Window> ();
         private Gee.HashMap<Meta.Window, BspPendingFrameRequest> pending_frame_requests = new Gee.HashMap<Meta.Window, BspPendingFrameRequest> ();
         private Gee.HashMap<Meta.Window, BspWindowMinimumSize> observed_minimum_sizes = new Gee.HashMap<Meta.Window, BspWindowMinimumSize> ();
+        private Gee.HashMap<Meta.Window, int> window_initial_monitor_overrides = new Gee.HashMap<Meta.Window, int> ();
+        private Gee.HashMap<Meta.Window, int> window_monitor_hints = new Gee.HashMap<Meta.Window, int> ();
         private Gee.HashSet<Meta.Window> monitored_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> floating_windows = new Gee.HashSet<Meta.Window> ();
         private Gee.HashSet<Meta.Window> pending_windows = new Gee.HashSet<Meta.Window> ();
@@ -92,8 +96,8 @@ namespace Gala {
             settings.changed.connect (on_settings_changed);
 
             display.window_created.connect (monitor_window);
-            display.window_entered_monitor.connect (on_window_monitor_changed);
-            display.window_left_monitor.connect (on_window_monitor_changed);
+            display.window_entered_monitor.connect (on_window_entered_monitor);
+            display.window_left_monitor.connect (on_window_left_monitor);
             display.workareas_changed.connect (queue_relayout_all_groups);
             display.notify["focus-window"].connect (update_active_window);
             display.grab_op_begin.connect (on_grab_op_begin);
@@ -107,6 +111,10 @@ namespace Gala {
             foreach (var window in display.list_all_windows ()) {
                 monitor_existing_window (window);
             }
+        }
+
+        private bool is_debug_enabled () {
+            return Environment.get_variable ("GALA_BSP_DEBUG") == "1";
         }
 
         private void monitor_window (Meta.Window window) {
@@ -125,9 +133,16 @@ namespace Gala {
             monitored_windows.add (window);
             log_window_event (window, "monitor");
 
+            if (!existing_window) {
+                var initial_monitor = capture_preferred_initial_monitor (window);
+                if (initial_monitor >= 0) {
+                    window_initial_monitor_overrides[window] = initial_monitor;
+                }
+            }
+
             window.notify.connect (on_window_notify);
-            window.position_changed.connect (on_window_geometry_changed);
-            window.size_changed.connect (on_window_geometry_changed);
+            window.position_changed.connect (on_window_position_changed);
+            window.size_changed.connect (on_window_size_changed);
             window.shown.connect (on_window_shown);
             window.workspace_changed.connect (on_window_workspace_changed);
             window.unmanaging.connect (on_window_unmanaging);
@@ -154,6 +169,17 @@ namespace Gala {
             hook_window_actor (window);
             windows_waiting_for_first_frame.add (window);
 
+            if (window.get_client_type () == Meta.WindowClientType.X11
+                && is_potential_tile_candidate (window)) {
+                Idle.add (() => {
+                    if (monitored_windows.contains (window)) {
+                        mark_window_first_frame_ready (window, "shown-fallback");
+                    }
+
+                    return Source.REMOVE;
+                });
+            }
+
             Idle.add (() => {
                 if (monitored_windows.contains (window)) {
                     queue_initial_sync (window);
@@ -169,8 +195,8 @@ namespace Gala {
             }
 
             window.notify.disconnect (on_window_notify);
-            window.position_changed.disconnect (on_window_geometry_changed);
-            window.size_changed.disconnect (on_window_geometry_changed);
+            window.position_changed.disconnect (on_window_position_changed);
+            window.size_changed.disconnect (on_window_size_changed);
             window.shown.disconnect (on_window_shown);
             window.workspace_changed.disconnect (on_window_workspace_changed);
             window.unmanaging.disconnect (on_window_unmanaging);
@@ -184,6 +210,8 @@ namespace Gala {
             windows_waiting_for_initial_settle.remove (window);
             windows_waiting_for_map_reveal.remove (window);
             floating_windows.remove (window);
+            window_initial_monitor_overrides.unset (window);
+            window_monitor_hints.unset (window);
             remove_ready_placement (window);
             clear_pending_frame_request (window);
             observed_minimum_sizes.unset (window);
@@ -222,10 +250,21 @@ namespace Gala {
         }
 
         private void on_window_workspace_changed (Meta.Window window) {
+            log_window_event (window, "workspace-changed");
             queue_sync_window (window);
         }
 
-        private void on_window_geometry_changed (Meta.Window window) {
+        private void on_window_position_changed (Meta.Window window) {
+            on_window_geometry_changed (window, "position-changed");
+        }
+
+        private void on_window_size_changed (Meta.Window window) {
+            on_window_geometry_changed (window, "size-changed");
+        }
+
+        private void on_window_geometry_changed (Meta.Window window, string source) {
+            log_window_event (window, source);
+
             var pending_request = pending_frame_requests[window];
             if (pending_request != null) {
                 var frame_rect = window.get_frame_rect ();
@@ -244,6 +283,12 @@ namespace Gala {
 
             var group = window_groups[window];
             if (group != null) {
+                var resolved_monitor = resolve_window_monitor (window);
+                if (resolved_monitor >= 0 && resolved_monitor != group.monitor) {
+                    queue_sync_window (window);
+                    return;
+                }
+
                 dirty_groups.add (group.key);
                 schedule_flush ();
                 return;
@@ -261,8 +306,42 @@ namespace Gala {
             unmonitor_window (window);
         }
 
-        private void on_window_monitor_changed (Meta.Display display, int monitor, Meta.Window window) {
+        private void on_window_entered_monitor (Meta.Display display, int monitor, Meta.Window window) {
+            if (should_ignore_monitor_transition (window, monitor, "entered-monitor")) {
+                return;
+            }
+
+            log_window_event (window, "entered-monitor", "event-monitor=%d".printf (monitor));
+            if (monitor >= 0) {
+                window_monitor_hints[window] = monitor;
+                if (!window_groups.has_key (window)) {
+                    window_initial_monitor_overrides[window] = monitor;
+                }
+            }
+
             queue_sync_window (window);
+        }
+
+        private void on_window_left_monitor (Meta.Display display, int monitor, Meta.Window window) {
+            if (should_ignore_monitor_transition (window, monitor, "left-monitor")) {
+                return;
+            }
+
+            log_window_event (window, "left-monitor", "event-monitor=%d".printf (monitor));
+            if (window_monitor_hints.has_key (window) && window_monitor_hints[window] == monitor) {
+                window_monitor_hints.unset (window);
+            }
+
+            queue_sync_window (window);
+        }
+
+        private bool should_ignore_monitor_transition (Meta.Window window, int monitor, string event) {
+            if (!should_hold_window_monitor_to_group (window)) {
+                return false;
+            }
+
+            log_window_event (window, "%s/ignored".printf (event), "event-monitor=%d".printf (monitor));
+            return true;
         }
 
         private void on_window_first_frame (Meta.Window window) {
@@ -307,7 +386,12 @@ namespace Gala {
             if (windows_waiting_for_first_frame.contains (window)
                 && !windows_with_first_frame.contains (window)) {
                 if (can_assume_first_frame_ready (window)) {
-                    mark_window_first_frame_ready (window, "fallback");
+                    mark_window_first_frame_ready (
+                        window,
+                        windows_waiting_for_map_reveal.contains (window)
+                            ? "deferred-map-fallback"
+                            : "fallback"
+                    );
                 } else {
                     log_window_event (window, "skip-queue/wait-first-frame");
                     return;
@@ -328,7 +412,12 @@ namespace Gala {
             if (windows_waiting_for_first_frame.contains (window)
                 && !windows_with_first_frame.contains (window)) {
                 if (can_assume_first_frame_ready (window)) {
-                    mark_window_first_frame_ready (window, "fallback");
+                    mark_window_first_frame_ready (
+                        window,
+                        windows_waiting_for_map_reveal.contains (window)
+                            ? "deferred-map-fallback"
+                            : "fallback"
+                    );
                 } else {
                     log_window_event (window, "wait-first-frame");
                     return;
@@ -500,15 +589,21 @@ namespace Gala {
         }
 
         public bool should_skip_map_animation (Meta.Window window) {
-            return should_manage_window (window);
+            var reason = get_window_gate_rejection_reason (window, true);
+            var should_skip = reason == "";
+            log_window_gate ("should-skip-map-animation", window, should_skip, true, reason);
+            return should_skip;
         }
 
         public void queue_map_reveal (Meta.Window window) {
-            if (!should_manage_window (window)) {
+            var reason = get_window_gate_rejection_reason (window, true);
+            if (reason != "") {
+                log_window_gate ("queue-map-reveal", window, false, true, reason);
                 return;
             }
 
             windows_waiting_for_map_reveal.add (window);
+            log_window_gate ("queue-map-reveal", window, true, true);
             log_window_event (window, "queue-map-reveal");
         }
 
@@ -520,31 +615,41 @@ namespace Gala {
             remove_ready_placement (window);
         }
 
+        public void complete_map_reveal (Meta.Window window) {
+            windows_waiting_for_map_reveal.remove (window);
+        }
+
         public bool try_get_initial_frame_rect (Meta.Window window, out Mtk.Rectangle rect) {
             rect = { 0, 0, 0, 0 };
 
-            if (!should_manage_window (window)) {
+            var reason = get_window_gate_rejection_reason (window, true);
+            if (reason != "") {
+                log_window_gate ("try-get-initial-frame-rect", window, false, true, reason);
                 return false;
             }
 
-            var target_key = get_group_key (window);
+            var target_key = get_group_key (window, true);
             if (target_key == null) {
+                log_window_event (window, "initial-frame/no-group-key");
                 return false;
             }
 
             var monitor = resolve_window_monitor (window);
             if (monitor < 0) {
+                log_window_event (window, "initial-frame/no-monitor");
                 return false;
             }
 
-            var workspace = display.get_workspace_manager ().get_workspace_by_index (window.get_workspace ().index ());
+            var workspace = resolve_effective_workspace (window);
             if (workspace == null) {
+                log_window_event (window, "initial-frame/no-workspace");
                 return false;
             }
 
             var work_area = workspace.get_work_area_for_monitor (monitor);
             work_area = apply_outer_gap (work_area);
             if (work_area.width <= 0 || work_area.height <= 0) {
+                log_window_event (window, "initial-frame/empty-work-area");
                 return false;
             }
 
@@ -819,6 +924,46 @@ namespace Gala {
             return true;
         }
 
+        public bool move_focused_window_to_monitor (int target_monitor) {
+            var focus_window = display.focus_window;
+            if (focus_window == null) {
+                return false;
+            }
+
+            var source_group = window_groups[focus_window];
+            if (source_group == null || target_monitor < 0 || source_group.monitor == target_monitor) {
+                return false;
+            }
+
+            var workspace = focus_window.get_workspace ();
+            if (workspace == null) {
+                return false;
+            }
+
+            var target_key = build_key (workspace.index (), target_monitor);
+            remove_window (focus_window);
+
+            var target_group = get_or_create_group_for_location (workspace, target_monitor, target_key);
+            Object? split_target = null;
+            if (target_group.active_window != null
+                && target_group.active_window != focus_window
+                && target_group.layout.contains (target_group.active_window)) {
+                split_target = target_group.active_window;
+            }
+
+            target_group.layout.insert (focus_window, split_target);
+            target_group.active_window = focus_window;
+            window_groups[focus_window] = target_group;
+            window_monitor_hints[focus_window] = target_monitor;
+            log_window_event (focus_window, "move-monitor", "%s -> %s".printf (source_group.key, target_group.key));
+
+            focus_window.move_to_monitor (target_monitor);
+            mark_group_dirty (target_group.key, true);
+            schedule_flush ();
+            focus_window.activate (display.get_current_time ());
+            return true;
+        }
+
         public bool promote_focused_window () {
             var focus_window = display.focus_window;
             if (focus_window == null) {
@@ -884,9 +1029,10 @@ namespace Gala {
         }
 
         private bool should_manage_window (Meta.Window window) {
-            return is_potential_tile_candidate (window)
-                && !floating_windows.contains (window)
-                && is_workspace_enabled (window.get_workspace ());
+            var reason = get_window_gate_rejection_reason (window, false);
+            var should_manage = reason == "";
+            log_window_gate ("should-manage-window", window, should_manage, false, reason);
+            return should_manage;
         }
 
         private bool can_toggle_floating (Meta.Window window) {
@@ -907,10 +1053,6 @@ namespace Gala {
         }
 
         private bool can_assume_first_frame_ready (Meta.Window window) {
-            if (window.get_client_type () != Meta.WindowClientType.X11) {
-                return false;
-            }
-
             var actor = window.get_compositor_private () as Meta.WindowActor;
             if (actor == null || actor.is_destroyed ()) {
                 return false;
@@ -926,7 +1068,16 @@ namespace Gala {
             float actor_width;
             float actor_height;
             actor.get_size (out actor_width, out actor_height);
-            return actor_width > 1.0f && actor_height > 1.0f;
+            if (actor_width <= 1.0f || actor_height <= 1.0f) {
+                return false;
+            }
+
+            if (window.get_client_type () == Meta.WindowClientType.X11) {
+                return true;
+            }
+
+            return windows_waiting_for_map_reveal.contains (window)
+                && is_potential_tile_candidate (window);
         }
 
         private void hook_window_actor (Meta.Window window) {
@@ -946,7 +1097,12 @@ namespace Gala {
             if (can_assume_first_frame_ready (window)) {
                 Idle.add (() => {
                     if (monitored_windows.contains (window)) {
-                        mark_window_first_frame_ready (window, "hook-fallback");
+                        mark_window_first_frame_ready (
+                            window,
+                            windows_waiting_for_map_reveal.contains (window)
+                                ? "deferred-map-hook-fallback"
+                                : "hook-fallback"
+                        );
                     }
 
                     return Source.REMOVE;
@@ -970,19 +1126,30 @@ namespace Gala {
             var target_buffer_y = target_frame_rect.y + buffer_offset_y;
             var target_buffer_width = int.max (1, target_frame_rect.width + buffer_width_delta);
             var target_buffer_height = int.max (1, target_frame_rect.height + buffer_height_delta);
-            var keep_hidden = windows_waiting_for_map_reveal.contains (window);
 
-            if (keep_hidden) {
-                actor.remove_all_transitions ();
-                actor.set_scale (1.0f, 1.0f);
-                actor.rotation_angle_x = 0.0f;
-                actor.rotation_angle_y = 0.0f;
-                actor.rotation_angle_z = 0.0f;
-                actor.set_pivot_point (0.0f, 0.0f);
-                actor.set_translation (0.0f, 0.0f, 0.0f);
-                actor.set_position (target_buffer_x, target_buffer_y);
-                actor.set_size (target_buffer_width, target_buffer_height);
-            }
+            actor.remove_all_transitions ();
+            actor.set_scale (1.0f, 1.0f);
+            actor.rotation_angle_x = 0.0f;
+            actor.rotation_angle_y = 0.0f;
+            actor.rotation_angle_z = 0.0f;
+            actor.set_pivot_point (0.0f, 0.0f);
+            actor.set_translation (0.0f, 0.0f, 0.0f);
+            actor.set_position (target_buffer_x, target_buffer_y);
+            actor.set_size (target_buffer_width, target_buffer_height);
+            log_window_event (
+                window,
+                "prepare-target-actor",
+                "frame-target=(%d,%d %dx%d) buffer-target=(%d,%d %dx%d)".printf (
+                    target_frame_rect.x,
+                    target_frame_rect.y,
+                    target_frame_rect.width,
+                    target_frame_rect.height,
+                    target_buffer_x,
+                    target_buffer_y,
+                    target_buffer_width,
+                    target_buffer_height
+                )
+            );
         }
 
         private void restore_window_actor_visibility (Meta.Window window) {
@@ -994,14 +1161,26 @@ namespace Gala {
             actor.opacity = 255U;
         }
 
-        private string? get_group_key (Meta.Window window) {
-            unowned var workspace = window.get_workspace ();
+        private string? get_group_key (Meta.Window window, bool allow_effective_workspace = false) {
+            Meta.Workspace? workspace = allow_effective_workspace
+                ? resolve_effective_workspace (window)
+                : window.get_workspace ();
             if (workspace == null) {
+                log_window_event (
+                    window,
+                    "group-key/no-workspace",
+                    "allow-effective=%s".printf (allow_effective_workspace ? "true" : "false")
+                );
                 return null;
             }
 
             var monitor = resolve_window_monitor (window);
             if (monitor < 0) {
+                log_window_event (
+                    window,
+                    "group-key/no-monitor",
+                    "allow-effective=%s".printf (allow_effective_workspace ? "true" : "false")
+                );
                 return null;
             }
 
@@ -1016,18 +1195,21 @@ namespace Gala {
             dirty_groups.add (key);
         }
 
-        private BspGroup get_or_create_group (Meta.Window window, string key) {
+        private BspGroup get_or_create_group_for_location (Meta.Workspace workspace, int monitor, string key) {
             var group = groups[key];
             if (group != null) {
                 configure_layout (group.layout);
                 return group;
             }
 
-            unowned var workspace = window.get_workspace ();
-            group = new BspGroup (workspace.index (), resolve_window_monitor (window), key);
+            group = new BspGroup (workspace.index (), monitor, key);
             configure_layout (group.layout);
             groups[key] = group;
             return group;
+        }
+
+        private BspGroup get_or_create_group (Meta.Window window, string key) {
+            return get_or_create_group_for_location (window.get_workspace (), resolve_window_monitor (window), key);
         }
 
         private void add_window (Meta.Window window, string key) {
@@ -1361,7 +1543,7 @@ namespace Gala {
                         continue;
                     }
 
-                    if (!windows_waiting_for_map_reveal.remove (placement.window)) {
+                    if (!windows_waiting_for_map_reveal.contains (placement.window)) {
                         continue;
                     }
 
@@ -1461,10 +1643,38 @@ namespace Gala {
         }
 
         private int resolve_window_monitor (Meta.Window window) {
+            if (should_resolve_initial_monitor (window)) {
+                var initial_monitor = resolve_initial_monitor (window);
+                if (initial_monitor >= 0) {
+                    log_monitor_resolution (window, "initial", initial_monitor);
+                    return initial_monitor;
+                }
+
+                var current_group = window_groups[window];
+                var group_monitor = current_group != null ? current_group.monitor : -1;
+                log_monitor_resolution (window, "initial-group-fallback", group_monitor);
+                return group_monitor;
+            }
+
+            var current_group = window_groups[window];
+            if (current_group != null && should_hold_window_monitor_to_group (window)) {
+                log_monitor_resolution (window, "group-hold", current_group.monitor);
+                return current_group.monitor;
+            }
+
+            if (window_monitor_hints.has_key (window)) {
+                var hinted_monitor = window_monitor_hints[window];
+                if (hinted_monitor >= 0) {
+                    log_monitor_resolution (window, "hint", hinted_monitor);
+                    return hinted_monitor;
+                }
+            }
+
             var frame_rect = window.get_frame_rect ();
             if (frame_rect.width > 1 && frame_rect.height > 1) {
                 var rect_monitor = display.get_monitor_index_for_rect (frame_rect);
                 if (rect_monitor >= 0) {
+                    log_monitor_resolution (window, "frame-rect", rect_monitor);
                     return rect_monitor;
                 }
             }
@@ -1473,11 +1683,265 @@ namespace Gala {
             if (buffer_rect.width > 1 && buffer_rect.height > 1) {
                 var rect_monitor = display.get_monitor_index_for_rect (buffer_rect);
                 if (rect_monitor >= 0) {
+                    log_monitor_resolution (window, "buffer-rect", rect_monitor);
                     return rect_monitor;
                 }
             }
 
+            var direct_monitor = window.get_monitor ();
+            if (direct_monitor >= 0) {
+                log_monitor_resolution (window, "raw-monitor", direct_monitor);
+                return direct_monitor;
+            }
+
+            current_group = window_groups[window];
+            var group_monitor = current_group != null ? current_group.monitor : -1;
+            log_monitor_resolution (window, "group-fallback", group_monitor);
+            return group_monitor;
+        }
+
+        private bool should_hold_window_monitor_to_group (Meta.Window window) {
+            var current_group = window_groups[window];
+            if (current_group == null || current_group.monitor < 0) {
+                return false;
+            }
+
+            if (interactive_windows.contains (window)) {
+                return false;
+            }
+
+            if (windows_waiting_for_map_reveal.contains (window)) {
+                return true;
+            }
+
+            var pending_request = pending_frame_requests[window];
+            if (pending_request == null) {
+                return false;
+            }
+
+            var frame_rect = window.get_frame_rect ();
+            if (rect_matches_target_without_expansion (frame_rect, pending_request.rect)) {
+                return false;
+            }
+
+            var target_monitor = resolve_monitor_for_rect (pending_request.rect);
+            return target_monitor >= 0 && target_monitor == current_group.monitor;
+        }
+
+        private bool should_resolve_initial_monitor (Meta.Window window) {
+            return windows_waiting_for_map_reveal.contains (window)
+                || (windows_waiting_for_first_frame.contains (window)
+                    && !windows_with_first_frame.contains (window))
+                || (window_initial_monitor_overrides.has_key (window)
+                    && !window_groups.has_key (window))
+                || should_preserve_initial_monitor_override (window);
+        }
+
+        private int resolve_initial_monitor (Meta.Window window) {
+            var current_group = window_groups[window];
+            if (current_group != null && current_group.monitor >= 0) {
+                return current_group.monitor;
+            }
+
+            if (window_initial_monitor_overrides.has_key (window)) {
+                var initial_monitor = window_initial_monitor_overrides[window];
+                if (initial_monitor >= 0) {
+                    return initial_monitor;
+                }
+            }
+
+            if (window_monitor_hints.has_key (window)) {
+                var hinted_monitor = window_monitor_hints[window];
+                if (hinted_monitor >= 0) {
+                    return hinted_monitor;
+                }
+            }
+
+            var frame_monitor = resolve_monitor_for_rect (window.get_frame_rect ());
+            if (frame_monitor >= 0) {
+                return frame_monitor;
+            }
+
+            var buffer_monitor = resolve_monitor_for_rect (window.get_buffer_rect ());
+            if (buffer_monitor >= 0) {
+                return buffer_monitor;
+            }
+
             return window.get_monitor ();
+        }
+
+        private bool should_preserve_initial_monitor_override (Meta.Window window) {
+            if (!window_initial_monitor_overrides.has_key (window)) {
+                return false;
+            }
+
+            var initial_monitor = window_initial_monitor_overrides[window];
+            if (initial_monitor < 0) {
+                return false;
+            }
+
+            var current_group = window_groups[window];
+            if (current_group == null || current_group.monitor != initial_monitor) {
+                return false;
+            }
+
+            if (window_monitor_hints.has_key (window) && window_monitor_hints[window] == initial_monitor) {
+                return false;
+            }
+
+            var frame_monitor = resolve_monitor_for_rect (window.get_frame_rect ());
+            if (frame_monitor == initial_monitor) {
+                return true;
+            }
+
+            var buffer_monitor = resolve_monitor_for_rect (window.get_buffer_rect ());
+            if (buffer_monitor == initial_monitor) {
+                return true;
+            }
+
+            return window.get_monitor () == initial_monitor;
+        }
+
+        private Meta.Workspace? resolve_effective_workspace (Meta.Window window) {
+            var workspace = window.get_workspace ();
+            if (workspace != null) {
+                return workspace;
+            }
+
+            return display.get_workspace_manager ().get_active_workspace ();
+        }
+
+        private string get_window_gate_rejection_reason (Meta.Window window, bool allow_effective_workspace) {
+            if (NotificationStack.is_notification (window)) {
+                return "notification";
+            }
+
+            if (window.window_type != Meta.WindowType.NORMAL) {
+                return "window-type=%d".printf ((int) window.window_type);
+            }
+
+            if (window.get_transient_for () != null) {
+                return "transient";
+            }
+
+            if (!window.allows_move ()) {
+                return "disallow-move";
+            }
+
+            if (!window.allows_resize ()) {
+                return "disallow-resize";
+            }
+
+            if (window.fullscreen) {
+                return "fullscreen";
+            }
+
+            if (window.minimized) {
+                return "minimized";
+            }
+
+            if (is_window_persistently_on_all_workspaces (window)) {
+                return "all-workspaces";
+            }
+
+            if (window.is_above ()) {
+                return "above";
+            }
+
+            if (window.maximized_horizontally || window.maximized_vertically) {
+                return "maximized";
+            }
+
+            if (floating_windows.contains (window)) {
+                return "floating";
+            }
+
+            var workspace = allow_effective_workspace
+                ? resolve_effective_workspace (window)
+                : window.get_workspace ();
+            if (workspace == null) {
+                return allow_effective_workspace ? "no-effective-workspace" : "no-workspace";
+            }
+
+            if (!is_workspace_enabled (workspace)) {
+                return "workspace-disabled";
+            }
+
+            return "";
+        }
+
+        private bool is_window_persistently_on_all_workspaces (Meta.Window window) {
+            return window.on_all_workspaces && meta_window_is_always_on_all_workspaces (window);
+        }
+
+        private int capture_preferred_initial_monitor (Meta.Window window) {
+            var pointer_monitor = get_pointer_monitor ();
+            if (pointer_monitor >= 0) {
+                log_initial_monitor_capture (window, "pointer", pointer_monitor);
+                return pointer_monitor;
+            }
+
+            var focus_window = display.focus_window;
+            if (focus_window != null && focus_window != window) {
+                var focus_group = window_groups[focus_window];
+                if (focus_group != null) {
+                    log_initial_monitor_capture (window, "focus-group", focus_group.monitor);
+                    return focus_group.monitor;
+                }
+
+                var focus_frame_monitor = resolve_monitor_for_rect (focus_window.get_frame_rect ());
+                if (focus_frame_monitor >= 0) {
+                    log_initial_monitor_capture (window, "focus-frame", focus_frame_monitor);
+                    return focus_frame_monitor;
+                }
+
+                var focus_buffer_monitor = resolve_monitor_for_rect (focus_window.get_buffer_rect ());
+                if (focus_buffer_monitor >= 0) {
+                    log_initial_monitor_capture (window, "focus-buffer", focus_buffer_monitor);
+                    return focus_buffer_monitor;
+                }
+
+                var focus_monitor = focus_window.get_monitor ();
+                if (focus_monitor >= 0) {
+                    log_initial_monitor_capture (window, "focus-raw", focus_monitor);
+                    return focus_monitor;
+                }
+            }
+
+            var current_monitor = display.get_current_monitor ();
+            if (current_monitor >= 0) {
+                log_initial_monitor_capture (window, "current-monitor", current_monitor);
+                return current_monitor;
+            }
+
+            log_initial_monitor_capture (window, "unresolved", -1);
+            return -1;
+        }
+
+        private int resolve_monitor_for_rect (Mtk.Rectangle rect) {
+            if (rect.width <= 1 || rect.height <= 1) {
+                return -1;
+            }
+
+            return display.get_monitor_index_for_rect (rect);
+        }
+
+        private int get_pointer_monitor () {
+            Graphene.Point coords = {};
+#if HAS_MUTTER48
+            unowned var cursor_tracker = display.get_compositor ().get_backend ().get_cursor_tracker ();
+#else
+            unowned var cursor_tracker = display.get_cursor_tracker ();
+#endif
+            cursor_tracker.get_pointer (out coords, null);
+
+            Mtk.Rectangle rect = {
+                (int) coords.x,
+                (int) coords.y,
+                1,
+                1
+            };
+            return display.get_monitor_index_for_rect (rect);
         }
 
         private bool is_workspace_enabled (Meta.Workspace? workspace) {
@@ -1530,6 +1994,15 @@ namespace Gala {
             var gap_padding = int.max (0, config.inner_gap);
             min_width = int.max (1, minimum_size.width + gap_padding);
             min_height = int.max (1, minimum_size.height + gap_padding);
+            log_observed_minimum_size (
+                window,
+                "use",
+                minimum_size,
+                null,
+                null,
+                null,
+                "gap=%d result=(%dx%d)".printf (gap_padding, min_width, min_height)
+            );
         }
 
         private void queue_pending_frame_request (Meta.Window window, Mtk.Rectangle old_rect, Mtk.Rectangle rect) {
@@ -1608,6 +2081,18 @@ namespace Gala {
                 changed = true;
             }
 
+            if (changed) {
+                log_observed_minimum_size (
+                    window,
+                    "update",
+                    minimum_size,
+                    actual_rect,
+                    old_rect,
+                    target_rect,
+                    "required=(%d,%d)".printf (required_width, required_height)
+                );
+            }
+
             return changed;
         }
 
@@ -1632,15 +2117,26 @@ namespace Gala {
         }
 
         private void log_window_event (Meta.Window window, string event, string extra = "") {
-            if (!debug_enabled) {
+            if (!is_debug_enabled ()) {
                 return;
             }
 
             var frame_rect = window.get_frame_rect ();
             var buffer_rect = window.get_buffer_rect ();
             var title = window.title ?? "(untitled)";
+            var workspace = window.get_workspace ();
+            var effective_workspace = resolve_effective_workspace (window);
             var group = window_groups[window];
             var group_key = group != null ? group.key : "-";
+            var group_monitor = group != null ? group.monitor : -1;
+            var raw_monitor = window.get_monitor ();
+            var resolved_monitor = resolve_window_monitor (window);
+            var initial_monitor = window_initial_monitor_overrides.has_key (window)
+                ? window_initial_monitor_overrides[window]
+                : -1;
+            var hinted_monitor = window_monitor_hints.has_key (window)
+                ? window_monitor_hints[window]
+                : -1;
             var suffix = extra != "" ? " %s".printf (extra) : "";
             var actor = window.get_compositor_private () as Meta.WindowActor;
             var actor_state = "";
@@ -1670,17 +2166,166 @@ namespace Gala {
             }
 
             message (
-                "[BSP] %s title=\"%s\" group=%s monitor=%d frame=(%d,%d %dx%d)%s%s",
+                "[BSP] %s title=\"%s\" group=%s workspace=%s effective-workspace=%s raw-monitor=%d resolved-monitor=%d group-monitor=%d hint=%d initial=%d frame=(%d,%d %dx%d)%s%s",
                 event,
                 title,
                 group_key,
-                window.get_monitor (),
+                workspace != null ? workspace.index ().to_string () : "null",
+                effective_workspace != null ? effective_workspace.index ().to_string () : "null",
+                raw_monitor,
+                resolved_monitor,
+                group_monitor,
+                hinted_monitor,
+                initial_monitor,
                 frame_rect.x,
                 frame_rect.y,
                 frame_rect.width,
                 frame_rect.height,
                 suffix,
                 actor_state
+            );
+        }
+
+        private void log_window_gate (
+            string gate,
+            Meta.Window window,
+            bool result,
+            bool allow_effective_workspace,
+            string reason = ""
+        ) {
+            if (!is_debug_enabled ()) {
+                return;
+            }
+
+            var workspace = window.get_workspace ();
+            var effective_workspace = resolve_effective_workspace (window);
+            var resolved_monitor = resolve_window_monitor (window);
+
+            message (
+                "[BSP] %s title=\"%s\" result=%s reason=%s workspace=%s effective-workspace=%s raw-monitor=%d resolved-monitor=%d type=%d allows-move=%s allows-resize=%s transient=%s floating=%s all-workspaces=%s always-all-workspaces=%s",
+                gate,
+                window.title ?? "(untitled)",
+                result ? "true" : "false",
+                reason != "" ? reason : "ok",
+                workspace != null ? workspace.index ().to_string () : "null",
+                allow_effective_workspace && effective_workspace != null ? effective_workspace.index ().to_string () : "null",
+                window.get_monitor (),
+                resolved_monitor,
+                (int) window.window_type,
+                window.allows_move () ? "true" : "false",
+                window.allows_resize () ? "true" : "false",
+                window.get_transient_for () != null ? "true" : "false",
+                floating_windows.contains (window) ? "true" : "false",
+                window.on_all_workspaces ? "true" : "false",
+                is_window_persistently_on_all_workspaces (window) ? "true" : "false"
+            );
+        }
+
+        private void log_monitor_resolution (Meta.Window window, string source, int resolved_monitor) {
+            if (!is_debug_enabled ()) {
+                return;
+            }
+
+            var workspace = window.get_workspace ();
+            var effective_workspace = resolve_effective_workspace (window);
+            var group = window_groups[window];
+            var group_monitor = group != null ? group.monitor : -1;
+            var initial_monitor = window_initial_monitor_overrides.has_key (window)
+                ? window_initial_monitor_overrides[window]
+                : -1;
+            var hinted_monitor = window_monitor_hints.has_key (window)
+                ? window_monitor_hints[window]
+                : -1;
+
+            message (
+                "[BSP] resolve-monitor title=\"%s\" source=%s resolved=%d raw=%d group-monitor=%d hint=%d initial=%d workspace=%s effective-workspace=%s waiting-map=%s waiting-frame=%s",
+                window.title ?? "(untitled)",
+                source,
+                resolved_monitor,
+                window.get_monitor (),
+                group_monitor,
+                hinted_monitor,
+                initial_monitor,
+                workspace != null ? workspace.index ().to_string () : "null",
+                effective_workspace != null ? effective_workspace.index ().to_string () : "null",
+                windows_waiting_for_map_reveal.contains (window) ? "true" : "false",
+                windows_waiting_for_first_frame.contains (window) && !windows_with_first_frame.contains (window) ? "true" : "false"
+            );
+        }
+
+        private void log_initial_monitor_capture (Meta.Window window, string source, int monitor) {
+            if (!is_debug_enabled ()) {
+                return;
+            }
+
+            var workspace = window.get_workspace ();
+            var effective_workspace = resolve_effective_workspace (window);
+
+            message (
+                "[BSP] capture-initial-monitor title=\"%s\" source=%s monitor=%d workspace=%s effective-workspace=%s raw-monitor=%d",
+                window.title ?? "(untitled)",
+                source,
+                monitor,
+                workspace != null ? workspace.index ().to_string () : "null",
+                effective_workspace != null ? effective_workspace.index ().to_string () : "null",
+                window.get_monitor ()
+            );
+        }
+
+        private void log_observed_minimum_size (
+            Meta.Window window,
+            string event,
+            BspWindowMinimumSize minimum_size,
+            Mtk.Rectangle? actual_rect = null,
+            Mtk.Rectangle? old_rect = null,
+            Mtk.Rectangle? target_rect = null,
+            string extra = ""
+        ) {
+            if (!is_debug_enabled ()) {
+                return;
+            }
+
+            var workspace = window.get_workspace ();
+            var effective_workspace = resolve_effective_workspace (window);
+            var actual = actual_rect ?? window.get_frame_rect ();
+            Mtk.Rectangle old_state = { 0, 0, 0, 0 };
+            Mtk.Rectangle target_state = { 0, 0, 0, 0 };
+            var has_old_rect = old_rect != null;
+            var has_target_rect = target_rect != null;
+
+            if (old_rect != null) {
+                old_state = (!) old_rect;
+            }
+
+            if (target_rect != null) {
+                target_state = (!) target_rect;
+            }
+
+            message (
+                "[BSP] min-size-%s title=\"%s\" min=(%d,%d) workspace=%s effective-workspace=%s raw-monitor=%d resolved-monitor=%d actual=(%d,%d %dx%d) old=(%d,%d %dx%d)%s target=(%d,%d %dx%d)%s%s",
+                event,
+                window.title ?? "(untitled)",
+                minimum_size.width,
+                minimum_size.height,
+                workspace != null ? workspace.index ().to_string () : "null",
+                effective_workspace != null ? effective_workspace.index ().to_string () : "null",
+                window.get_monitor (),
+                resolve_window_monitor (window),
+                actual.x,
+                actual.y,
+                actual.width,
+                actual.height,
+                old_state.x,
+                old_state.y,
+                old_state.width,
+                old_state.height,
+                has_old_rect ? "" : " (unset)",
+                target_state.x,
+                target_state.y,
+                target_state.width,
+                target_state.height,
+                has_target_rect ? "" : " (unset)",
+                extra != "" ? " %s".printf (extra) : ""
             );
         }
     }

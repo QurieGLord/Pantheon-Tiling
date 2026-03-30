@@ -470,11 +470,27 @@ public class PanelBsp.Indicator : Wingpanel.Indicator {
         }
 
         try {
-            string[] argv = { helper_path, null };
-            Pid child_pid;
-            Process.spawn_async (null, argv, null, SpawnFlags.SEARCH_PATH, null, out child_pid);
+            Gdk.AppLaunchContext? launch_context = null;
+            var gdk_display = Gdk.Display.get_default ();
+            if (gdk_display != null) {
+                launch_context = gdk_display.get_app_launch_context ();
+                launch_context.set_timestamp (Gtk.get_current_event_time ());
+            }
+
+            var app_info = AppInfo.create_from_commandline (
+                helper_path,
+                "BSP Tiling Help",
+                AppInfoCreateFlags.SUPPORTS_STARTUP_NOTIFICATION
+            );
+            app_info.launch (null, launch_context);
         } catch (Error e) {
-            warning ("Failed to launch BSP help overlay: %s", e.message);
+            try {
+                string[] argv = { helper_path, null };
+                Pid child_pid;
+                Process.spawn_async (null, argv, null, SpawnFlags.SEARCH_PATH, null, out child_pid);
+            } catch (Error spawn_error) {
+                warning ("Failed to launch BSP help overlay: %s", spawn_error.message);
+            }
         }
     }
 

@@ -9,19 +9,17 @@ namespace PanelBsp {
     }
 
     public class HelpOverlay : Object {
-        private GLib.Settings keybinding_settings;
-        private Gtk.Application? application;
+        private const string ELEMENTARY_KEYBINDINGS_SCHEMA = "io.elementary.desktop.wm.keybindings";
+        private const string GNOME_KEYBINDINGS_SCHEMA = "org.gnome.desktop.wm.keybindings";
+
+        private Gee.HashMap<string, GLib.Settings> keybinding_settings = new Gee.HashMap<string, GLib.Settings> ();
         private Gtk.Window window;
         private Gee.HashMap<string, Gtk.Label> shortcut_labels = new Gee.HashMap<string, Gtk.Label> ();
 
-        public HelpOverlay (GLib.Settings keybinding_settings, Gtk.Application? application = null) {
-            this.keybinding_settings = keybinding_settings;
-            this.application = application;
+        public HelpOverlay () {
             window = build_window ();
-
-            this.keybinding_settings.changed.connect (() => {
-                refresh_shortcuts ();
-            });
+            ensure_settings (ELEMENTARY_KEYBINDINGS_SCHEMA);
+            ensure_settings (GNOME_KEYBINDINGS_SCHEMA);
 
             refresh_shortcuts ();
         }
@@ -37,17 +35,19 @@ namespace PanelBsp {
                 title = "BSP Tiling Help",
                 default_width = 720,
                 default_height = 560,
-                resizable = true,
-                modal = false,
-                window_position = Gtk.WindowPosition.CENTER
+                resizable = false,
+                modal = true,
+                decorated = false,
+                skip_taskbar_hint = true,
+                skip_pager_hint = true,
+                window_position = Gtk.WindowPosition.CENTER_ALWAYS
             };
-            if (application != null) {
-                help_window.application = application;
-            }
-
             help_window.set_type_hint (Gdk.WindowTypeHint.DIALOG);
+            help_window.accept_focus = true;
+            help_window.focus_on_map = true;
+            help_window.set_keep_above (true);
             help_window.delete_event.connect (() => {
-                help_window.hide ();
+                Gtk.main_quit ();
                 return true;
             });
 
@@ -117,7 +117,7 @@ namespace PanelBsp {
             var close_button = new Gtk.Button.with_label ("Close");
             close_button.halign = Gtk.Align.END;
             close_button.clicked.connect (() => {
-                help_window.hide ();
+                Gtk.main_quit ();
             });
             outer_box.pack_start (close_button, false, false, 0);
 
@@ -174,7 +174,13 @@ namespace PanelBsp {
         }
 
         private string lookup_shortcut_label (string key) {
-            var bindings = keybinding_settings.get_strv (key);
+            var schema_id = get_schema_id_for_key (key);
+            var settings = ensure_settings (schema_id);
+            if (settings == null || !schema_has_key (schema_id, key)) {
+                return "Unavailable";
+            }
+
+            var bindings = settings.get_strv (key);
             if (bindings.length == 0) {
                 return "Unassigned";
             }
@@ -191,10 +197,107 @@ namespace PanelBsp {
             Gdk.ModifierType accel_mods = 0;
             Gtk.accelerator_parse (binding, out accel_key, out accel_mods);
             if (accel_key != 0) {
-                return Gtk.accelerator_get_label (accel_key, accel_mods);
+                return format_accelerator_english (accel_key, accel_mods);
             }
 
             return binding;
+        }
+
+        private string format_accelerator_english (uint accel_key, Gdk.ModifierType accel_mods) {
+            var parts = new Gee.ArrayList<string> ();
+
+            if ((accel_mods & Gdk.ModifierType.CONTROL_MASK) != 0) {
+                parts.add ("Ctrl");
+            }
+
+            if ((accel_mods & Gdk.ModifierType.SHIFT_MASK) != 0) {
+                parts.add ("Shift");
+            }
+
+            if ((accel_mods & Gdk.ModifierType.MOD1_MASK) != 0) {
+                parts.add ("Alt");
+            }
+
+            if ((accel_mods & Gdk.ModifierType.SUPER_MASK) != 0) {
+                parts.add ("Super");
+            }
+
+            parts.add (format_key_name_english (accel_key));
+            return string.joinv (" + ", parts.to_array ());
+        }
+
+        private string format_key_name_english (uint accel_key) {
+            unowned string? key_name = Gdk.keyval_name (accel_key);
+            if (key_name == null || key_name == "") {
+                return "Unknown";
+            }
+
+            switch (key_name) {
+                case "Return":
+                    return "Enter";
+                case "KP_Enter":
+                    return "Keypad Enter";
+                case "Left":
+                case "Right":
+                case "Up":
+                case "Down":
+                    return key_name;
+                default:
+                    if (key_name.length == 1) {
+                        return key_name.up ();
+                    }
+
+                    return key_name.replace ("_", " ");
+            }
+        }
+
+        private string get_schema_id_for_key (string key) {
+            switch (key) {
+                case "switch-to-workspace-left":
+                case "switch-to-workspace-right":
+                case "move-to-monitor-left":
+                case "move-to-monitor-right":
+                    return GNOME_KEYBINDINGS_SCHEMA;
+                default:
+                    return ELEMENTARY_KEYBINDINGS_SCHEMA;
+            }
+        }
+
+        private bool schema_has_key (string schema_id, string key) {
+            var schema_source = GLib.SettingsSchemaSource.get_default ();
+            if (schema_source == null) {
+                return false;
+            }
+
+            var schema = schema_source.lookup (schema_id, true);
+            return schema != null && schema.has_key (key);
+        }
+
+        private GLib.Settings? ensure_settings (string schema_id) {
+            var existing = keybinding_settings[schema_id];
+            if (existing != null) {
+                return existing;
+            }
+
+            if (!schema_exists (schema_id)) {
+                return null;
+            }
+
+            var settings = new GLib.Settings (schema_id);
+            settings.changed.connect (() => {
+                refresh_shortcuts ();
+            });
+            keybinding_settings[schema_id] = settings;
+            return settings;
+        }
+
+        private bool schema_exists (string schema_id) {
+            var schema_source = GLib.SettingsSchemaSource.get_default ();
+            if (schema_source == null) {
+                return false;
+            }
+
+            return schema_source.lookup (schema_id, true) != null;
         }
     }
 }
